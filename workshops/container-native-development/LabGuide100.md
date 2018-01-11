@@ -50,7 +50,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 -  In a new browser tab, go to:
     [http://www.wercker.com/]()
 
-- Click **Sign Up** in the upper right hand corner of the browser.
+- Click **Sign Up** in the upper right hand corner of the browser. Alternately, if you have already signed up for a Wercker account, click **log in** and then **log in with GitHub** and skip to **STEP 3**.
 
   ![](images/100/2.png)
 
