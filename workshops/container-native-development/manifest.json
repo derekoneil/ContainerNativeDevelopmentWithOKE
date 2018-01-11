@@ -32,14 +32,14 @@
             {
                 "number": "300",
                 "filename": "LabGuide300.md",
-                "title": "Lab 300:  Title of Lab 300",
-                "description": "Short description of lab 300"
+                "title": "Lab 300:  Make a Bug Fix to Your Java Microservice",
+                "description": "Go from code change to production using Wercker"
             },
             {
                 "number": "400",
                 "filename": "LabGuide400.md",
-                "title": "Lab 400: Title of Lab 400",
-                "description": "Short description of lab 400"
+                "title": "Lab 400: Perform a Blue/Green Deployment to Kubernetes",
+                "description": "Stage your new version without disrupting the current deployment"
             }
         ]
     }
