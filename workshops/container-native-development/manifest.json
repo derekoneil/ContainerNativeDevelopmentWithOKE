@@ -1,0 +1,46 @@
+{
+    "workshop": {
+        "title": "Container Native Development",
+        "description": "How to create a CI/CD pipeline and deploy to a managed Kubernetes environment using Wercker.",
+        "theme": "default",
+        "interactive":"https://launch.oracle.com/?",
+        "labs": [
+            {
+                "number": "0",
+                "filename": "README.md",
+                "title": "Read Me First",
+                "description": "Step-by-step workshop instructions"
+            },
+            {
+                "number": "0",
+                "filename": "StudentGuide.md",
+                "title": "Student Guide",
+                "description": "Workshop guidance and prerequisites"
+            },
+            {
+                "number": "100",
+                "filename": "LabGuide100.md",
+                "title": "Lab 100: Containerize Your Application",
+                "description": "Use Wercker to automatically build your application and package it as a Docker image"
+            },
+            {
+                "number": "200",
+                "filename": "LabGuide200.md",
+                "title": "Lab 200: Automate Deployment to Kubernetes",
+                "description": "Use Wercker to set up a managed Kubernetes cluster and deploy to it"
+            },
+            {
+                "number": "300",
+                "filename": "LabGuide300.md",
+                "title": "Lab 300:  Title of Lab 300",
+                "description": "Short description of lab 300"
+            },
+            {
+                "number": "400",
+                "filename": "LabGuide400.md",
+                "title": "Lab 400: Title of Lab 400",
+                "description": "Short description of lab 400"
+            }
+        ]
+    }
+}
