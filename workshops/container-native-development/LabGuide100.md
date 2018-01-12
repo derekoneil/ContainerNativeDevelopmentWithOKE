@@ -1,5 +1,6 @@
+# Containerize Your Java Microservice
 
-![](images/100/header.png)  
+![](images/100/header.png)
 
 ## Introduction
 
@@ -47,7 +48,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 ### **STEP 2**: Create a Wercker account
   **NOTE** If you already have a Wercker account, proceed to **STEP 3**.
 
--  In a new browser tab, go to:
+- In a new browser tab, go to:
     [http://www.wercker.com/]()
 
 - Click **Sign Up** in the upper right hand corner of the browser. Alternately, if you have already signed up for a Wercker account, click **log in** and then **log in with GitHub** and skip to **STEP 3**.
@@ -87,7 +88,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
 - Click **Create**
 
-  ![](images/100/10.png)   
+  ![](images/100/10.png)
 
 - Do not generate a wercker.yml file -- we will create one in a later step.
 
@@ -97,23 +98,23 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
 - Navigate to the Wercker page for your newly-created application (you will already be on that page if you just completed **STEP 3**). Notice that you are viewing the **Runs** tab. This is where any executions of your workflow will be recorded.
 
-  ![](images/100/16.png)   
+  ![](images/100/16.png)
 
 - Click the **Workflows** tab. You will see that Wercker has created the beginning of a workflow for you already. This workflow is triggered by a Git commit and it will execute a pipeline called **build**.
 
-  ![](images/100/17.png)   
+  ![](images/100/17.png)
 
 - The **build** pipeline will be used to build and unit test our application. Let's create a new pipeline to store the resulting Docker image in the Oracle Container Registry. Click the **Add new pipeline** button.
 
-  ![](images/100/18.png)   
+  ![](images/100/18.png)
 
 - Fill in **push-release** for the name of the pipeline and the YML name of the pipeline and click **Create**.
 
-  ![](images/100/19.png)   
+  ![](images/100/19.png)
 
 - Now that you've created the pipeline, click on the **Workflows** tab to return to the workflow editor. Click the **plus sign** next to the build pipeline in the editor.
 
-  ![](images/100/20.png)   
+  ![](images/100/20.png)
 
 - In the **Execute Pipeline** drop down list, choose the pipeline we just created, **push-release**. Leave the other fields at their default values and click **Add**.
 
@@ -133,8 +134,8 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
 - In the **Edit new file** input box, **paste** the following:
 
-```
-#Use OpenJDK base docker image from dockerhub and open the application port on the docker container   
+```yaml
+#Use OpenJDK base docker image from dockerhub and open the application port on the docker container
 box:
   id: openjdk
   ports:
@@ -178,7 +179,7 @@ build:
 
 - Our next step is to define the second part of our workflow, the **push-release** pipeline, which will store our container image in the Oracle Container Registry after a successful **build**. This pipeline will make use of some environment variables, so let's get those set up first.
 
-### **Step 6**: Set Environment Variables in Wercker
+### **STEP 6**: Set Environment Variables in Wercker
 
 - In your Wercker browser tab, click the **Environment** tab.
 
@@ -206,7 +207,7 @@ build:
 
 - After the definition of the build pipeline, **paste** the following YAML:
 
-```
+```yaml
 #Push the docker image with our built and tested application to the Oracle Container Registry
 push-release:
   steps:
@@ -246,3 +247,5 @@ push-release:
 - Click on the **title** of the repository (yourusername/twitter-feed) to view the history of published images (you'll only have one at this point). Note that when you hover over the **Download** icon, the `docker pull` command to pull this image is displayed. At this point you could run your application in Docker on your laptop, tie in to your existing deployment setup, or (as you'll see in the next lab) deploy it to **Oracle Container Engine**--our managed Kubernetes cloud service.
 
   ![](images/100/35.png)
+
+**You are now ready to move to the next lab.**
