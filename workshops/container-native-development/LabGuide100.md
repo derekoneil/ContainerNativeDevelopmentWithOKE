@@ -13,6 +13,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 **_To log issues_**, click here to go to the [GitHub oracle](https://github.com/oracle/learning-library/issues/new) repository issue submission form.
 
 ## Objectives
+
 **Containerize Your Java Application and Automate Building and Packaging**
 - Create Wercker Application
   - Fork Java Application on GitHub

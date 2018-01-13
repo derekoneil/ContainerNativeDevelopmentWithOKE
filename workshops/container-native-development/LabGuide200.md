@@ -1,5 +1,6 @@
+# Automate Deployment to Kubernetes
 
-![](images/200/header.png)  
+![](images/200/header.png)
 
 ## Introduction
 
@@ -12,6 +13,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 **_To log issues_**, click here to go to the [GitHub oracle](https://github.com/oracle/learning-library/issues/new) repository issue submission form.
 
 ## Objectives
+
 **Create and Deploy to a Kubernetes Cluster**
 - Set Up Oralce Cloud infrastructure
 - Configure Wercker Cluster
@@ -19,6 +21,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 - Deploy and Test the Product Catalog Application
 
 ## Required Artifacts
+
 - The following lab requires:
   - an Oracle Public Cloud account that will be supplied by your instructor.
   - a [GitHub account](https://github.com/join)
@@ -28,6 +31,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 ## Set Up Oralce Cloud infrastructure
 
 ### **STEP 1**: Log in to your OCI dashboard
+
 - From any browser, go to:
 
     [https://cloud.oracle.com/en_US/sign-in]()
@@ -180,7 +184,7 @@ cat ~/.oci/oci_api_key_public.pem | pbcopy
 
   >The second part of the file defines a **Service**. A Service defines how Kubernetes should expose our application to traffic from outside the cluster. In this case, we are asking for a cluster-internal IP address to be assigned (`type: ClusterIP`). This means that our twitter feed will only be accessible from inside the cluster. This is ok, because the twitter feed will be consumed by the product catalog application that we will deploy later. We can still verify that our twitter feed is deployed properly -- we'll see how in a later step.
 
-```
+```yaml
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -249,7 +253,7 @@ spec:
 
   >The **deploy-to-cluster** Pipeline will prepare our kubernetes.yml file by filling in some environment variables. It will then use kubectl to tell Kubernetes to apply that configuration to our cluster.
 
-```
+```yaml
 #Inject our Wercker application token into Kubernetes to authenticate container pulls
 #delete any existing Wercker secret before creating, to accommodate secret changes
 inject-secret:
