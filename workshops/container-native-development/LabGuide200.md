@@ -383,7 +383,7 @@ export KUBECONFIG=~/Downloads/kubeconfig
 kubectl proxy
 ```
 
-- In a browser tab, navigate to the Kubernetes dashboard at [http://localhost:8001/ui]()
+- In a browser tab, navigate to the Kubernetes dashboard at [http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/]()
 
 - You should see the overview page. In the pods section, you should see two twitter-feed pods running. Click the **name of one of the pods** to go to the detail page.
 
@@ -423,7 +423,7 @@ kubectl proxy
 
 ### **STEP 13**: Deploy and test the Product Catalog using the Kubernetes dashboard
 
-- Switch back to your **Kubernetes dashboard** browser tab. If you have closed it, navigate to the Kubernetes dashboard at [http://localhost:8001/ui]()
+- Switch back to your **Kubernetes dashboard** browser tab. If you have closed it, navigate to the Kubernetes dashboard at [http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/]()
 
 - In the upper right corner of the dashboard, click **Create**.
 
