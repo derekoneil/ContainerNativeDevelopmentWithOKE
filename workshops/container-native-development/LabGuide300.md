@@ -72,7 +72,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 
   ![](images/300/7.png)
 
-- In a new browser tab, navigate to the **Kubernetes dashboard** at [http://localhost:8001/ui](). Click on **Overview** in the left side navigation menu. You should see four twitter-feed pods -- the two that we deployed in the previous lab, running the old code version, and two new ones running the new code version.
+- In a new browser tab, navigate to the **Kubernetes dashboard** at [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/). Click on **Overview** in the left side navigation menu. You should see four twitter-feed pods -- the two that we deployed in the previous lab, running the old code version, and two new ones running the new code version.
 
   ![](images/300/8.png)
 

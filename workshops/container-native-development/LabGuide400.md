@@ -1,5 +1,6 @@
+# K8S Blue Green Deployments
 
-![](images/400/header.png)  
+![](images/400/header.png)
 
 ## Introduction
 
@@ -12,6 +13,7 @@ During this lab, you will take on the **DevOps Engineer Persona** and perform a 
 **_To log issues_**, click here to go to the [GitHub oracle](https://github.com/oracle/learning-library/issues/new) repository issue submission form.
 
 ## Objectives
+
 **Perform a Blue/Green Deployment to Kubernetes**
 - Update Existing Deployment and Service with Blue Color Labels
 - Validate Deployment Color In Kubernetes and Application
@@ -21,6 +23,7 @@ During this lab, you will take on the **DevOps Engineer Persona** and perform a 
 - Validate Green Deployment Now Serves Traffic
 
 ## Required Artifacts
+
 - The following lab requires:
   - an Oracle Public Cloud account that will be supplied by your instructor.
   - a [GitHub account](https://github.com/join)
@@ -28,6 +31,7 @@ During this lab, you will take on the **DevOps Engineer Persona** and perform a 
 # Perform a Blue/Green Deployment to Kubernetes
 
 ### **STEP 1**: Update Existing Deployment and Service with Blue Color Labels
+
 - In a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), scrolling down until you see the **Your repositories** box on the right side of the page, and clicking the **twitter-feed** link.
 
   ![](images/400/1.png)
@@ -41,6 +45,7 @@ During this lab, you will take on the **DevOps Engineer Persona** and perform a 
   ![](images/400/3.png)
 
 - After **line 16** in the **spec.template.metadata.labels** section of your Deployment definition, paste the following label on a new line:
+
 `color: blue`
 This label will identify our Kubernetes pods as the blue version of the code.
 
@@ -48,7 +53,7 @@ This label will identify our Kubernetes pods as the blue version of the code.
 
 - After **line 26**, in the **spec.template.spec.containers** section of your Deployment definition, paste the following YAML. This will create and mount a volume on our pods that uses the Kubernetes [Downward API](https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/) to expose the pod's labels to our application. The application will display the pod's color so we can see which version (blue or green) served our webpage.
 
-```
+```yaml
         volumeMounts:
             - name: podinfo
               mountPath: /tmp
@@ -68,6 +73,7 @@ This label will identify our Kubernetes pods as the blue version of the code.
   ![](images/400/5.png)
 
 - After **line 53**, in the **spec.selector** section of your Service definition, paste the following label on a new line:
+
 `color: blue`
 This selector will instruct your load balancer to only route traffic to the blue version of our code.
 
@@ -77,8 +83,8 @@ This selector will instruct your load balancer to only route traffic to the blue
 
   ![](images/400/6.png)
 
-
 ### **STEP 2**: Validate Deployment Color In Kubernetes and Application
+
 - Open **[Wercker](https://app.wercker.com)** in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Pipelines**, then click on your **twitter-feed** application.
 
   ![](images/400/8.png)
@@ -123,6 +129,7 @@ This selector will instruct your load balancer to only route traffic to the blue
   ![](images/400/6.png)
 
 ### **STEP 4**: Validate Blue Deployment Still Serves Traffic
+
 - Switch to your **[Wercker](https://app.wercker.com)** browser tab and go to the twitter-feed **Runs tab**. Monitor the execution of your workflow. Within a few minutes, each pipeline should complete successfully.
 
   ![](images/400/9.png)
@@ -136,6 +143,7 @@ This selector will instruct your load balancer to only route traffic to the blue
   ![](images/400/13.png)
 
 ### **STEP 5**: Reconfigure Service to Switch to Green Deployment
+
 - To cut over to our green deployment, we will use the Kubernetes dashboard GUI to alter the Kubernetes Service that exposes our twitter feed microservice. In a production setting, you could perform this switch in a number of ways. It could be handled by scripting the commands directly using kubectl, by altering the service definition in version control and having Wercker apply it, or by using a different automation framework such as Jenkins.
 
 - Navigate or switch tabs to the [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/). In the left side navigation menu, click **Services**, then click on the **twitter-feed** service.
@@ -152,11 +160,12 @@ This selector will instruct your load balancer to only route traffic to the blue
 
 - Note that the targets in the **Pods** list immediately change to the green v2 pods.
 
-  ![](images/400/20.png)  
+  ![](images/400/20.png)
 
 ### **STEP 6**: Validate Green Deployment Now Serves Traffic
+
 - Switch back to the browser tab with the **product catalog** application. Refresh the page. You'll see that the title bar now indicates that we are using the green pods.
 
-  ![](images/400/21.png)  
+  ![](images/400/21.png)
 
 - If an unexpected issue were to arise with the green code version, it would be very easy to undo the change we made to the Service and switch back over to the blue pods, since they are still running. Eventually, the blue version can be taken down by deleting the Deployment that created them. Once again this can be accomplished through the GUI, the kubectl CLI, or via an automation system like Wercker.
