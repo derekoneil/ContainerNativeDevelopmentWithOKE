@@ -65,7 +65,6 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 
   ![](images/300/9.png)
 
-
 ### **STEP 2**: Verify Execution of Wercker Workflow
 
 - Switch to your **Wercker** browser tab. You will see that the workflow execution is already in progress, having been triggered by a webhook when you committed your code change. Wait for the **deploy-to-cluster** pipeline to begin executing.

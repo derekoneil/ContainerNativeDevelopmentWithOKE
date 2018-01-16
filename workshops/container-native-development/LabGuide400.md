@@ -15,6 +15,7 @@ During this lab, you will take on the **DevOps Engineer Persona** and perform a 
 ## Objectives
 
 **Perform a Blue/Green Deployment to Kubernetes**
+
 - Update Existing Deployment and Service with Blue Color Labels
 - Validate Deployment Color In Kubernetes and Application
 - Increment Application Version and Switch Color to Green
@@ -29,6 +30,8 @@ During this lab, you will take on the **DevOps Engineer Persona** and perform a 
   - a [GitHub account](https://github.com/join)
 
 # Perform a Blue/Green Deployment to Kubernetes
+
+## Update Existing Deployment
 
 ### **STEP 1**: Update Existing Deployment and Service with Blue Color Labels
 
@@ -66,7 +69,6 @@ This label will identify our Kubernetes pods as the blue version of the code.
               fieldRef:
                 fieldPath: metadata.labels
 ```
-
 
 **NOTE**: YAML files are sensitive to indentation -- make sure that `volumeMounts` is indented to the same level as `ports` on line 23. Also ensure that `volumes` is indented to the same level as `containers` on line 19. Your file should look like this:
 
@@ -110,6 +112,7 @@ This selector will instruct your load balancer to only route traffic to the blue
   ![](images/400/13.png)
 
 ### **STEP 3**: Increment Application Version and Switch Color to Green
+
 - Return to your forked **twitter-feed** repository on [GitHub](https://github.com). Once again, click the **kuberetes.yml.template** file and begin editing it by clicking the **pencil icon**.
 
   ![](images/400/3.png)

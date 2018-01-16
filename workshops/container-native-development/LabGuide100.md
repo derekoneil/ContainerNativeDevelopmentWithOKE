@@ -15,6 +15,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 ## Objectives
 
 **Containerize Your Java Application and Automate Building and Packaging**
+
 - Create Wercker Application
   - Fork Java Application on GitHub
   - Create a Wercker account
@@ -27,6 +28,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
   - Validate Workflow Execution
 
 ## Required Artifacts
+
 - The following lab requires:
   - an Oracle Public Cloud account that will be supplied by your instructor.
   - a [GitHub account](https://github.com/join)
@@ -36,6 +38,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 ## Create Wercker Application
 
 ### **STEP 1**: Fork Java Application on GitHub
+
 - From any browser, go to:
 
     [https://github.com/derekoneil/twitter-feed]()
@@ -47,6 +50,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
   **NOTE:** If prompted, choose to fork the repository to your account (this may occur if your account is also a member of an organization on GitHub).
 
 ### **STEP 2**: Create a Wercker account
+
   **NOTE** If you already have a Wercker account, proceed to **STEP 3**.
 
 - In a new browser tab, go to:
