@@ -1,4 +1,6 @@
-![](images/300/header.png)  
+# Implement and Deploy a New Feature
+
+![](images/300/header.png)
 
 ## Introduction
 
@@ -11,18 +13,23 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 **_To log issues_**, click here to go to the [GitHub oracle](https://github.com/oracle/learning-library/issues/new) repository issue submission form.
 
 ## Objectives
+
 **Make a Bug Fix to Your Java Microservice**
+
 - Modify Java Code and Commit to GitHub
 - Verify Execution of Wercker Workflow
 - Verify Deployment to Kubernetes
 - Test the Product Catalog Application
 
 ## Required Artifacts
+
 - The following lab requires:
   - an Oracle Public Cloud account that will be supplied by your instructor.
   - a [GitHub account](https://github.com/join)
 
 # Make a Bug Fix to Your Java Microservice
+
+## Fix Java Microservice
 
 ### **STEP 1**: Modify Java code and commit to GitHub
 
@@ -46,7 +53,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 
   ![](images/300/4.png)
 
-- Scroll down to **line 52**. This is the REST endpoint that should return only tweets that match a given search term, but it's commented out. Delete the comments on **line 51** and **line 67** to enable this function.
+- Scroll down to **line 52**. This is the REST endpoint that should return only tweets that match a given search term, but it's commented out. Delete the comments on **line 48** and **line 64** to enable this function.
 
   ![](images/300/5.png)
 
@@ -65,7 +72,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 
   ![](images/300/7.png)
 
-- In a new browser tab, navigate to the **Kubernetes dashboard** at [http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/](). Click on **Overview** in the left side navigation menu. You should see four twitter-feed pods -- the two that we deployed in the previous lab, running the old code version, and two new ones running the new code version.
+- In a new browser tab, navigate to the **Kubernetes dashboard** at [http://localhost:8001/ui](). Click on **Overview** in the left side navigation menu. You should see four twitter-feed pods -- the two that we deployed in the previous lab, running the old code version, and two new ones running the new code version.
 
   ![](images/300/8.png)
 

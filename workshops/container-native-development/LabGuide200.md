@@ -15,6 +15,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 ## Objectives
 
 **Create and Deploy to a Kubernetes Cluster**
+
 - Set Up Oralce Cloud infrastructure
 - Configure Wercker Cluster
 - Configure and Run Wercker Deployment Pipelines
@@ -59,6 +60,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
   ![](images/200/5.png)
 
 ### **STEP 2**: Create a Compartment for your Kubernetes nodes
+
 Compartments are used to isolate resources within your OCI tenant. User-based access policies can be applied to manage access to compute instances and other resources within a Compartment.
 
 - Hover over the **Identity** menu in the top navigation bar and click **Compartments**
@@ -78,15 +80,18 @@ Compartments are used to isolate resources within your OCI tenant. User-based ac
   ![](images/200/9.png)
 
 ### **STEP 3**: Create and upload a new API key
+
 An API key is required for Wercker to authenticate to OCI in order to create compute instances for your Kubernetes worker nodes.
 
 - Open a terminal window and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called .oci, generate a new PEM private key, generate the corresponding public key, and copy the public key to the clipboard. For more information on this process, including the alternate commands to protect your key file with a passphrase, see the [official documentation](https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm#two).
-```
+
+```bash
 mkdir ~/.oci
 openssl genrsa -out ~/.oci/oci_api_key.pem 2048
 openssl rsa -pubout -in ~/.oci/oci_api_key.pem -out ~/.oci/oci_api_key_public.pem
 cat ~/.oci/oci_api_key_public.pem | pbcopy
 ```
+
   ![](images/200/11.png)
 
 - In your browser window showing the OCI Console, hover over your username in the top right corner and click **User Settings**
@@ -125,7 +130,7 @@ cat ~/.oci/oci_api_key_public.pem | pbcopy
 
 - **Paste** your private key into the **API Private Key** field in the Wercker form in your browser. Then click **Create**.
 
-  ![](images/200/16.png)  
+  ![](images/200/16.png)
 
 ## Configure Wercker Cluster
 
@@ -133,29 +138,29 @@ cat ~/.oci/oci_api_key_public.pem | pbcopy
 
 - **Open** [Wercker](https://app.wercker.com) in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Clusters**, then **Create**.
 
-  ![](images/200/18.png)  
+  ![](images/200/18.png)
 
 - **Select** the same organization you did when you created your cloud credential in the previous step. Then **select** your cloud credential from the drop down list.
 
-  ![](images/200/19.png)  
+  ![](images/200/19.png)
 
 - In the Compartment OCID field, enter the value that you saved to a text file after creating the wercker **compartment** in the OCI Console. If you have lost it, you can retrieve it from the OCI Console compartment list (refer to **STEP 2**). Once you have entered it, click **Next**
 
-  ![](images/200/20.png)  
+  ![](images/200/20.png)
 
 - Enter a **name** for your cluster and click **Next**
 
-  ![](images/200/21.png)  
+  ![](images/200/21.png)
 
 - Leave the default **small** size selected for your cluster and click **Next**
 
-  ![](images/200/22.png)  
+  ![](images/200/22.png)
 
   **NOTE**: We are selecting small virtual machines to run our cluster in this workshop, but you could have chosen any shape--including bare metal instances--for your nodes.
 
 - Leave the default OS and Kubernetes versions selected and click **Launch**
 
-  ![](images/200/23.png)  
+  ![](images/200/23.png)
 
 - Wercker will begin provisioning nodes in your OCI compartment. Wercker will show you a **Get Started** page with a **Download kubeconfig file** button. Click that button, as we will need the kubeconfig file to monitor our cluster later.
 
@@ -165,7 +170,7 @@ cat ~/.oci/oci_api_key_public.pem | pbcopy
 
 ## Configure and Run Wercker Deployment Pipelines
 
-### **STEP 7**: Define Wercker Deployment Pipelines
+### **STEP 6**: Define Wercker Deployment Pipelines
 
 - From a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), scrolling down until you see the **Your repositories** box on the right side of the page, and clicking the **twitter-feed** link.
 
@@ -211,7 +216,7 @@ spec:
           containerPort: ${PORT}
           protocol: TCP
       imagePullSecrets:
-        - name: wercker          
+        - name: wercker
 ---
 apiVersion: v1
 kind: Service
@@ -233,7 +238,6 @@ spec:
 - At the bottom of the page, click **Commit new file**
 
   ![](images/200/29.png)
-
 
 ### **STEP 7**: Define Wercker Deployment Pipelines
 
@@ -383,7 +387,7 @@ export KUBECONFIG=~/Downloads/kubeconfig
 kubectl proxy
 ```
 
-- In a browser tab, navigate to the Kubernetes dashboard at [http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/]()
+- In a browser tab, navigate to the Kubernetes dashboard at [http://localhost:8001/ui]()
 
 - You should see the overview page. In the pods section, you should see two twitter-feed pods running. Click the **name of one of the pods** to go to the detail page.
 
@@ -423,7 +427,7 @@ kubectl proxy
 
 ### **STEP 13**: Deploy and test the Product Catalog using the Kubernetes dashboard
 
-- Switch back to your **Kubernetes dashboard** browser tab. If you have closed it, navigate to the Kubernetes dashboard at [http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/]()
+- Switch back to your **Kubernetes dashboard** browser tab. If you have closed it, navigate to the Kubernetes dashboard at [http://localhost:8001/ui]()
 
 - In the upper right corner of the dashboard, click **Create**.
 
