@@ -377,7 +377,8 @@ deploy-to-cluster:
 - You will need to install kubectl to use the Kubernetes dashboard. Install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
 
 - In a terminal window, **run** the following two commands. If your downloaded kubeconfig file is in a different location, modify the path in the first command to match.
-```
+
+```bash
 export KUBECONFIG=~/Downloads/kubeconfig
 kubectl proxy
 ```
