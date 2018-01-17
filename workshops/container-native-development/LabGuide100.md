@@ -170,7 +170,7 @@ build:
 
   ![](images/100/23.png)
 
-- Switch back to your Wercker browser tab and click on the **Runs** tab. If you are quick enough, you will see that Wercker has been notified of your new Git commit (via a webhook) and is executing your workflow.
+- Switch back to your **Wercker** browser tab and click on the **Runs** tab. If you are quick enough, you will see that Wercker has been notified of your new Git commit (via a webhook) and is executing your workflow.
 
   ![](images/100/24.png)
 
