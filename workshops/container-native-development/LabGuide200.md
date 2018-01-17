@@ -403,6 +403,8 @@ kubectl proxy
 
 - In the shell that is displayed, **paste** the following command and press **Enter**.
 
+**NOTE:** For windows you will need to use ctrl-shift-v to paste.
+
   `curl -s http://$HOSTNAME:8080/statictweets | head -c 100`
 
 - You should see some JSON data being returned by our twitter feed service. Our microservice has been deployed successfully! But the twitter feed service is just one part of our product catalog application. Let's deploy the rest of the application so we can validate that everything works together as expected. Leave this browser tab open, as we will use it in a later step.
