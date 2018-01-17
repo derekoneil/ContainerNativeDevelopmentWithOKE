@@ -84,12 +84,19 @@ Compartments are used to isolate resources within your OCI tenant. User-based ac
 An API key is required for Wercker to authenticate to OCI in order to create compute instances for your Kubernetes worker nodes.
 
 - Open a terminal window and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called .oci, generate a new PEM private key, generate the corresponding public key, and copy the public key to the clipboard. For more information on this process, including the alternate commands to protect your key file with a passphrase, see the [official documentation](https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm#two).
+- If you're using **Windows**, you'll need to install [Git Bash for Windows](https://git-scm.com/download/win) and run the commands with that tool
 
 ```bash
 mkdir ~/.oci
 openssl genrsa -out ~/.oci/oci_api_key.pem 2048
 openssl rsa -pubout -in ~/.oci/oci_api_key.pem -out ~/.oci/oci_api_key_public.pem
 cat ~/.oci/oci_api_key_public.pem | pbcopy
+```
+
+**Note:** For Windows Git Bash uses clip instead of pbcopy
+
+```bash
+cat ~/.oci/oci_api_key_public.pem | clip
 ```
 
   ![](images/200/11.png)
@@ -162,9 +169,7 @@ cat ~/.oci/oci_api_key_public.pem | pbcopy
 
   ![](images/200/23.png)
 
-- Wercker will begin provisioning nodes in your OCI compartment. Wercker will show you a **Get Started** page with a **Download kubeconfig file** button. Click that button, as we will need the kubeconfig file to monitor our cluster later.
-
-  In a few minutes, the **Cluster Status** and **Node Status** on your summary page will move from provisioning to running. No need to sit and wait for that -- feel free to move on to the next step, where we will tell Wercker how we would like to deploy our application to Kubernetes.
+- Wercker will begin provisioning nodes in your OCI compartment. Wercker will show you a **Get Started** page with a **Download kubeconfig file** button once completed. In a few minutes, the **Cluster Status** and **Node Status** on your summary page will move from provisioning to running. No need to sit and wait for that -- feel free to move on to the next step, where we will tell Wercker how we would like to deploy our application to Kubernetes.
 
   ![](images/200/24.png)
 
@@ -184,10 +189,9 @@ cat ~/.oci/oci_api_key_public.pem | pbcopy
 
   ![](images/200/28.png)
 
-- **Copy** the YAML below and **paste** it into the file editor.  
-  >This configuration consists of two parts. The first section (up to line 28) defines a **Deployment**, which tells Kubernetes about the application we want to deploy. In this Deployment we instruct Kubernetes to create two Pods (`replicas: 2`) that will run our application. Within those pods, we specify that we want one Docker container to be run, and compose the link to the image for that container using environment variables specific to this workflow execution (`image: ${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}`).
+- **Copy** the YAML below and **paste** it into the file editor. This configuration consists of two parts. The first section (up to line 28) defines a **Deployment**, which tells Kubernetes about the application we want to deploy. In this Deployment we instruct Kubernetes to create two Pods (`replicas: 2`) that will run our application. Within those pods, we specify that we want one Docker container to be run, and compose the link to the image for that container using environment variables specific to this workflow execution (`image: ${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}`).
 
-  >The second part of the file defines a **Service**. A Service defines how Kubernetes should expose our application to traffic from outside the cluster. In this case, we are asking for a cluster-internal IP address to be assigned (`type: ClusterIP`). This means that our twitter feed will only be accessible from inside the cluster. This is ok, because the twitter feed will be consumed by the product catalog application that we will deploy later. We can still verify that our twitter feed is deployed properly -- we'll see how in a later step.
+- The second part of the file defines a **Service**. A Service defines how Kubernetes should expose our application to traffic from outside the cluster. In this case, we are asking for a cluster-internal IP address to be assigned (`type: ClusterIP`). This means that our twitter feed will only be accessible from inside the cluster. This is ok, because the twitter feed will be consumed by the product catalog application that we will deploy later. We can still verify that our twitter feed is deployed properly -- we'll see how in a later step.
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -240,10 +244,6 @@ spec:
   ![](images/200/29.png)
 
 ### **STEP 7**: Define Wercker Deployment Pipelines
-
-- From a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), scrolling down until you see the **Your repositories** box on the right side of the page, and clicking the **twitter-feed** link.
-
-  ![](images/200/25.png)
 
 - Click the file **wercker.yml** and then click the **pencil** button to begin editing the file.
 
@@ -320,7 +320,9 @@ deploy-to-cluster:
 
   ![](images/200/32.png)
 
-- Repeat that process to create the **deploy-to-cluster** pipeline. Then click the **Workflows** tab again to get back to the editor.
+- Repeat that process to create the **deploy-to-cluster** pipeline. 
+
+- Then click the **Workflows** tab again to get back to the editor.
 
 - Click the **plus** button to the right of the **push-release** pipeline to add to the workflow. In the **Execute Pipeline** drop down list, select **inject-secret** and click **Add**
 
@@ -342,7 +344,9 @@ deploy-to-cluster:
 
   ![](images/200/36.png)
 
-- **Copy** the generated token to the clipboard. Return to your application page in Wercker by clicking **back** in your browser twice. Once there, click the **Environment** tab. In the key field of the empty row below the PORT environment variable, enter the key **KUBERNETES_TOKEN**. In the value field, **paste** the token we just generated. Check the **Protected** box and click **Add**.
+- **Copy** the generated token to the clipboard. Return to your application page in Wercker by clicking **back** in your browser twice. Once there, click the **Environment** tab.
+
+- In the key field of the empty row below the PORT environment variable, enter the key **KUBERNETES_TOKEN**. In the value field, **paste** the token we just generated. Check the **Protected** box and click **Add**.
 
   ![](images/200/37.png)
 
@@ -374,13 +378,13 @@ deploy-to-cluster:
 
 ### **STEP 11**: Validate deployment
 
-- You should have already downloaded the **kubeconfig file** from Wercker when you created your cluster. If you did not, download it now by going to Wercker, clicking **Clusters**, clicking your **cluster name**, clicking the **Get started** tab, and clicking **Download kubeconfig File**.
+- You will need to download the **kubeconfig file** from Wercker that was created for your cluster. Download it by going to Wercker, clicking **Clusters**, clicking your **cluster name**, clicking the **Get started** tab, and clicking **Download kubeconfig File**.
 
   ![](images/200/43.png)
 
 - You will need to install kubectl to use the Kubernetes dashboard. Install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
 
-- In a terminal window, **run** the following two commands. If your downloaded kubeconfig file is in a different location, modify the path in the first command to match.
+- In a terminal window, **run** the following two commands. If your downloaded kubeconfig file is in a different location, modify the path in the first command to match. For Windows run in Git Bash.
 
 ```bash
 export KUBECONFIG=~/Downloads/kubeconfig
@@ -454,3 +458,5 @@ kubectl proxy
   ![](images/200/54.png)
 
 - Some tweets are indeed displayed, but they aren't relevant to this product. It looks like there is a bug in our twitter feed microservice! Continue on to the next lab to explore how to make bug fixes and updates to our microservice.
+
+**You are now ready to move to the next lab.**
