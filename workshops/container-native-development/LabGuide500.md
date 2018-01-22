@@ -11,7 +11,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 **_To log issues_**, click here to go to the [GitHub oracle](https://github.com/oracle/learning-library/issues/new) repository issue submission form.
 
 ## Objectives
+
 **Extend Your Application Using a Function**
+
 - Run Your Function Locally
   - Install Fn Server on Your Local Machine
   - Clone the Function Repository
