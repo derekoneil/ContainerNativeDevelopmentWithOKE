@@ -12,11 +12,11 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ## Objectives
 **Extend Your Application Using a Function**
-    - Run Your Function Locally
-      - Install Fn Server on Your Local Machine
-      - Clone the Function Repository
-      - Deploy the Function Locally
-      - Test the Function Using curl
+- Run Your Function Locally
+  - Install Fn Server on Your Local Machine
+  - Clone the Function Repository
+  - Deploy the Function Locally
+  - Test the Function Using curl
 - Deploy Your Function to Fn on Kubernetes
   - Install Helm on Your Local Machine
   - Deploy Fn Server to Kubernetes Using Helm
@@ -209,6 +209,6 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/24.png)
 
-- You'll see a loading spinner in the upload pane while your browser uploads the full size image to the product catalog server. The product catalog server invokes your function (resolved using Kubernetes DNS service at the URL `http://my-release-fn-api/r/imgconvert/resize128`). The thumbnail is returned to the product catalog server, which passes it back to your browser to be displayed. If everything worked correctly, you'll see the generated thumbnail displayed in the upload pane. 
+- You'll see a loading spinner in the upload pane while your browser uploads the full size image to the product catalog server. The product catalog server invokes your function (resolved using Kubernetes DNS service at the URL `http://my-release-fn-api/r/imgconvert/resize128`). The thumbnail is returned to the product catalog server, which passes it back to your browser to be displayed. If everything worked correctly, you'll see the generated thumbnail displayed in the upload pane.
 
   ![](images/500/25.png)
