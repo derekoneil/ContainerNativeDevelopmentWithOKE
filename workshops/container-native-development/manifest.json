@@ -40,6 +40,12 @@
                 "filename": "LabGuide400.md",
                 "title": "Lab 400: Perform a Blue/Green Deployment to Kubernetes",
                 "description": "Stage your new version without disrupting the current deployment"
+            },
+            {
+                "number": "500",
+                "filename": "LabGuide500.md",
+                "title": "Lab 500: Extend Your Application with a Function",
+                "description": "Install Fn in Kubernetes and Deploy a Function"
             }
         ]
     }
