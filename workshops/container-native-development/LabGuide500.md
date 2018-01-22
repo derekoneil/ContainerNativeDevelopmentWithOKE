@@ -29,6 +29,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - The following lab requires:
   - an Oracle Public Cloud account that will be supplied by your instructor.
   - a [GitHub account](https://github.com/join)
+  - a [Docker Hub account](https://hub.docker.com/)
 
 # Extend Your Application Using a Function
 
@@ -171,6 +172,12 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   `cd ~/Downloads/image-resize`
 
   ![](images/500/18.png)
+
+- Since we are pushing to a remote Fn Server, Fn will use Docker Hub as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to.
+
+  `export FN_REGISTRY=your-docker-hub-registry`
+
+  ![](images/500/26.png)
 
 - **Deploy the function** (and application) to the remote Fn Server using the same command you used in **STEP 3**, but without the --local flag.
 
