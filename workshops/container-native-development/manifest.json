@@ -12,15 +12,9 @@
                 "description": "Step-by-step workshop instructions"
             },
             {
-                "number": "0",
-                "filename": "StudentGuide.md",
-                "title": "Student Guide",
-                "description": "Workshop guidance and prerequisites"
-            },
-            {
                 "number": "100",
                 "filename": "LabGuide100.md",
-                "title": "Lab 100: Containerize Your Application",
+                "title": "Lab 100: Containerize Your Java Microservice",
                 "description": "Use Wercker to automatically build your application and package it as a Docker image"
             },
             {
@@ -32,13 +26,13 @@
             {
                 "number": "300",
                 "filename": "LabGuide300.md",
-                "title": "Lab 300:  Make a Bug Fix to Your Java Microservice",
+                "title": "Lab 300: Make a Bug Fix to Your Java Microservice",
                 "description": "Go from code change to production using Wercker"
             },
             {
                 "number": "400",
                 "filename": "LabGuide400.md",
-                "title": "Lab 400: Perform a Blue/Green Deployment to Kubernetes",
+                "title": "Lab 400: Kubernetes Blue/Green Deployments",
                 "description": "Stage your new version without disrupting the current deployment"
             },
             {

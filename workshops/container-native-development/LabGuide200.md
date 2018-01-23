@@ -14,12 +14,11 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 
 ## Objectives
 
-**Create and Deploy to a Kubernetes Cluster**
-
-- Set Up Oralce Cloud infrastructure
-- Configure Wercker Cluster
-- Configure and Run Wercker Deployment Pipelines
-- Deploy and Test the Product Catalog Application
+- Create and Deploy to a Kubernetes Cluster 
+  - Set Up Oralce Cloud infrastructure
+  - Configure Wercker Cluster
+  - Configure and Run Wercker Deployment Pipelines
+  - Deploy and Test the Product Catalog Application
 
 ## Required Artifacts
 
@@ -320,7 +319,7 @@ deploy-to-cluster:
 
   ![](images/200/32.png)
 
-- Repeat that process to create the **deploy-to-cluster** pipeline. 
+- Repeat that process to create the **deploy-to-cluster** pipeline.
 
 - Then click the **Workflows** tab again to get back to the editor.
 

@@ -1,4 +1,4 @@
-# K8S Blue Green Deployments
+# Kubernetes Blue/Green Deployments
 
 ![](images/400/header.png)
 
@@ -14,14 +14,13 @@ During this lab, you will take on the **DevOps Engineer Persona** and perform a 
 
 ## Objectives
 
-**Perform a Blue/Green Deployment to Kubernetes**
-
-- Update Existing Deployment and Service with Blue Color Labels
-- Validate Deployment Color In Kubernetes and Application
-- Increment Application Version and Switch Color to Green
-- Validate Blue Deployment Still Serves Traffic
-- Reconfigure Service to Switch to Green Deployment
-- Validate Green Deployment Now Serves Traffic
+- Perform a Blue/Green Deployment to Kubernetes
+  - Update Existing Deployment and Service with Blue Color Labels
+  - Validate Deployment Color In Kubernetes and Application
+  - Increment Application Version and Switch Color to Green
+  - Validate Blue Deployment Still Serves Traffic
+  - Reconfigure Service to Switch to Green Deployment
+  - Validate Green Deployment Now Serves Traffic
 
 ## Required Artifacts
 
