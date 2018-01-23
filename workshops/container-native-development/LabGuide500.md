@@ -221,3 +221,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - You'll see a loading spinner in the upload pane while your browser uploads the full size image to the product catalog server. The product catalog server invokes your function (resolved using Kubernetes DNS service at the URL `http://my-release-fn-api/r/imgconvert/resize128`). The thumbnail is returned to the product catalog server, which passes it back to your browser to be displayed. If everything worked correctly, you'll see the generated thumbnail displayed in the upload pane.
 
   ![](images/500/25.png)
+
+- Congratulations! You've just used the Fn Project to create and deploy a new serverless function to extend your application!
+
+**You have completed the Container Native Application Development Workshop**

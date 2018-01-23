@@ -171,3 +171,5 @@ This selector will instruct your load balancer to only route traffic to the blue
   ![](images/400/21.png)
 
 - If an unexpected issue were to arise with the green code version, it would be very easy to undo the change we made to the Service and switch back over to the blue pods, since they are still running. Eventually, the blue version can be taken down by deleting the Deployment that created them. Once again this can be accomplished through the GUI, the kubectl CLI, or via an automation system like Wercker.
+
+**You are now ready to move to the next lab.**

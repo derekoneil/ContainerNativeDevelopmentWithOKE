@@ -14,7 +14,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 
 ## Objectives
 
-- Create and Deploy to a Kubernetes Cluster 
+- Create and Deploy to a Kubernetes Cluster
   - Set Up Oralce Cloud infrastructure
   - Configure Wercker Cluster
   - Configure and Run Wercker Deployment Pipelines
@@ -154,7 +154,7 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   ![](images/200/20.png)
 
-- Enter a **name** for your cluster and click **Next**
+- Enter a **name** for your cluster, accept the default **Master Kubernetes Version**, and click **Next**
 
   ![](images/200/21.png)
 
@@ -168,7 +168,7 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   ![](images/200/23.png)
 
-- Wercker will begin provisioning nodes in your OCI compartment. Wercker will show you a **Get Started** page with a **Download kubeconfig file** button once completed. In a few minutes, the **Cluster Status** and **Node Status** on your summary page will move from provisioning to running. No need to sit and wait for that -- feel free to move on to the next step, where we will tell Wercker how we would like to deploy our application to Kubernetes.
+- Wercker will begin provisioning nodes in your OCI compartment. The **kubeconfig file** will be available from the **Get Started** tab at any time after your cluster is provisioned. In a few minutes, the **Cluster Status** and **Node Status** on your summary page will move from provisioning to running. No need to wait for that; you can move on to the next step, where we will tell Wercker how we would like to deploy our application to Kubernetes.
 
   ![](images/200/24.png)
 
@@ -327,7 +327,7 @@ deploy-to-cluster:
 
   ![](images/200/33.png)
 
-- Now click the **plus** button to the right of **inject-secret** and add the **deploy-to-cluster** pipeline to your workflow.
+- Now click the **plus** button to the right of **inject-secret** and add the **deploy-to-cluster** pipeline to your workflow in the same manner.
 
   ![](images/200/34.png)
 
@@ -354,6 +354,8 @@ deploy-to-cluster:
   ![](images/200/38.png)
 
 - Use the browser's **back** button to get back to the environment variable page for your application. Add a new environment variable with the key **KUBERNETES_MASTER**. In the value field, type **https://** and then **paste** the value you copied from the clusters page. When finished, click **Add**.
+
+  ![](images/200/55.png)
 
 - Now we're ready to try out our workflow from start to finish. We could do that by making another commit on GitHub, since Wercker is monitoring our source code. We can also trigger a workflow execution right from Wercker. We'll see how in the next step.
 

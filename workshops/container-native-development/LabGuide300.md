@@ -52,7 +52,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 
   ![](images/300/4.png)
 
-- Scroll down to **line 52**. This is the REST endpoint that should return only tweets that match a given search term, but it's commented out. Delete the comments on **line 48** and **line 64** to enable this function.
+- Scroll down to **line 54**. This is the REST endpoint that should return only tweets that match a given search term, but it's not working. Delete **line 57** to fix the bug that is breaking this feature.
 
   ![](images/300/5.png)
 
@@ -91,3 +91,5 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 - The Alpha Office Product Catalog site will load in a new tab. Click on **any of the products** to load its twitter feed. Now the feed displays only tweets with hashtags relevant to this specific product. We've gone from making a code change to having our new version built, tested, and deployed to Kubernetes in just a couple of minutes!
 
   ![](images/300/13.png)
+
+**You are now ready to move to the next lab.**
