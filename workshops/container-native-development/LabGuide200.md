@@ -66,6 +66,12 @@ Compartments are used to isolate resources within your OCI tenant. User-based ac
 
   ![](images/200/6.png)
 
+- If your workshop instructor has directed you to use a pre-created compartment, locate it in the list and click **Copy** next to the displayed OCID. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Wercker where to set up our Cluster in a later step. Proceed to **STEP 3**.
+
+  Otherwise, if you are using a trial account or paid account, proceed to the next instruction to create a compartment.
+
+  ![](images/200/9.png)
+
 - Click **Create Compartment**
 
   ![](images/200/7.png)
