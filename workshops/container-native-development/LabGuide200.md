@@ -14,6 +14,8 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 
 ## Objectives
 
+**Automate Deployment to Kubernetes**
+
 - Create and Deploy to a Kubernetes Cluster
   - Set Up Oralce Cloud infrastructure
   - Configure Wercker Cluster

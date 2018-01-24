@@ -14,11 +14,12 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 
 ## Objectives
 
-- Make a Bug Fix to Your Java Microservice
-  - Modify Java Code and Commit to GitHub
-  - Verify Execution of Wercker Workflow
-  - Verify Deployment to Kubernetes
-  - Test the Product Catalog Application
+**Make a Bug Fix to Your Java Microservice**
+
+- Modify Java Code and Commit to GitHub
+- Verify Execution of Wercker Workflow
+- Verify Deployment to Kubernetes
+- Test the Product Catalog Application
 
 ## Required Artifacts
 
