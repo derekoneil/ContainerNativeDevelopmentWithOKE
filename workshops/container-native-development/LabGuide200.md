@@ -60,7 +60,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 
   ![](images/200/5.png)
 
-### **STEP 2**: Create a Compartment for your Kubernetes nodes
+### **STEP 2**: Locate or Create a Compartment for your Kubernetes nodes
 
 Compartments are used to isolate resources within your OCI tenant. User-based access policies can be applied to manage access to compute instances and other resources within a Compartment.
 
@@ -68,7 +68,7 @@ Compartments are used to isolate resources within your OCI tenant. User-based ac
 
   ![](images/200/6.png)
 
-- If your workshop instructor has directed you to use a pre-created compartment, locate it in the list and click **Copy** next to the displayed OCID. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Wercker where to set up our Cluster in a later step. Proceed to **STEP 3**.
+- If your workshop instructor has directed you to use a pre-created compartment **_do not create a new one_**. Locate the compartment in the list and click **Copy** next to the displayed OCID. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Wercker where to set up our Cluster in a later step. Proceed to **STEP 3**.
 
   Otherwise, if you are using a trial account or paid account, proceed to the next instruction to create a compartment.
 
