@@ -36,7 +36,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 
 - From any browser, go to:
 
-    [https://cloud.oracle.com/en_US/sign-in]()
+    [https://cloud.oracle.com/en_US/sign-in](https://cloud.oracle.com/en_US/sign-in)
 
 - Enter your **Cloud Account Name** in the input field and click the **My Services** button. If you have a trial account, this can be found in your welcome email. Otherwise, this will be supplied by your workshop instructor.
 

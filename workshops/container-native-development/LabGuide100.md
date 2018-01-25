@@ -41,7 +41,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
 - From any browser, go to:
 
-    [https://github.com/derekoneil/twitter-feed]()
+    [https://github.com/derekoneil/twitter-feed](https://github.com/derekoneil/twitter-feed)
 
 - Click **Fork** in the upper right hand corner of the browser. **Sign in** if prompted.
 
@@ -54,7 +54,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
   **NOTE** If you already have a Wercker account, proceed to **STEP 3**.
 
 - In a new browser tab, go to:
-    [http://www.wercker.com/]()
+    [http://www.wercker.com/](http://www.wercker.com/)
 
 - Click **Sign Up** in the upper right hand corner of the browser. Alternately, if you have already signed up for a Wercker account, click **log in** and then **log in with GitHub** and skip to **STEP 3**.
 
