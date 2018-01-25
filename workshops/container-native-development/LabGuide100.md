@@ -195,10 +195,10 @@ build:
 
 ```
   Key:              Value:
-  DOCKER_EMAIL      Your email address
-  DOCKER_USERNAME   Your Github username
+  DOCKER_EMAIL      Your email address (can be any address)
+  DOCKER_USERNAME   Your Wercker username
   DOCKER_REGISTRY   wcr.io
-  DOCKER_REPO       wcr.io/your-github-username/twitter-feed
+  DOCKER_REPO       wcr.io/your-wercker-username/twitter-feed
   PORT              8080
 ```
 
