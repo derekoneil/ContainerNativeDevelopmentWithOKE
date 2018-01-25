@@ -17,7 +17,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 **Automate Deployment to Kubernetes**
 
 - Create and Deploy to a Kubernetes Cluster
-  - Set Up Oralce Cloud infrastructure
+  - Set Up Oracle Cloud infrastructure
   - Configure Wercker Cluster
   - Configure and Run Wercker Deployment Pipelines
   - Deploy and Test the Product Catalog Application
@@ -30,7 +30,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 
 # Containerize Your Java Application and Automate Builds
 
-## Set Up Oralce Cloud infrastructure
+## Set Up Oracle Cloud infrastructure
 
 ### **STEP 1**: Log in to your OCI dashboard
 
