@@ -10,7 +10,7 @@
 
 - To log issues and view the Lab Guide source, go to the [github oracle](https://github.com/oracle/learning-library/issues/new) repository.
 
-- Visit the [Workshop Interactive Labguide](#) (coming soon) for a visual overview of the workshop content.
+- Visit the [Workshop Interactive Labguide](https://launch.oracle.com/?container-native-development) for a visual overview of the workshop content.
 
 
 ## Container Native Application Development Workshop
