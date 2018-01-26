@@ -79,7 +79,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
   ![](images/100/6.png)
 
 
-- Leave the default selections of your account and GitHub and click **Next**
+- Leave the default selections of **your account** for the owner and **GitHub** for the SCM and click **Next**
 
   ![](images/100/7.png)
 
@@ -202,7 +202,7 @@ build:
   PORT              8080
 ```
 
-**NOTE**: The Docker email and username variables are required to authenticate to the container registry.
+**NOTE**: The Docker email and username variables are required to authenticate to the container registry. The `DOCKER_REPO` must be **all lowercase**.
 
 ### **STEP 7**: Define Wercker Publish Pipeline
 

@@ -250,6 +250,8 @@ spec:
 
   ![](images/200/29.png)
 
+- Since you've committed to the repository, Wercker will trigger another execution of your workflow. We haven't defined the deployment pipelines yet, so this will just result in a new entry in Wercker's Runs tab and a new image pushed to the container registry. You don't need to do anything with those; you can move on to the next step.
+
 ### **STEP 7**: Define Wercker Deployment Pipelines
 
 - Click the file **wercker.yml** and then click the **pencil** button to begin editing the file.
@@ -313,6 +315,8 @@ deploy-to-cluster:
 
   ![](images/200/29.png)
 
+- Since you've committed to the repository again, Wercker will once again trigger an execution of your workflow. We still haven't configured the deployment pipelines in Wercker yet, so we'll still end up with a new Run and a new image, but not a deployment to Kubernetes.
+
 ### **STEP 8**: Set up deployment pipelines in Wercker
 
 - Open **[Wercker](https://app.wercker.com)** in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Pipelines**, then click on your **twitter-feed** application.
@@ -361,7 +365,7 @@ deploy-to-cluster:
 
   ![](images/200/38.png)
 
-- Use the browser's **back** button to get back to the environment variable page for your application. Add a new environment variable with the key **KUBERNETES_MASTER**. In the value field, type **https://** and then **paste** the value you copied from the clusters page. When finished, click **Add**.
+- Use the browser's **back** button to get back to the environment variable page for your application. Add a new environment variable with the key **KUBERNETES_MASTER**. In the value field, type **https://** and then **paste** the value you copied from the clusters page. The value **must start with https://** for Wercker to communicate with the cluster. When finished, click **Add**.
 
   ![](images/200/55.png)
 
