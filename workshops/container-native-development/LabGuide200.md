@@ -64,7 +64,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 
 Compartments are used to isolate resources within your OCI tenant. User-based access policies can be applied to manage access to compute instances and other resources within a Compartment.
 
-- Hover over the **Identity** menu in the top navigation bar and click **Compartments**
+- Hover over the **Identity** menu in the top navigation bar and click **Compartments**.
 
   ![](images/200/6.png)
 
