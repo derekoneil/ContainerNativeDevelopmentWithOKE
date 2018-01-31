@@ -113,7 +113,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
   ![](images/100/18.png)
 
-- Fill in **push-release** for the name of the pipeline and the YML name of the pipeline and click **Create**.
+- Fill in `push-release` for the name of the pipeline and the YML name of the pipeline and click **Create**.
 
   ![](images/100/19.png)
 
@@ -133,7 +133,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
   ![](images/100/13.png)
 
-- In the **Name your file...** input field, type **wercker.yml**
+- In the **Name your file...** input field, type `wercker.yml`
 
   ![](images/100/14.png)
 
