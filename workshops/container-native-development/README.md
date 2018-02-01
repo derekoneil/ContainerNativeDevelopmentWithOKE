@@ -2,11 +2,11 @@
 
 ## IMPORTANT: How to prepare for this Workshop
 
-- **Step #1**: The Lab documentation is **best viewed** by using the Workshop's [GitHub Pages Website URL](https://pcdavies.github.io/ContainerNativeAppDev/workshops/container-native-development/). Once you are viewing the Workshop's GitHub Pages website, you can see a list of Lab Guides at any time by clicking on the **Menu Icon**
+- The Lab documentation is **best viewed** by using the Workshop's [GitHub Pages Website URL](https://pcdavies.github.io/ContainerNativeAppDev/workshops/container-native-development/). Once you are viewing the Workshop's GitHub Pages website, you can see a list of Lab Guides at any time by clicking on the **Menu Icon**
 
     ![](images/WorkshopMenu.png)
 
-- **Step #2**: To get your Trial Account, ***Please follow the instruction*** found in the [Trial Account Student Guide](StudentGuide.md) prior to starting the Labs found in this workshop.
+<!-- - **Step #2**: To get your Trial Account, ***Please follow the instruction*** found in the [Trial Account Student Guide](StudentGuide.md) prior to starting the Labs found in this workshop. -->
 
 - To log issues and view the Lab Guide source, go to the [github oracle](https://github.com/oracle/learning-library/issues/new) repository.
 
