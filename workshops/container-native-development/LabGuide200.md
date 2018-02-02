@@ -64,7 +64,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 
 Compartments are used to isolate resources within your OCI tenant. User-based access policies can be applied to manage access to compute instances and other resources within a Compartment.
 
-- Hover over the **Identity** menu in the top navigation bar and click **Compartments**.
+- Hover over the **Identity** menu in the top navigation bar and click **Compartments**
 
   ![](images/200/6.png)
 
@@ -111,6 +111,10 @@ cat ~/.oci/oci_api_key_public.pem | clip
 - In your browser window showing the OCI Console, hover over your username in the top right corner and click **User Settings**
 
   ![](images/200/10.png)
+
+**NOTE**: If you are using a federated user, you will not see **User Settings** in the dropdown menu. Instead, click the **Identity** menu item. You will be brought to the **Users** menu. Find your username in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**. 
+
+  ![](images/200/56.png)
 
 - Click **Add Public Key**
 
