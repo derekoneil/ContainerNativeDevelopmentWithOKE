@@ -28,7 +28,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
   - an Oracle Public Cloud account that will be supplied by your instructor.
   - a [GitHub account](https://github.com/join)
 
-# Containerize Your Java Application and Automate Builds
+# Automate Deployment to Kubernetes
 
 ## Set Up Oracle Cloud infrastructure
 
@@ -112,7 +112,7 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   ![](images/200/10.png)
 
-**NOTE**: If you are using a federated user, you will not see **User Settings** in the dropdown menu. Instead, click the **Identity** menu item. You will be brought to the **Users** menu. Find your username in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**. 
+**NOTE**: If you are using a federated user, you will not see **User Settings** in the dropdown menu. Instead, click the **Identity** menu item. You will be brought to the **Users** menu. Find your username in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
 
   ![](images/200/56.png)
 
