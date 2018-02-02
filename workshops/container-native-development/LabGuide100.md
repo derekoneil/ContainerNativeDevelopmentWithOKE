@@ -24,6 +24,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
   - Configure Pipelines and Workflow in Wercker
   - Define Wercker Build Pipeline
   - Set Environment Variables in Wercker
+  - Create Docker Hub Repository
   - Define Wercker Publish Pipeline
   - Validate Workflow Execution
 
@@ -32,6 +33,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 - The following lab requires:
   - an Oracle Public Cloud account that will be supplied by your instructor.
   - a [GitHub account](https://github.com/join)
+  - a [Docker Hub account](https://hub.docker.com)
 
 # Containerize Your Java Application and Automate Builds
 
@@ -196,15 +198,28 @@ build:
 ```
   Key:              Value:
   DOCKER_EMAIL      Your email address (can be any address)
-  DOCKER_USERNAME   Your Wercker username
-  DOCKER_REGISTRY   wcr.io
-  DOCKER_REPO       wcr.io/your-wercker-username/twitter-feed
+  DOCKER_USERNAME   Your Docker Hub username
+  DOCKER_PASSWORD   Your Docker Hub password (check the box for 'protected')
+  DOCKER_REGISTRY   https://registry.hub.docker.com/v2
+  DOCKER_REPO       your-docker-hub-username/twitter-feed
   PORT              8080
 ```
 
 **NOTE**: The Docker email and username variables are required to authenticate to the container registry. The `DOCKER_REPO` must be **all lowercase**.
 
-### **STEP 7**: Define Wercker Publish Pipeline
+### **STEP 7**: Create Docker Hub Repository
+
+- In a browser, go to [Docker Hub](https://hub.docker.com) and click on **Create Repository**.
+
+  ![](images/100/36.png)
+
+- In the **Name** field, enter `twitter-feed`. Optionally add descriptions and click **Create**
+
+  ![](images/100/37.png)
+
+- Your repository is now ready for Wercker to push a Docker image into during the publish pipeline. Let's configure that now.
+
+### **STEP 8**: Define Wercker Publish Pipeline
 
 - Switch to your Github browser tab, click on the **wercker.yml** file, and click the **pencil icon** to begin editing.
 
@@ -217,10 +232,15 @@ build:
 push-release:
   steps:
     - internal/docker-push:
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
+        repository: $DOCKER_REPO
+        registry: $DOCKER_REGISTRY
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         working-dir: /pipeline/source
         ports: $PORT
-        cmd: sh target/bin/start
+        env: PORT=$PORT
+        cmd: node server.js
 ```
 
   ![](images/100/28.png)
@@ -235,17 +255,17 @@ push-release:
 
   ![](images/100/29.png)
 
-### **STEP 8**: Validate Workflow Execution
+### **STEP 9**: Validate Workflow Execution
 
 - Switch to your Wercker browser tab and click the **Runs** tab within Wercker. You'll see the workflow executing as a result of your Git commit.
 
   ![](images/100/30.png)
 
-- Once the workflow finishes, you'll see both the build and push-release pipelines turn green to indicate success. After that happens, click on the **Releases** button in the top navigation menu in Wercker.
+- Once the workflow finishes, you'll see both the build and push-release pipelines turn green to indicate success. After that happens, switch back to your **Docker Hub** browser tab. You'll see that your twitter-feed repository was pushed to successfully (you may need to refresh the page).
 
   ![](images/100/34.png)
 
-- On the Releases page, you'll see that a repository for your application has been automatically created for you, and your **push-release** pipeline has saved your Docker image into the repository.
+- Click the **Tags** tab to see the image metadata, such as the Git branch and commit hash, as well as the size of the image.
 
   ![](images/100/33.png)
 

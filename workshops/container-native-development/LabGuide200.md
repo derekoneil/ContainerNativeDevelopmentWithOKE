@@ -1,4 +1,4 @@
-# Automate Deployment to Kubernetes
+# Provision Kubernetes Using Terraform
 
 ![](images/200/header.png)
 
@@ -8,7 +8,7 @@ This is the second of several labs that are part of the **Oracle Public Cloud Co
 
 You will take on 2 personas during the workshop. The **Lead Developer Persona** will be responsible for configuring the parts of the automated build and deploy process that involve details about the application itself. The **DevOps Engineer Persona** will configure the parts of the automation involving the Kubernetes infrastructure. To containerize and automate the building and deploying of this application you will make use of Wercker Pipelines, Oracle Container Registry, and Oracle Container Engine.
 
-During this lab, you will take on the **DevOps Engineer Persona**. You will create a Kubernetes cluster and deploy your twitter feed microservice and the product catalog application. You'll also create both internal and external facing services in Kubernetes to expose only some of your application's entry points to the internet.
+During this lab, you will take on the **DevOps Engineer Persona**. You will provision a Kubernetes cluster and all of the infrastructure that it requires using Terraform. Terraform will provision the Virtual Cloud Network, Load Balancers, Kubernetes Master and Worker instances, and etcd instance required to support your cluster.
 
 **_To log issues_**, click here to go to the [GitHub oracle](https://github.com/oracle/learning-library/issues/new) repository issue submission form.
 
@@ -27,8 +27,9 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will crea
 - The following lab requires:
   - an Oracle Public Cloud account that will be supplied by your instructor.
   - a [GitHub account](https://github.com/join)
+  - a [Docker Hub account](https://hub.docker.com)
 
-# Containerize Your Java Application and Automate Builds
+# Provision Kubernetes Using Terraform
 
 ## Set Up Oracle Cloud infrastructure
 
@@ -68,7 +69,7 @@ Compartments are used to isolate resources within your OCI tenant. User-based ac
 
   ![](images/200/6.png)
 
-- If your workshop instructor has directed you to use a pre-created compartment **_do not create a new one_**. Locate the compartment in the list and click **Copy** next to the displayed OCID. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Wercker where to set up our Cluster in a later step. Proceed to **STEP 3**.
+- If your workshop instructor has directed you to use a pre-created compartment **_do not create a new one_**. Locate the compartment in the list and click **Copy** next to the displayed OCID. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Terraform where to set up our cluster in a later step. Proceed to **STEP 3**.
 
   Otherwise, if you are using a trial account or paid account, proceed to the next instruction to create a compartment.
 
@@ -78,19 +79,19 @@ Compartments are used to isolate resources within your OCI tenant. User-based ac
 
   ![](images/200/7.png)
 
-- In the **Name** field, enter `wercker`. Enter a description of your choice. Click **Create Compartment**.
+- In the **Name** field, enter `kubernetes`. Enter a description of your choice. Click **Create Compartment**.
 
   ![](images/200/8.png)
 
-- In a moment, your new Compartment will show up in the list. Locate it and click **Copy** in the OCID display. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Wercker where to set up our Cluster in a later step.
+- In a moment, your new Compartment will show up in the list. Locate it and click **Copy** in the OCID display. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Terraform where to set up our cluster in a later step.
 
   ![](images/200/9.png)
 
 ### **STEP 3**: Create and upload a new API key
 
-An API key is required for Wercker to authenticate to OCI in order to create compute instances for your Kubernetes worker nodes.
+An API key is required for Terraform to authenticate to OCI in order to create compute instances for your Kubernetes master and worker nodes.
 
-- Open a terminal window and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called .oci, generate a new PEM private key, generate the corresponding public key, and copy the public key to the clipboard. For more information on this process, including the alternate commands to protect your key file with a passphrase, see the [official documentation](https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm#two).
+- Open a terminal window and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called `.oci`, generate a new PEM private key, generate the corresponding public key, and copy the public key to the clipboard. For more information on this process, including the alternate commands to protect your key file with a passphrase, see the [official documentation](https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm#two).
 - If you're using **Windows**, you'll need to install [Git Bash for Windows](https://git-scm.com/download/win) and run the commands with that tool
 
 ```bash
@@ -112,7 +113,7 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   ![](images/200/10.png)
 
-**NOTE**: If you are using a federated user, you will not see **User Settings** in the dropdown menu. Instead, click the **Identity** menu item. You will be brought to the **Users** menu. Find your username in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**. 
+**NOTE**: If you are using a federated user, you will not see **User Settings** in the dropdown menu. Instead, click the **Identity** menu item. You will be brought to the **Users** menu. Find your username in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
 
   ![](images/200/56.png)
 
@@ -124,9 +125,105 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   ![](images/200/13.png)
 
-- **Leave this browser window open**, as we will need to copy and paste some of this information into Wercker.
+- **Leave this browser window open**, as we will need to copy and paste some of this information into the Terraform configuration file.
 
-### **STEP 4**: Create a new Cloud Credential in Wercker
+### **STEP 4**: Download Terraform and the OCI Terraform Provider
+
+- If you are using the Oracle-provided client image, this step has been done for you. Skip to the next step. Otherwise, continue with this step to install Terraform and the OCI provider.
+
+- Download the appropriate Terraform package for your operating system from the [terraform.io downloads page](https://www.terraform.io/downloads.html).
+
+  ![](images/200/58.png)
+
+- **Unzip** the file you downloaded into the folder ~/terraform. You can use the command line or a graphical zip program for this operation. The example command below assumes you don't have other zip files in the current directory beginning with the string `terraform_`.
+
+  `mkdir ~/terraform && cat terraform_*.zip | tar -xvf - -C ~/terraform && cd ~/terraform`
+
+- Add Terraform to your PATH in the **terminal window** that you will use for the next two steps using the following command:
+
+  ``export PATH=$PATH:`PWD` ``
+
+- Download the **OCI Terraform Provider** from the [GitHub release page](https://github.com/oracle/terraform-provider-oci/releases/latest). Select the package for your operating system.
+
+  ![](images/200/59.png)
+
+- Extract the **zip file** you just downloaded
+
+### **STEP 5**: Download and Configure the OCI Terraform Kubernetes Installer
+
+- From the same **terminal window**, run the following commands to download the OCI Terraform Kubernetes Installer:
+  ```bash
+  cd ~
+  git clone https://github.com/oracle/terraform-kubernetes-installer.git
+  cd terraform-kubernetes-installer
+  ```
+
+- Verify proper installation of both Terraform and the OCI provider by running the following command from your **terminal window**:
+
+  ```bash
+  terraform --version
+  ```
+  You should see a version for `Terraform` as well as a version for the `provider.oci` plugin. It is OK if those versions differ from the screenshot below.
+
+  ![](images/200/57.png)
+
+- If you got the expected output from `terraform --version`, proceed to the next instruction. Otherwise, go back to the previous step and complete the instructions to **Download Terraform and the OCI Terraform Provider**. If you installed Terraform yourself, also ensure that it is in your PATH for the current terminal window.
+
+- Once you have Terraform and the OCI provider set up, you are ready to configure the Kubernetes installer with your OCI account information. Start by making a copy of the included TFVARS example file to edit. Run the following from your **terminal window**:
+
+  ```bash
+  cp terraform.example.tfvars terraform.tfvars
+  ```
+
+- Open the `terraform.tfvars` file in your text editor of choice. On Linux you could run:
+
+  ```bash
+  gedit terraform.tfvars
+  ```
+
+- You should still have a browser tab open to your **User Details** page in the OCI Console. Fill in the values in the terraform.tfvars file on lines **2, 4, 6, and 7** with the values from the OCI Console, referring to the following screenshot for where to find them.
+
+  ```
+  tenancy_ocid = "Tenancy OCID"
+
+  fingerprint = "Key Fingerprint"
+
+  user_ocid = "User OCID"
+  region = "Region (e.g. us-ashburn-1)"
+  ```
+
+  **NOTE**: The `region` parameter may not already be present in your tfvars file. If it is not there, add it on a new line after the user_ocid parameter on line 6.
+
+  ![](images/200/17.png)
+
+- Now we'll fill in the OCI Compartment ID on **line 3**. Paste the value that you saved to a text file after creating the kubernetes **compartment** in the OCI Console. If you have lost it, you can retrieve it from the OCI Console compartment list (refer to **STEP 2**).
+
+  ```
+  compartment_ocid = "Compartment OCID"
+  ```
+
+- The last piece of information we need to provide about your OCI tenant is the private key corresponding to the public API key you uploaded to the OCI console previously. Provide the path the the private key file on **line 5**. Note that your path may differ from the example given below.
+
+  ```
+  private_key_path = "/Users/oracle/.oci/oci_api_key.pem"
+  ```
+
+- The rest of the terraform.tfvars file controls the parameters used when creating your Kubernetes cluster. You can control how many OCPUs each node receives, whether nodes should be virtual machines or bare metal instances, how many availability domains to use, and more. We will modify three of the lines in the remainder of the file.
+
+- First, we will specify that we want only one OCPU in each of the worker and master nodes. This reduces the hourly cost of running our cluster. On **lines 15 and 16**, uncomment the **k8sMasterShape** and **k8sWorkerShape** parameters, and set both values to **VM.Standard1.1**:
+
+  ```
+  k8sMasterShape = "VM.Standard1.1"
+  k8sWorkerShape = "VM.Standard1.1"
+  ```
+
+- The other change we will make is to open up the allowed Kubernetes master inbound IP address range, so that we can access our cluster from the internet. On **line 38**, remove the pound sign at the beginning of the line to uncomment it.
+
+  ```
+  master_https_ingress = "0.0.0.0/0"
+  ```
+
+  **NOTE**: The 0.0.0.0/0 value means that any IP address can access your cluster. A better security practice would be to determine your externally-facing IP address and restrict access to only that address. If you'd like, you can find out your IP address by running `curl ifconfig.co` in a terminal window, and place that address into the `master_https_ingress` parameter (e.g. `master_https_ingress = "10.10.10.10/32"`). Note that if you need remote assistance with the workshop, you may need to open this back up to 0.0.0.0/0 to allow access to your cluster.
 
 - **Open** [Wercker](https://app.wercker.com) in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Clusters**, then **Cloud Credentials**.
 
