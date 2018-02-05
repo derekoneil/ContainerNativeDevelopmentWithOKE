@@ -113,7 +113,7 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   ![](images/200/10.png)
 
-**NOTE**: If you are using a federated user, you will not see **User Settings** in the dropdown menu. Instead, click the **Identity** menu item. You will be brought to the **Users** menu. Find your username in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
+  **NOTE**: If you are using a federated user, you will not see **User Settings** in the dropdown menu. Instead, click the **Identity** menu item. You will be brought to the **Users** menu. Find your username in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
 
   ![](images/200/56.png)
 
@@ -223,63 +223,48 @@ cat ~/.oci/oci_api_key_public.pem | clip
   master_https_ingress = "0.0.0.0/0"
   ```
 
-  **NOTE**: The 0.0.0.0/0 value means that any IP address can access your cluster. A better security practice would be to determine your externally-facing IP address and restrict access to only that address. If you'd like, you can find out your IP address by running `curl ifconfig.co` in a terminal window, and place that address into the `master_https_ingress` parameter (e.g. `master_https_ingress = "10.10.10.10/32"`). Note that if you need remote assistance with the workshop, you may need to open this back up to 0.0.0.0/0 to allow access to your cluster.
+  **NOTE**: The 0.0.0.0/0 value means that any IP address can access your cluster. A better security practice would be to determine your externally-facing IP address and restrict access to only that address. If you'd like, you can find out your IP address by running `curl ifconfig.co` in a terminal window, and place that address into the `master_https_ingress` parameter (e.g. `master_https_ingress = "11.12.13.14/32"`). Note that if you need remote assistance with the workshop, you may need to open this back up to 0.0.0.0/0 to allow access to your cluster.
 
-- **Open** [Wercker](https://app.wercker.com) in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Clusters**, then **Cloud Credentials**.
+- Now we are ready to have Terraform provision our Kubernetes cluster. **Save and close** your terraform.tfvars file. In your open **terminal window**, run the following command to have Terraform evaluate the various network and compute infrastructure that we are asking to be provisioned. You should see asdf
 
-  ![](images/200/14.png)
+  ```bash
+  terraform plan
+  ```
 
-- Before we can create a new Kubernetes cluster, we must give Wercker the identity information for our OCI tenant, user, and compartment. We also need to give Wercker the private API key that we just generated.
+  ![](images/200/60.png)
 
-  If your workshop instructor has specified an organization for you to use, **select it** from the drop down list in the top left part of the page. Then click **New Cloud Credential**.
+- If the output of the plan step looks correct, you are ready to actually provision the infrastructure by running the following command in your **terminal window**. Note that Terraform will prompt you to type `yes` after it recomputes the required plan in order to begin provisioning.
 
-  ![](images/200/15.png)
+  ```bash
+  terraform apply
+  ```
 
-- In the **Name** field, enter a name of your choice to identify your credential. For the next three fields, you will **copy and paste** values from the OCI Console User Details screen into the Wercker form. The image below shows where to find the User OCID, Tenancy OCID, and Key Fingerprint. We will fill in the API Private Key field next.
+  ![](images/200/61.png)
 
-  ![](images/200/17.png)
+- It will take several minutes to create the required Virtual Cloud Networks, load balancers, and compute instances that make up a Kubernetes cluster. If you'd like, you can observe the objects being created in the **OCI Console** -- click on **Compute** or **Networking** from the navigation menu and be sure to select the **kubernetes compartment** from the dropdown on the left side of the page.
 
-- In a terminal window, run the following command to copy your **API Private Key**
+  ![](images/200/62.png)
 
-  `cat ~/.oci/oci_api_key.pem | pbcopy`
+- When provisioning is complete, Terraform will output the details of all created infrastructure to the terminal:
 
-- **Paste** your private key into the **API Private Key** field in the Wercker form in your browser. Then click **Create**.
+  ![](images/200/63.png)
 
-  ![](images/200/16.png)
+- During provisioning, Terraform generated a `kubeconfig` file that will authenticate you to the cluster. Let's configure and start the kubectl proxy server to make sure our cluster is accessible.
 
-## Configure Wercker Cluster
+- First, you will need to install `kubectl`, the Kubernetes command line interface, to interact with Kubernetes from your local machine. Install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
 
-### **STEP 5**: Create a Cluster in Wercker
+- Next, you will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Then you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL.
 
-- **Open** [Wercker](https://app.wercker.com) in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Clusters**, then **Create**.
+  ```bash
+  export KUBECONFIG=`PWD`/generated/kubeconfig
+  kubectl proxy
+  ```
 
-  ![](images/200/18.png)
+- Now that the proxy server is running, navigate to the **[Kubernetes dashboard](localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)** in a new browser tab.
 
-- **Select** the same organization you did when you created your cloud credential in the previous step. Then **select** your cloud credential from the drop down list.
+  ![](images/200/64.png)
 
-  ![](images/200/19.png)
-
-- In the Compartment OCID field, enter the value that you saved to a text file after creating the wercker **compartment** in the OCI Console. If you have lost it, you can retrieve it from the OCI Console compartment list (refer to **STEP 2**). Once you have entered it, click **Next**
-
-  ![](images/200/20.png)
-
-- Enter a **name** for your cluster, accept the default **Master Kubernetes Version**, and click **Next**
-
-  ![](images/200/21.png)
-
-- Leave the default **small** size selected for your cluster and click **Next**
-
-  ![](images/200/22.png)
-
-  **NOTE**: We are selecting small virtual machines to run our cluster in this workshop, but you could have chosen any shape--including bare metal instances--for your nodes.
-
-- Leave the default OS and Kubernetes versions selected and click **Launch**
-
-  ![](images/200/23.png)
-
-- Wercker will begin provisioning nodes in your OCI compartment. The **kubeconfig file** will be available from the **Get Started** tab at any time after your cluster is provisioned. In a few minutes, the **Cluster Status** and **Node Status** on your summary page will move from provisioning to running. No need to wait for that; you can move on to the next step, where we will tell Wercker how we would like to deploy our application to Kubernetes.
-
-  ![](images/200/24.png)
+- Great! We've got Kubernetes installed and accessible -- now we're ready to get our microservice deployed to the cluster. The next step is to tell Wercker how and where we would like to deploy our application. In your **terminal window**, press **Control-C** to terminate `kubectl proxy`. We will need the terminal window to gather some cluster info in another step. We'll start the proxy again later.
 
 ## Configure and Run Wercker Deployment Pipelines
 
@@ -361,36 +346,12 @@ spec:
 
 - **Copy** the YAML below and **paste** it below the pipelines we defined earlier.
 
-  >This will define two new **Pipelines** called inject-secret and deploy-to-cluster. Both pipelines will make use of a new type of step: **kubectl**. If you have used Kubernetes before, you will be familiar with kubectl, the standard command line interface for managing Kubernetes. The kubectl Wercker step can be used to execute Kubernetes commands from within a Pipeline.
-
-  >The **inject-secret** Pipeline will create a new Kubernetes secret that contains our Wercker authentication token (we'll generate one in the Wercker app later). This will allow Kubernetes to authenticate when it tries to pull our Docker image from the Oracle Container Registry.
+  >This will define a new **Pipeline** called deploy-to-cluster. The pipeline will make use of a new type of step: **kubectl**. If you have used Kubernetes before, you will be familiar with kubectl, the standard command line interface for managing Kubernetes. The kubectl Wercker step can be used to execute Kubernetes commands from within a Pipeline.
 
   >The **deploy-to-cluster** Pipeline will prepare our kubernetes.yml file by filling in some environment variables. It will then use kubectl to tell Kubernetes to apply that configuration to our cluster.
 
 ```yaml
-#Inject our Wercker application token into Kubernetes to authenticate container pulls
-#delete any existing Wercker secret before creating, to accommodate secret changes
-inject-secret:
-    box:
-        id: alpine
-        cmd: /bin/sh
-    steps:
-
-    - kubectl:
-        name: delete secret
-        server: $KUBERNETES_MASTER
-        token: $KUBERNETES_TOKEN
-        insecure-skip-tls-verify: true
-        command: delete secret wercker; echo delete registry secret
-
-    - kubectl:
-        name: create secret
-        server: $KUBERNETES_MASTER
-        token: $KUBERNETES_TOKEN
-        insecure-skip-tls-verify: true
-        command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-username=$DOCKER_USERNAME --docker-password=$KUBERNETES_TOKEN --docker-email=$DOCKER_EMAIL; echo create registry secret
-
-#Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
+#Deploy our container from the Docker Hub to Kubernetes
 deploy-to-cluster:
     box:
         id: alpine
@@ -428,45 +389,41 @@ deploy-to-cluster:
 
   ![](images/200/31.png)
 
-- Enter **inject-secret** into both the Name and YML Pipleine name fields. Click **Create**.
+- Enter **deploy-to-cluster** into both the Name and YML Pipleine name fields. Click **Create**.
 
   ![](images/200/32.png)
 
-- Repeat that process to create the **deploy-to-cluster** pipeline.
+- Click the **Workflows** tab again to get back to the editor.
 
-- Then click the **Workflows** tab again to get back to the editor.
-
-- Click the **plus** button to the right of the **push-release** pipeline to add to the workflow. In the **Execute Pipeline** drop down list, select **inject-secret** and click **Add**
+- Click the **plus** button to the right of the **push-release** pipeline to add to the workflow. In the **Execute Pipeline** drop down list, select **deploy-to-cluster** and click **Add**
 
   ![](images/200/33.png)
 
-- Now click the **plus** button to the right of **inject-secret** and add the **deploy-to-cluster** pipeline to your workflow in the same manner.
+- Your overall Workflow should now have three Pipelines:
 
   ![](images/200/34.png)
 
-- Now we've got our workflow updated with our deployment pipelines, but there's one more thing we need to do before we can actually deploy. We need to set two environment variables that tell Wercker the address of our Kubernetes master and provide an authentication token for Kubernetes to use to pull Docker images from our registry.
+- Now we've got our workflow updated with our deployment pipelines, but there's one more thing we need to do before we can actually deploy. We need to set two environment variables that tell Wercker the address of our Kubernetes master and provide an authentication token for Wercker to issue commands to Kubernetes.
 
 ### **STEP 9**: Set up environment variables in Wercker
 
-- Our first step is to generate an authentication token for Kubernetes. Click to open the **User Menu** in the upper right hand corner of Wercker, then click **Settings**
+- Our first step is to set our cluster's authentication token as a Wercker environment variable. In your **terminal window**, run the following command to copy the token to your clipboard:
 
-  ![](images/200/35.png)
+  ```bash
+  terraform output api_server_admin_token | pbcopy
+  ```
 
-- Click **Personal Tokens** in the left side menu. Enter a name for your token, such as **OCI Token**, and click **Generate**.
-
-  ![](images/200/36.png)
-
-- **Copy** the generated token to the clipboard. Return to your application page in Wercker by clicking **back** in your browser twice. Once there, click the **Environment** tab.
-
-- In the key field of the empty row below the PORT environment variable, enter the key **KUBERNETES_TOKEN**. In the value field, **paste** the token we just generated. Check the **Protected** box and click **Add**.
+- Back in your Wercker browser tab, click the **Environment** tab. In the key field of the empty row below the last environment variable, enter the key **KUBERNETES_TOKEN**. In the value field, **paste** the token we just copied. Check the **Protected** box and click **Add**.
 
   ![](images/200/37.png)
 
-- The other environment variable we need to add is the address of the Kubernetes master we want to deploy to. We can find it on the clusters page. In the top navigation bar, click **Clusters**. Find your cluster in the list and **copy** its **Kubernetes Address**.
+- The other environment variable we need to add is the address of the Kubernetes master we want to deploy to. We can get the URL from `kubectl`. Run the following command in your **terminal window** to copy the URL to your clipboard:
 
-  ![](images/200/38.png)
+  ```bash
+  echo $(kubectl config view | grep server | cut -f 2- -d ":" | tr -d " ") | pbcopy
+  ```
 
-- Use the browser's **back** button to get back to the environment variable page for your application. Add a new environment variable with the key **KUBERNETES_MASTER**. In the value field, type **https://** and then **paste** the value you copied from the clusters page. The value **must start with https://** for Wercker to communicate with the cluster. When finished, click **Add**.
+- In your Wercker browser tab, add a new environment variable with the key **KUBERNETES_MASTER**. In the value field, **paste** the value you copied from `kubectl`. The value **must start with https://** for Wercker to communicate with the cluster. When finished, click **Add**.
 
   ![](images/200/55.png)
 
@@ -478,7 +435,7 @@ deploy-to-cluster:
 
   ![](images/200/39.png)
 
-- From the **Actions** menu, click **inject-secret**.
+- From the **Actions** menu, click **deploy-to-cluster**.
 
   ![](images/200/40.png)
 
@@ -486,26 +443,19 @@ deploy-to-cluster:
 
   ![](images/200/41.png)
 
-- Click the **Runs** tab so you can monitor the execution of the pipelines. Within a couple of minutes, all four pipelines should complete successfully. Now we can use the Kubernetes dashboard to inspect and validate our deployment.
+- Click the **Runs** tab so you can monitor the execution of the pipeline. Within a minute or so, the deployment pipeline should complete successfully. Now we can use the Kubernetes dashboard to inspect and validate our deployment.
 
   ![](images/200/42.png)
 
 ### **STEP 11**: Validate deployment
 
-- You will need to download the **kubeconfig file** from Wercker that was created for your cluster. Download it by going to Wercker, clicking **Clusters**, clicking your **cluster name**, clicking the **Get started** tab, and clicking **Download kubeconfig File**.
+- In a terminal window, start the **kubectl proxy** using the following command. Your `KUBECONFIG` environment variable should still be set from a previous step. If not, reset it.
 
-  ![](images/200/43.png)
+  ```bash
+  kubectl proxy
+  ```
 
-- You will need to install kubectl to use the Kubernetes dashboard. Install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
-
-- In a terminal window, **run** the following two commands. If your downloaded kubeconfig file is in a different location, modify the path in the first command to match. For Windows run in Git Bash.
-
-```bash
-export KUBECONFIG=~/Downloads/kubeconfig
-kubectl proxy
-```
-
-- In a browser tab, navigate to the Kubernetes dashboard at [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)
+- In a browser tab, navigate to the [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)
 
 - You should see the overview page. In the pods section, you should see two twitter-feed pods running. Click the **name of one of the pods** to go to the detail page.
 
@@ -517,7 +467,7 @@ kubectl proxy
 
 - In the shell that is displayed, **paste** the following command and press **Enter**.
 
-**NOTE:** For windows you will need to use ctrl-shift-v to paste.
+  **NOTE:** For windows you will need to use ctrl-shift-v to paste. Alternatively, you can use the mouse-driven browser menu to paste the command.
 
   `curl -s http://$HOSTNAME:8080/statictweets | head -c 100`
 

@@ -110,7 +110,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   **NOTE**: `kubectl` needs to be in your PATH for Helm to run. If you did not modify your system PATH when you installed kubectl in a previous lab, you can run `export PATH=$PATH:/the/directory/where/you/downloaded/kubectl` to alter the path in this shell. Do this before running `helm init` below.
 
-  ```
+  ```bash
   cd ~/Downloads
   mkdir helm
   tar -xf helm-v2.7.2-windows-amd64.tar.gz -C helm
@@ -151,7 +151,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   - Once the **External-IP** field is populated (which could take up to 5 minutes), set the **FN_API_URL** environment variable using the following command:
 
-    `export FN_API_URL=http://$(kubectl get svc --namespace default my-release-fn-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):80`
+    ```bash
+    export FN_API_URL=http://$(kubectl get svc --namespace default my-release-fn-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):80
+    ```
 
     ![](images/500/16.png)
 
@@ -187,7 +189,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Test the function using **curl**, but this time using the URL of the remote Fn Server:
 
-  `curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" $FN_API_URL/r/imgconvert/resize128 > thumbnail-remote.png`
+  ```bash
+  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" $FN_API_URL/r/imgconvert/resize128 > thumbnail-remote.png
+  ```
 
   ![](images/500/20.png)
 
@@ -206,7 +210,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Open the **product catalog** website in a browser. If you don't have the URL, you can look in the Kubernetes dashboard for the **external endpoint** of the product-catalog-service, or you can run the following command from your terminal window:
 
-  `echo http://$(kubectl get svc --namespace default product-catalog-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):$(kubectl get svc --namespace default product-catalog-service -o jsonpath='{.spec.ports[0].port}')`
+  ```bash
+  echo http://$(kubectl get svc --namespace default product-catalog-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):$(kubectl get svc --namespace default product-catalog-service -o jsonpath='{.spec.ports[0].port}')
+  ```
 
   ![](images/500/22.png)
 
