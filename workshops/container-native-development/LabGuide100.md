@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This is the first of several labs that are part of the **Oracle Public Cloud Container Native Development workshop.** This workshop will walk you through the process of moving an existing application into a containerized CI/CD pipeline and deploying it to a managed Kubernetes service in the Oracle Public Cloud.
+This is the first of several labs that are part of the **Oracle Public Cloud Container Native Development workshop.** This workshop will walk you through the process of moving an existing application into a containerized CI/CD pipeline and deploying it to a Kubernetes cluster in the Oracle Public Cloud.
 
 You will take on 2 personas during the workshop. The **Lead Developer Persona** will be responsible for configuring the parts of the automated build and deploy process that involve details about the application itself. The **DevOps Engineer Persona** will configure the parts of the automation involving the Kubernetes infrastructure. To containerize and automate the building and deploying of this application you will make use of Wercker Pipelines for CI/CD, Docker Hub for a container registry, and Terraform for provisioning a Kubernetes cluster on Oracle Cloud Infrastructure.
 
@@ -31,7 +31,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 ## Required Artifacts
 
 - The following lab requires:
-  - an Oracle Public Cloud account that will be supplied by your instructor.
+  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial Account
   - a [GitHub account](https://github.com/join)
   - a [Docker Hub account](https://hub.docker.com)
 
@@ -53,7 +53,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
 ### **STEP 2**: Create a Wercker account
 
-  **NOTE** If you already have a Wercker account, proceed to **STEP 3**.
+  **NOTE** If you already have a Wercker account, proceed to **STEP 3**. If you have not associated your existing Wercker account with your GitHub account, you can do so in the **Settings->Git Connections** menu, found in the user dropdown in the top right corner of Wercker. 
 
 - In a new browser tab, go to:
     [http://www.wercker.com/](http://www.wercker.com/)
@@ -111,7 +111,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
   ![](images/100/17.png)
 
-- The **build** pipeline will be used to build and unit test our application. Let's create a new pipeline to store the resulting Docker image in the Oracle Container Registry. Click the **Add new pipeline** button.
+- The **build** pipeline will be used to build and unit test our application. Let's create a new pipeline to store the resulting Docker image in a Docker Hub repository. Click the **Add new pipeline** button.
 
   ![](images/100/18.png)
 
@@ -184,7 +184,7 @@ build:
 
   ![](images/100/26.png)
 
-- Our next step is to define the second part of our workflow, the **push-release** pipeline, which will store our container image in the Oracle Container Registry after a successful **build**. This pipeline will make use of some environment variables, so let's get those set up first.
+- Our next step is to define the second part of our workflow, the **push-release** pipeline, which will store our container image in a Docker Hub repository after a successful **build**. This pipeline will make use of some environment variables, so let's get those set up first.
 
 ### **STEP 6**: Set Environment Variables in Wercker
 
@@ -205,6 +205,8 @@ build:
   PORT              8080
 ```
 
+  ![](images/100/38.png)
+
 **NOTE**: The Docker email and username variables are required to authenticate to the container registry. The `DOCKER_REPO` must be **all lowercase**.
 
 ### **STEP 7**: Create Docker Hub Repository
@@ -212,6 +214,10 @@ build:
 - In a browser, go to [Docker Hub](https://hub.docker.com) and click on **Create Repository**.
 
   ![](images/100/36.png)
+
+  **OR**
+
+  ![](images/100/40.png)  
 
 - In the **Name** field, enter `twitter-feed`. Optionally add descriptions and click **Create**
 
@@ -228,7 +234,7 @@ build:
 - After the definition of the build pipeline, **paste** the following YAML:
 
 ```yaml
-#Push the docker image with our built and tested application to the Oracle Container Registry
+#Push the docker image with our built and tested application to Docker Hub
 push-release:
   steps:
     - internal/docker-push:
@@ -263,14 +269,12 @@ push-release:
 
 - Once the workflow finishes, you'll see both the build and push-release pipelines turn green to indicate success. After that happens, switch back to your **Docker Hub** browser tab. You'll see that your twitter-feed repository was pushed to successfully (you may need to refresh the page).
 
+  ![](images/100/39.png)
+
   ![](images/100/34.png)
 
 - Click the **Tags** tab to see the image metadata, such as the Git branch and commit hash, as well as the size of the image.
 
   ![](images/100/33.png)
-
-- Click on the **title** of the repository (yourusername/twitter-feed) to view the history of published images (you'll only have one at this point). Note that when you hover over the **Download** icon, the `docker pull` command to pull this image is displayed. At this point you could run your application in Docker on your laptop, tie in to your existing deployment setup, or (as you'll see in the next lab) deploy it to **Oracle Container Engine**--our managed Kubernetes cloud service.
-
-  ![](images/100/35.png)
 
 **You are now ready to move to the next lab.**
