@@ -141,7 +141,7 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
 - Add Terraform to your PATH in the **terminal window** that you will use for the next two steps using the following command:
 
-  ``export PATH=$PATH:`PWD` ``
+  ``export PATH=$PATH:`pwd` ``
 
 - Download the **OCI Terraform Provider** from the [GitHub release page](https://github.com/oracle/terraform-provider-oci/releases/latest). Select the package for your operating system.
 
@@ -225,9 +225,10 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   **NOTE**: The 0.0.0.0/0 value means that any IP address can access your cluster. A better security practice would be to determine your externally-facing IP address and restrict access to only that address. If you'd like, you can find out your IP address by running `curl ifconfig.co` in a terminal window, and place that address into the `master_https_ingress` parameter (e.g. `master_https_ingress = "11.12.13.14/32"`). Note that if you need remote assistance with the workshop, you may need to open this back up to 0.0.0.0/0 to allow access to your cluster.
 
-- Now we are ready to have Terraform provision our Kubernetes cluster. **Save and close** your terraform.tfvars file. In your open **terminal window**, run the following command to have Terraform evaluate the various network and compute infrastructure that we are asking to be provisioned. You should see asdf
+- Now we are ready to have Terraform provision our Kubernetes cluster. **Save and close** your terraform.tfvars file. In your open **terminal window**, run the following commands to initialize this directory and then have Terraform evaluate the various network and compute infrastructure that we are asking to be provisioned. 
 
   ```bash
+  terraform init
   terraform plan
   ```
 
@@ -256,11 +257,11 @@ cat ~/.oci/oci_api_key_public.pem | clip
 - Next, you will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Then you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL.
 
   ```bash
-  export KUBECONFIG=`PWD`/generated/kubeconfig
+  export KUBECONFIG=`pwd`/generated/kubeconfig
   kubectl proxy
   ```
 
-- Now that the proxy server is running, navigate to the **[Kubernetes dashboard](localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)** in a new browser tab.
+- Now that the proxy server is running, navigate to the **[Kubernetes dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)** in a new browser tab.
 
   ![](images/200/64.png)
 
