@@ -100,7 +100,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ### **STEP 5**: Install Helm on Your Local Machine
 
-- Helm is a package manager for Kubernetes that streamlines installing and managing applications on your Kubernetes cluster. We'll use Helm in this lab to install Fn on our cluster. Download the latest release for your operating system from the [Helm releases page](https://github.com/kubernetes/helm/releases/latest) in the **Installation and Upgrading** section.
+- Helm is a package manager for Kubernetes that streamlines installing and managing applications on your Kubernetes cluster. We'll use Helm in this lab to install Fn on our cluster. If you are using an Oracle-provided client image, this step has been done for you. Skip to the next step. Otherwise, download the latest release for your operating system from the [Helm releases page](https://github.com/kubernetes/helm/releases/latest) in the **Installation and Upgrading** section.
 
   ![](images/500/1.png)
 
