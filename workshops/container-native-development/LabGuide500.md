@@ -141,6 +141,17 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/5.png)
 
+  **NOTE**: You may receive this error message instead: `Error: release my-release failed: namespaces "default" is forbidden: User "system:serviceaccount:kube-system:default" cannot get namespaces in the namespace "default"`.
+
+  **_Only if you encountered this error_**, run the following four commands, which will assign tiller to a service account with API permissions, and then run the above `helm instal...` command again.
+
+  ```bash
+  kubectl create serviceaccount --namespace kube-system tiller
+  kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+  kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'      
+  helm init --service-account tiller --upgrade
+  ```
+
 - As directed by the output of the install command, set the `FN_API_URL` environment variable by waiting for the load balancer to be provisioned and using its external IP address in the URL.
 
   - To check the status of the load balancer from the command line, run:

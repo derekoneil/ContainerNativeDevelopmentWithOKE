@@ -159,6 +159,7 @@ cat ~/.oci/oci_api_key_public.pem | clip
 ### **STEP 5**: Download and Configure the OCI Terraform Kubernetes Installer
 
 - From the same **terminal window**, run the following commands to download the OCI Terraform Kubernetes Installer:
+
   ```bash
   cd ~
   git clone https://github.com/oracle/terraform-kubernetes-installer.git
