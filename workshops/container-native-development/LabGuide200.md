@@ -147,7 +147,14 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   ![](images/200/59.png)
 
-- Extract the **zip file** you just downloaded
+- Run the following commands in a **terminal window** to extract the provider binary into the Terraform plugins folder (replace `linux.tar.gz` with the filename of the file you downloaded):
+
+  ```bash
+  cd ~/Downloads
+  mkdir ~/.terraform.d/plugins && cat linux.tar.gz | tar -zxvf - -C ~/.terraform.d/plugins/
+  ```
+
+- Terraform will look in the `plugins` directory for the OCI provider when it is specified by an installer, as we will see in the next step.
 
 ### **STEP 5**: Download and Configure the OCI Terraform Kubernetes Installer
 
@@ -225,7 +232,7 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   **NOTE**: The 0.0.0.0/0 value means that any IP address can access your cluster. A better security practice would be to determine your externally-facing IP address and restrict access to only that address. If you'd like, you can find out your IP address by running `curl ifconfig.co` in a terminal window, and place that address into the `master_https_ingress` parameter (e.g. `master_https_ingress = "11.12.13.14/32"`). Note that if you need remote assistance with the workshop, you may need to open this back up to 0.0.0.0/0 to allow access to your cluster.
 
-- Now we are ready to have Terraform provision our Kubernetes cluster. **Save and close** your terraform.tfvars file. In your open **terminal window**, run the following commands to initialize this directory and then have Terraform evaluate the various network and compute infrastructure that we are asking to be provisioned. 
+- Now we are ready to have Terraform provision our Kubernetes cluster. **Save and close** your terraform.tfvars file. In your open **terminal window**, run the following commands to initialize this directory and then have Terraform evaluate the various network and compute infrastructure that we are asking to be provisioned.
 
   ```bash
   terraform init
