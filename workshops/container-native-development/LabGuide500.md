@@ -131,13 +131,13 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Prepare the **dependencies** of the Fn chart by running:
 
-  `../helm.exe dep build fn`
+  `../helm dep build fn`
 
   ![](images/500/4.png)
 
 - Install the **Fn chart** by running:
 
-  `../helm.exe install --name my-release fn`
+  `../helm install --name my-release fn`
 
   ![](images/500/5.png)
 
