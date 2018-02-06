@@ -53,7 +53,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
 ### **STEP 2**: Create a Wercker account
 
-  **NOTE** If you already have a Wercker account, proceed to **STEP 3**. If you have not associated your existing Wercker account with your GitHub account, you can do so in the **Settings->Git Connections** menu, found in the user dropdown in the top right corner of Wercker. 
+  **NOTE** If you already have a Wercker account, use your account to log into Wercker, and proceed to **STEP 3**. If you have not associated your existing Wercker account with your GitHub account, you can do so in the **Settings->Git Connections** menu, found in the user dropdown in the top right corner of Wercker. 
 
 - In a new browser tab, go to:
     [http://www.wercker.com/](http://www.wercker.com/)
@@ -269,7 +269,7 @@ push-release:
 
 - Once the workflow finishes, you'll see both the build and push-release pipelines turn green to indicate success. After that happens, switch back to your **Docker Hub** browser tab. You'll see that your twitter-feed repository was pushed to successfully (you may need to refresh the page).
 
-  ![](images/100/39.png)
+  ![](images/100/39.1.png)
 
   ![](images/100/34.png)
 
