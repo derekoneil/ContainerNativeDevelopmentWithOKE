@@ -6,8 +6,6 @@
 
     ![](images/WorkshopMenu.png)
 
-- This version of the lab guides requires the use of an Oracle-provided VirtualBox or Cloud-hosted client image to use during the workshop. You can download the [VirtualBox image](http://TODO) to run on your laptop, or switch to a different version of the lab guides using the dropdown menu at the top right of the page.
-
 <!-- - **Step #2**: To get your Trial Account, ***Please follow the instruction*** found in the [Trial Account Student Guide](StudentGuide.md) prior to starting the Labs found in this workshop. -->
 
 - To log issues and view the Lab Guide source, go to the [github oracle](https://github.com/oracle/learning-library/issues/new) repository.

@@ -27,7 +27,6 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ## Required Artifacts
 - The following lab requires:
-  - an Oracle-provided VirtualBox or Cloud-hosted Client Image
   - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial Account
   - a [GitHub account](https://github.com/join)
   - a [Docker Hub account](https://hub.docker.com/)
@@ -86,7 +85,10 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Open both the **original and resized images** using one of the following commands to verify that the function did it's job -- which is to resize the image to 128px x 128px.
 
-  `eog sample-image.png && eog thumbnail.png`
+  - Git Bash: `start sample-image.png && start thumbnail.png`
+  - Windows Command Prompt: `sample-image.png && thumbnail.png`
+  - macOS: `open sample-image.png && open thumbnail.png`
+  - Linux (if ImageMagick is installed): `display sample-image.png && display thumbnail.png`
 
 **NOTE**: You can also use your OS's file explorer to open the images if the above commands don't work.
 
@@ -96,7 +98,30 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ## Deploy Your Function to Fn on Kubernetes
 
-### **STEP 5**: Deploy Fn Server to Kubernetes Using Helm
+### **STEP 5**: Install Helm on Your Local Machine
+
+- Helm is a package manager for Kubernetes that streamlines installing and managing applications on your Kubernetes cluster. We'll use Helm in this lab to install Fn on our cluster. If you are using an Oracle-provided client image, this step has been done for you. Skip to the next step. Otherwise, download the latest release for your operating system from the [Helm releases page](https://github.com/kubernetes/helm/releases/latest) in the **Installation and Upgrading** section.
+
+  ![](images/500/1.png)
+
+  **NOTE**: See the [Fn Helm GitHub page](https://github.com/fnproject/fn-helm#prerequisites) for more details.
+
+- Open a **terminal or Git Bash** window and run the following commands to extract and initialize **Helm**. Replace ~/Downloads with the directory where you download the Helm archive in the previous step, and replace the filename of the Helm tar.gz file with the name of the one you downloaded. For all terminal commands, only include the .exe file extension if you are using Windows (and even then it's only necessary if the executable is not in your PATH).
+
+  **NOTE**: `kubectl` needs to be in your PATH for Helm to run. If you did not modify your system PATH when you installed kubectl in a previous lab, you can run `export PATH=$PATH:/the/directory/where/you/downloaded/kubectl` to alter the path in this shell. Do this before running `helm init` below.
+
+  ```bash
+  cd ~/Downloads
+  mkdir helm
+  tar -xf helm-v2.7.2-windows-amd64.tar.gz -C helm
+  cd helm/*
+  ./helm.exe init --upgrade
+  ```
+
+  ![](images/500/2.png)
+
+
+### **STEP 6**: Deploy Fn Server to Kubernetes Using Helm
 
 - Clone the **fn-helm git repository** using the following command.
 
@@ -104,19 +129,15 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/3.png)
 
-- Initialize Helm and upgrade the server-side version (Tiller) by running:
-
-  `helm init --upgrade`
-
 - Prepare the **dependencies** of the Fn chart by running:
 
-  `helm dep build fn`
+  `../helm dep build fn`
 
   ![](images/500/4.png)
 
 - Install the **Fn chart** by running:
 
-  `helm install --name my-release fn`
+  `../helm install --name my-release fn`
 
   ![](images/500/5.png)
 
@@ -147,17 +168,17 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
     ![](images/500/16.png)
 
-    **NOTE**: You can also find out the API URL from the [Kubernetes dashboard](). To check the status of the load balancer from the [Kubernetes dashboard](), click **Services** from the left side navigation menu and look at the **External endpoints** column of the **my-release-fn-api** service.   
+  **NOTE**: You can also find out the API URL from the [Kubernetes dashboard](). To check the status of the load balancer from the [Kubernetes dashboard](), click **Services** from the left side navigation menu and look at the **External endpoints** column of the **my-release-fn-api** service.   
 
-    ![](images/500/15.png)
+  ![](images/500/15.png)
 
   - Verify that the environment variable was set correctly by running the following command. Note that your IP address will differ from the screenshot.
 
-    `echo $FN_API_URL`
+  `echo $FN_API_URL`
 
-    ![](images/500/17.png)
+  ![](images/500/17.png)
 
-### **STEP 6**: Deploy Your Function to Fn Server on Kubernetes
+### **STEP 8**: Deploy Your Function to Fn Server on Kubernetes
 
 - In the same **terminal window** from the previous step, change directories to cloned function directory from **STEP 2**.
 
@@ -187,13 +208,16 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Open **thumbnail-remote.png** (using the same method you used in the local test) to verify the function was successful:
 
-    `eog thumbnail-remote.png`
+    - Git Bash: `start thumbnail-remote.png`
+    - Windows Command Prompt: `thumbnail-remote.png`
+    - macOS: `open thumbnail-remote.png`
+    - Linux (if ImageMagick is installed): `display thumbnail-remote.png`
 
   ![](images/500/21.png)
 
 - Our function is deployed and available on our remote Fn Server, which is running in our Kubernetes cluster. The last thing to verify is that the product catalog application is able to find and use our function. Let's test out the upload image feature.
 
-### **STEP 7**: Test Your Function in the Product Catalog
+### **STEP 9**: Test Your Function in the Product Catalog
 
 - Open the **product catalog** website in a browser. If you don't have the URL, you can look in the Kubernetes dashboard for the **external endpoint** of the product-catalog-service, or you can run the following command from your terminal window:
 

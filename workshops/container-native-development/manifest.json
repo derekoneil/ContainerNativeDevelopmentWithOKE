@@ -9,37 +9,85 @@
                 "number": "0",
                 "filename": "README.md",
                 "title": "Read Me First",
-                "description": "Step-by-step workshop instructions"
+                "description": "Step-by-step workshop instructions",
+                "labels": {"version": "Oracle-Provided Image"}
             },
             {
                 "number": "100",
                 "filename": "LabGuide100.md",
                 "title": "Lab 100: Containerize Your Java Microservice",
-                "description": "Use Wercker to automatically build your application and package it as a Docker image"
+                "description": "Use Wercker to automatically build your application and package it as a Docker image",
+                "labels": {"version": "Oracle-Provided Image"}
             },
             {
                 "number": "200",
                 "filename": "LabGuide200.md",
                 "title": "Lab 200: Automate Deployment to Kubernetes",
-                "description": "Use Wercker to set up a managed Kubernetes cluster and deploy to it"
+                "description": "Use Wercker to set up a managed Kubernetes cluster and deploy to it",
+                "labels": {"version": "Oracle-Provided Image"}
             },
             {
                 "number": "300",
                 "filename": "LabGuide300.md",
                 "title": "Lab 300: Make a Bug Fix to Your Java Microservice",
-                "description": "Go from code change to production using Wercker"
+                "description": "Go from code change to production using Wercker",
+                "labels": {"version": "Oracle-Provided Image"}
             },
             {
                 "number": "400",
                 "filename": "LabGuide400.md",
                 "title": "Lab 400: Kubernetes Blue/Green Deployments",
-                "description": "Stage your new version without disrupting the current deployment"
+                "description": "Stage your new version without disrupting the current deployment",
+                "labels": {"version": "Oracle-Provided Image"}
             },
             {
                 "number": "500",
                 "filename": "LabGuide500.md",
                 "title": "Lab 500: Extend Your Application with a Function",
-                "description": "Install Fn in Kubernetes and Deploy a Function"
+                "description": "Install Fn in Kubernetes and Deploy a Function",
+                "labels": {"version": "Oracle-Provided Image"}
+            },
+            {
+                "number": "0",
+                "filename": "README-Linux.md",
+                "title": "Read Me First",
+                "description": "Step-by-step workshop instructions",
+                "labels": {"version": "Linux/Mac Workstation"}
+            },
+            {
+                "number": "100",
+                "filename": "LabGuide100.md",
+                "title": "Lab 100: Containerize Your Java Microservice",
+                "description": "Use Wercker to automatically build your application and package it as a Docker image",
+                "labels": {"version": "Linux/Mac Workstation"}
+            },
+            {
+                "number": "200",
+                "filename": "LabGuide200-Linux.md",
+                "title": "Lab 200: Automate Deployment to Kubernetes",
+                "description": "Use Wercker to set up a managed Kubernetes cluster and deploy to it",
+                "labels": {"version": "Linux/Mac Workstation"}
+            },
+            {
+                "number": "300",
+                "filename": "LabGuide300.md",
+                "title": "Lab 300: Make a Bug Fix to Your Java Microservice",
+                "description": "Go from code change to production using Wercker",
+                "labels": {"version": "Linux/Mac Workstation"}
+            },
+            {
+                "number": "400",
+                "filename": "LabGuide400.md",
+                "title": "Lab 400: Kubernetes Blue/Green Deployments",
+                "description": "Stage your new version without disrupting the current deployment",
+                "labels": {"version": "Linux/Mac Workstation"}
+            },
+            {
+                "number": "500",
+                "filename": "LabGuide500-Linux.md",
+                "title": "Lab 500: Extend Your Application with a Function",
+                "description": "Install Fn in Kubernetes and Deploy a Function",
+                "labels": {"version": "Linux/Mac Workstation"}
             }
         ]
     }
