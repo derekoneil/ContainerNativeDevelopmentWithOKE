@@ -15,7 +15,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 **Extend Your Application Using a Function**
 
 - Run Your Function Locally
-  - Install Fn Server on Your Local Machine
+  - Start an Fn Server on Your Local Machine
   - Clone the Function Repository
   - Deploy the Function Locally
   - Test the Function Using curl
@@ -36,19 +36,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ## Run Your Function Locally
 
-### **STEP 1**: Install Fn Server on Your Local Machine
+### **STEP 1**: Start an Fn Server on Your Local Machine
 
-- Fn has one prerequisite--Docker--that we'll need to install before we begin (unless you already have it). From a browser, navigate to the [Docker CE download page](https://www.docker.com/community-edition). Download and run the installer and follow the prompts to **install Docker**. Be sure to log in with your Docker Hub account, either by clicking the Docker icon in the system tray or by running `docker login` from a terminal.
-
-  ![](images/500/7.png)
-
-- Now that Docker is installed, we can download Fn. From a browser, navigate to the [Fn CLI releases GitHub page](https://github.com/fnproject/cli/releases/latest) and download the binary from the latest release that is appropriate for your operating system.
-
-  ![](images/500/6.png)
-
-**NOTE**: See the [Fn Project Quickstart](https://github.com/fnproject/fn#quickstart) for more details on installation.
-
-- Let's start a local Fn Server. From a terminal, run `fn start`.
+- Since you are using the Oracle-provided client image, **Fn is pre-installed** for you. Let's start up a local Fn Server. From a terminal, run `fn start`.
 
   ![](images/500/8.png)
 
@@ -60,7 +50,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Now we're ready to get a copy of the image resizing function and test it out on our local Fn Server. From a new **terminal window**, clone the Git repository into a directory of your choice using the following command:
 
-  `git clone https://github.com/derekoneil/image-resize.git && cd image-resize`
+  `cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-resize`
 
   ![](images/500/10.png)
 
@@ -80,13 +70,13 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - With the function deployed to our local Fn Server, we can use **curl** to test it. Execute the following command while still in the image-resize directory in your terminal window:
 
-`curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" http://localhost:8080/r/imgconvert/resize128 > thumbnail.png`
+`curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" http://localhost:8080/r/imgconvert/resize128 > thumbnail.jpg`
 
   ![](images/500/12.png)
 
 - Open both the **original and resized images** using one of the following commands to verify that the function did it's job -- which is to resize the image to 128px x 128px.
 
-  `eog sample-image.png && eog thumbnail.png`
+  `eog sample-image.jpg & eog thumbnail.jpg &`
 
 **NOTE**: You can also use your OS's file explorer to open the images if the above commands don't work.
 
@@ -98,11 +88,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ### **STEP 5**: Deploy Fn Server to Kubernetes Using Helm
 
-- Clone the **fn-helm git repository** using the following command.
+- Since you are using the Oracle-provided client image, the **fn-helm installer** has been downloaded for you. Change directories to the installer with the following command:
 
-  `git clone https://github.com/fnproject/fn-helm.git && cd fn-helm`
-
-  ![](images/500/3.png)
+  `cd ~/fn-helm`
 
 - Initialize Helm and upgrade the server-side version (Tiller) by running:
 
@@ -114,15 +102,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/4.png)
 
-- Install the **Fn chart** by running:
-
-  `helm install --name my-release fn`
-
-  ![](images/500/5.png)
-
-  **NOTE**: You may receive this error message instead: `Error: release my-release failed: namespaces "default" is forbidden: User "system:serviceaccount:kube-system:default" cannot get namespaces in the namespace "default"`.
-
-  **_Only if you encountered this error_**, run the following four commands, which will assign tiller to a service account with API permissions, and then run the above `helm instal...` command again.
+- By default, the server-side component of Helm (Tiller) does not have permissions to perform actions in the `default` namespace. Create a Service Account and bind to the Cluster Admin role to allow Tiller access. **NOTE**: In a production environment, you would want to restrict Tiller to a more limited role than Cluster Admin.
 
   ```bash
   kubectl create serviceaccount --namespace kube-system tiller
@@ -130,6 +110,11 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'      
   helm init --service-account tiller --upgrade
   ```
+- Install the **Fn chart** by running:
+
+  `helm install --name my-release fn`
+
+  ![](images/500/5.png)
 
 - As directed by the output of the install command, set the `FN_API_URL` environment variable by waiting for the load balancer to be provisioned and using its external IP address in the URL.
 
@@ -161,7 +146,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - In the same **terminal window** from the previous step, change directories to cloned function directory from **STEP 2**.
 
-  `cd ~/Downloads/image-resize`
+  `cd ~/image-resize`
 
   ![](images/500/18.png)
 
@@ -170,6 +155,12 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   `export FN_REGISTRY=your-docker-hub-registry`
 
   ![](images/500/26.png)
+
+- Log in to **Docker Hub** by running the following command and entering your Docker Hub **username and password** at the prompts:
+
+  `docker login`
+
+  ![](images/500/27.png)
 
 - **Deploy the function** (and application) to the remote Fn Server using the same command you used in **STEP 3**, but without the --local flag.
 
@@ -180,14 +171,14 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Test the function using **curl**, but this time using the URL of the remote Fn Server:
 
   ```bash
-  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" $FN_API_URL/r/imgconvert/resize128 > thumbnail-remote.png
+  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" $FN_API_URL/r/imgconvert/resize128 > thumbnail-remote.jpg
   ```
 
   ![](images/500/20.png)
 
-- Open **thumbnail-remote.png** (using the same method you used in the local test) to verify the function was successful:
+- Open **thumbnail-remote.jpg** (using the same method you used in the local test) to verify the function was successful:
 
-    `eog thumbnail-remote.png`
+    `eog thumbnail-remote.jpg`
 
   ![](images/500/21.png)
 
