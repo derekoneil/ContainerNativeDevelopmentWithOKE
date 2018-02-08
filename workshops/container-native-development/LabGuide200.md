@@ -199,7 +199,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
   private_key_path = "/home/oracle/.oci/oci_api_key.pem"
   ```
 
-- The rest of the terraform.tfvars file controls the parameters used when creating your Kubernetes cluster. You can control how many OCPUs each node receives, whether nodes should be virtual machines or bare metal instances, how many availability domains to use, and more. We will modify three of the lines in the remainder of the file.
+- The rest of the terraform.tfvars file controls the parameters used when creating your Kubernetes cluster. You can control how many OCPUs each node receives, whether nodes should be virtual machines or bare metal instances, how many availability domains to use, and more. We will modify five of the lines in the remainder of the file.
 
 - First, we will specify that we want only one OCPU in each of the worker and master nodes. This reduces the hourly cost of running our cluster. On **lines 15 and 16**, uncomment the **k8sMasterShape** and **k8sWorkerShape** parameters, and set both values to **VM.Standard1.1**:
 
@@ -208,7 +208,14 @@ An API key is required for Terraform to authenticate to OCI in order to create c
   k8sWorkerShape = "VM.Standard1.1"
   ```
 
-- The other change we will make is to open up the allowed Kubernetes master inbound IP address range, so that we can access our cluster from the internet. On **line 38**, remove the pound sign at the beginning of the line to uncomment it.
+- Next, we will specify the type of load balancers we want for the master and etcd VMs -- 400Mbps in this case. Alter **lines 30 and 31** to read:
+
+  ```
+  etcdLBShape = "400Mbps"
+  k8sMasterLBShape = "400Mbps"
+  ```
+
+- The last change we will make is to open up the allowed Kubernetes master inbound IP address range, so that we can access our cluster from the internet. On **line 38**, remove the pound sign at the beginning of the line to uncomment it.
 
   ```
   master_https_ingress = "0.0.0.0/0"
