@@ -255,7 +255,7 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
 - During provisioning, Terraform generated a `kubeconfig` file that will authenticate you to the cluster. Let's configure and start the kubectl proxy server to make sure our cluster is accessible.
 
-- First, you will need to install `kubectl`, the Kubernetes command line interface, to interact with Kubernetes from your local machine. If you are using an Oracle-provided client image, this step has been done for you. You can move on to the next instruction. Install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
+- First, you will need to install `kubectl`, the Kubernetes command line interface, to interact with Kubernetes from your local machine. Install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
 
 - Next, you will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Then you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL.
 
