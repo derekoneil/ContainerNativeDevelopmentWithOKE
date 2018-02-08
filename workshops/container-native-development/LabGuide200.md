@@ -102,11 +102,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
   cat ~/.oci/oci_api_key_public.pem | xclip -sel clip
   ```
 
-- In your browser window showing the OCI Console, hover over your username in the top right corner and click **User Settings**
-
-  ![](images/200/10.png)
-
-  **NOTE**: If you are using a federated user, you will not see **User Settings** in the dropdown menu. Instead, click the **Identity** menu item. You will be brought to the **Users** menu. Find your username in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
+- In your browser window showing the OCI Console, click the **Identity** menu item. You will be brought to the **Users** menu. Find your username in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
 
   ![](images/200/56.png)
 
@@ -114,7 +110,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/12.png)
 
-- **Paste** the public key from your clipboard into the text field and click **Add**.
+- **Paste** the public key from your clipboard into the text field and click **Add**. Note: The public key was copied to the clipboard when you ran the `cat` command from the terminal window, which copied the results to the clipboard using the `clip` command. 
 
   ![](images/200/13.png)
 
@@ -124,15 +120,19 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
 - Since you are using the Oracle-provided client image, Terraform has been **pre-installed** for you. All you need to do is install the latest Terraform provider for OCI.
 
-- Download the **OCI Terraform Provider** from the [GitHub release page](https://github.com/oracle/terraform-provider-oci/releases/latest). Select the package for your operating system.
+- Download the **OCI Terraform Provider** from the [GitHub release page](https://github.com/oracle/terraform-provider-oci/releases/latest). Select the package for your operating system. Since you are using the Oracle-provided client linux image, you will download the **linux.tar.gz** file.
 
   ![](images/200/59.png)
+
+- Click on the **Save File** option and then click on **OK** to download the file.
+
+  ![](images/200/59.1.png)
 
 - Run the following commands in a **terminal window** to extract the provider binary into the Terraform plugins folder (replace `linux.tar.gz` with the filename of the file you downloaded):
 
   ```bash
   cd ~/Downloads
-  mkdir ~/.terraform.d/plugins && cat linux.tar.gz | tar -zxvf - -C ~/.terraform.d/plugins/
+  mkdir -p ~/.terraform.d/plugins && cat linux.tar.gz | tar -zxvf - -C ~/.terraform.d/plugins/
   ```
 
 - Terraform will look in the `plugins` directory for the OCI provider when it is specified by an installer, as we will see in the next step.
@@ -174,28 +174,26 @@ An API key is required for Terraform to authenticate to OCI in order to create c
   gedit terraform.tfvars
   ```
 
-- You should still have a browser tab open to your **User Details** page in the OCI Console. Fill in the values in the terraform.tfvars file on lines **2, 4, 6, and 7** with the values from the OCI Console, referring to the following screenshot for where to find them.
+- You should still have a browser tab open to your **User Details** page in the OCI Console. You will first remove the **#** comment character and replace in the values  in the terraform.tfvars file on lines **2, 4, 6, and 7**. **NOTE**: The **region** parameter may not already be present in your tfvars file. If it is not there, add it on a new line after the user_ocid parameter on line 6.
 
-  ```
-  tenancy_ocid = "Tenancy OCID"
+  ![](images/200/57.1.png)
 
-  fingerprint = "Key Fingerprint"
 
-  user_ocid = "User OCID"
-  region = "Region (e.g. us-ashburn-1)"
-  ```
-
-  **NOTE**: The `region` parameter may not already be present in your tfvars file. If it is not there, add it on a new line after the user_ocid parameter on line 6.
+- You will replace lines **2, 4, 6, and 7** with the values from the OCI Console, referring to the following screenshot for where to find them.
 
   ![](images/200/17.png)
 
-- Now we'll fill in the OCI Compartment ID on **line 3**. Paste the value that you saved to a text file after creating the kubernetes **compartment** in the OCI Console. If you have lost it, you can retrieve it from the OCI Console compartment list (refer to **STEP 2**).
+- As an exmaple, Your terraform.tfvars file should now appear similar to the image shown below:
+
+  ![](images/200/57.2.png)
+
+- Now follow the same process of removing the comment character **#**, and fill in the OCI Compartment ID on **line 3**. Paste the value that you saved to a text file after creating the kubernetes **compartment** in the OCI Console. If you have lost it, you can retrieve it from the OCI Console compartment list (refer to **STEP 2**).
 
   ```
   compartment_ocid = "Compartment OCID"
   ```
 
-- The last piece of information we need to provide about your OCI tenant is the private key corresponding to the public API key you uploaded to the OCI console previously. Provide the path the the private key file on **line 5**. Note that your path may differ from the example given below.
+- The last piece of information we need to provide about your OCI tenant is the private key corresponding to the public API key you uploaded to the OCI console previously. Provide the path and the private key file on **line 5** using the path below: 
 
   ```
   private_key_path = "/home/oracle/.oci/oci_api_key.pem"
@@ -226,7 +224,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/60.png)
 
-- If the output of the plan step looks correct, you are ready to actually provision the infrastructure by running the following command in your **terminal window**. Note that Terraform will prompt you to type `yes` after it recomputes the required plan in order to begin provisioning.
+- If the output of the plan step looks correct (note: the number in the "Plan to add" field may vary), you are ready to actually provision the infrastructure by running the following command in your **terminal window**. Note that Terraform will prompt you to type `yes` after it recomputes the required plan in order to begin provisioning.
 
   ```bash
   terraform apply
