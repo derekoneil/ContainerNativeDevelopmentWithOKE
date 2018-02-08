@@ -224,7 +224,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/60.png)
 
-- If the output of the plan step looks correct (note: the number in the "Plan to add" field may vary), you are ready to actually provision the infrastructure by running the following command in your **terminal window**. Note that Terraform will prompt you to type `yes` after it recomputes the required plan in order to begin provisioning.
+- If the output of the plan step looks correct, you are ready to actually provision the infrastructure by running the following command in your **terminal window**. Note that Terraform will prompt you to type `yes` after it recomputes the required plan in order to begin provisioning.
 
   ```bash
   terraform apply
