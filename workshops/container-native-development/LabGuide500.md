@@ -50,7 +50,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Now we're ready to get a copy of the image resizing function and test it out on our local Fn Server. From a new **terminal window**, clone the Git repository into a directory of your choice using the following command:
 
-  `git clone https://github.com/derekoneil/image-resize.git && cd image-resize`
+  `cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-resize`
 
   ![](images/500/10.png)
 
@@ -116,14 +116,6 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/5.png)
 
-  **NOTE**: You may receive this error message instead: `Error: release my-release failed: namespaces "default" is forbidden: User "system:serviceaccount:kube-system:default" cannot get namespaces in the namespace "default"`.
-
-  **_Only if you encountered this error_**, run the following four commands, which will assign tiller to a service account with API permissions, and then run the above `helm instal...` command again.
-
-  ```bash
-
-  ```
-
 - As directed by the output of the install command, set the `FN_API_URL` environment variable by waiting for the load balancer to be provisioned and using its external IP address in the URL.
 
   - To check the status of the load balancer from the command line, run:
@@ -154,7 +146,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - In the same **terminal window** from the previous step, change directories to cloned function directory from **STEP 2**.
 
-  `cd ~/Downloads/image-resize`
+  `cd ~/image-resize`
 
   ![](images/500/18.png)
 
@@ -163,6 +155,12 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   `export FN_REGISTRY=your-docker-hub-registry`
 
   ![](images/500/26.png)
+
+- Log in to **Docker Hub** by running the following command and entering your Docker Hub **username and password** at the prompts:
+
+  `docker login`
+
+  ![](images/500/27.png)
 
 - **Deploy the function** (and application) to the remote Fn Server using the same command you used in **STEP 3**, but without the --local flag.
 
