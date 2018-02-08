@@ -271,7 +271,7 @@ push-release:
 
   ![](images/100/39.1.png)
 
-- After that happens, switch back to your **Docker Hub** browser tab. You'll see that your twitter-feed repository was pushed to successfully (you may need to refresh the page).
+- After that happens, switch back to your **Docker Hub** browser tab. You'll see that your twitter-feed repository was pushed to successfully (you may need to refresh the page). Click on the **twitter-feed** repository name.
 
   ![](images/100/34.png)
 
