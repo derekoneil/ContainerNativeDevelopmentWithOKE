@@ -267,9 +267,11 @@ push-release:
 
   ![](images/100/30.png)
 
-- Once the workflow finishes, you'll see both the build and push-release pipelines turn green to indicate success. After that happens, switch back to your **Docker Hub** browser tab. You'll see that your twitter-feed repository was pushed to successfully (you may need to refresh the page).
+- Once the workflow finishes, you'll see both the build and push-release pipelines turn green to indicate success.
 
   ![](images/100/39.1.png)
+
+- After that happens, switch back to your **Docker Hub** browser tab. You'll see that your twitter-feed repository was pushed to successfully (you may need to refresh the page).
 
   ![](images/100/34.png)
 
