@@ -53,7 +53,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
 ### **STEP 2**: Create a Wercker account
 
-  **NOTE** If you already have a Wercker account, use your account to log into Wercker, and proceed to **STEP 3**. If you have not associated your existing Wercker account with your GitHub account, you can do so in the **Settings->Git Connections** menu, found in the user dropdown in the top right corner of Wercker. 
+  **NOTE** If you already have a Wercker account, use your account to log into Wercker, and proceed to **STEP 3**. If you have not associated your existing Wercker account with your GitHub account, you can do so in the **Settings->Git Connections** menu, found in the user dropdown in the top right corner of Wercker.
 
 - In a new browser tab, go to:
     [http://www.wercker.com/](http://www.wercker.com/)
@@ -246,7 +246,7 @@ push-release:
         working-dir: /pipeline/source
         ports: $PORT
         env: PORT=$PORT
-        cmd: node server.js
+        cmd: sh target/bin/start
 ```
 
   ![](images/100/28.png)
