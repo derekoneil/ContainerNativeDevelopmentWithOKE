@@ -251,6 +251,10 @@ An API key is required for Terraform to authenticate to OCI in order to create c
   kubectl proxy
   ```
 
+  **NOTE**: Should you need to change the IP address of your cluster in the future, you can configure `kubectl` with the updated connection information by running the following command, which will pass the current address and authentication details to `kubectl`:
+
+  `terraform output kubeconfig | tr '\n' '\0' | xargs -0 -n1 sh -c`
+
 - Now that the proxy server is running, navigate to the **[Kubernetes dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)** in a new browser tab.
 
   ![](images/200/64.png)
