@@ -111,6 +111,8 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   **NOTE**: `kubectl` needs to be in your PATH for Helm to run. If you did not modify your system PATH when you installed kubectl in a previous lab, you can run `export PATH=$PATH:/the/directory/where/you/downloaded/kubectl` to alter the path in this shell. Do this before running `helm init` below.
 
   ```bash
+  cd ~/terraform-kubernetes-installer
+  export KUBECONFIG=`pwd`/generated/kubeconfig
   cd ~/Downloads
   mkdir helm
   tar -xf helm-v2.7.2-windows-amd64.tar.gz -C helm

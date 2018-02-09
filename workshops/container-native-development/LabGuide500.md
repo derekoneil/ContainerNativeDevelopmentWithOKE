@@ -92,10 +92,6 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   `cd ~/fn-helm`
 
-- Since you opened a new terminal window in the previous step, the `KUBECONFIG` environment variable is no longer set. You could add the export command to `~/.bash_profile` so it is set for every new shell you open. For now, let's just export it locally one more time: 
-
-  `export KUBECONFIG=/home/oracle/terraform-kubernetes-installer/generated/kubeconfig`
-
 - Initialize Helm and upgrade the server-side version (Tiller) by running:
 
   `helm init --upgrade`
