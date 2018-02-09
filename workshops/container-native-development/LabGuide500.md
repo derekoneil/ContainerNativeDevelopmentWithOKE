@@ -92,10 +92,6 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   `cd ~/fn-helm`
 
-- Since you opened a new terminal window in the previous step, the `KUBECONFIG` environment variable is no longer set. You could add the export command to `~/.bash_profile` so it is set for every new shell you open. For now, let's just export it locally one more time: 
-
-  `export KUBECONFIG=/home/oracle/terraform-kubernetes-installer/generated/kubeconfig`
-
 - Initialize Helm and upgrade the server-side version (Tiller) by running:
 
   `helm init --upgrade`
@@ -154,7 +150,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/18.png)
 
-- Since we are pushing to a remote Fn Server, Fn will use Docker Hub as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to.
+- Since we are pushing to a remote Fn Server, Fn will use Docker Hub as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to. In the following command, **replace "your-docker-hub-registry"** with the name of your Docker Hub registry (not your Docker Hub email address):
 
   `export FN_REGISTRY=your-docker-hub-registry`
 
