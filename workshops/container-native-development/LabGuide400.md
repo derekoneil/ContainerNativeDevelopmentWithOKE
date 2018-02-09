@@ -76,7 +76,8 @@ This label will identify our Kubernetes pods as the blue version of the code.
 
 - After **line 53**, in the **spec.selector** section of your Service definition, paste the following label on a new line:
 
-`color: blue`
+  `color: blue`
+  
 This selector will instruct your load balancer to only route traffic to the blue version of our code.
 
   ![](images/400/7.png)
