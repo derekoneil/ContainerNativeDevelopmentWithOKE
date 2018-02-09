@@ -122,7 +122,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - As directed by the output of the install command, set the `FN_API_URL` environment variable by waiting for the load balancer to be provisioned and using its external IP address in the URL.
 
-  - To check the status of the load balancer from the command line, run:
+  - To check the status of the load balancer from the command line, run the following command. Note, you can use Ctrl-C to stop the command running, and re-run to again check if the External-IP field is populated:
 
     `kubectl get svc --namespace default -w my-release-fn-api`
 
