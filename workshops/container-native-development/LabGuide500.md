@@ -92,6 +92,10 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   `cd ~/fn-helm`
 
+- Specify the version of Fn we want to install by modifying the `values.yaml` file using this command:
+
+  `sed -i.bak 's/fnproject\/fnserver:latest/fnproject\/fnserver:0.3.327/' fn/values.yaml`
+
 - Initialize Helm and upgrade the server-side version (Tiller) by running:
 
   `helm init --upgrade`
