@@ -57,9 +57,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ### **STEP 2**: Clone the Function Repository
 
-- Now we're ready to get a copy of the image resizing function and test it out on our local Fn Server. From a new **terminal window**, clone the Git repository into a directory of your choice using the following command:
+- Now we're ready to get a copy of the image resizing function and test it out on our local Fn Server. From a new **terminal window**, clone the Git repository into your home directory using the following command. If you choose to clone the repository into a different directory, modify the command in **STEP 8** to reflect your choice.
 
-  `git clone https://github.com/derekoneil/image-resize.git && cd image-resize`
+  `cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-resize`
 
   ![](images/500/10.png)
 
@@ -79,16 +79,17 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - With the function deployed to our local Fn Server, we can use **curl** to test it. Execute the following command while still in the image-resize directory in your terminal window:
 
-`curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" http://localhost:8080/r/imgconvert/resize128 > thumbnail.png`
+`curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" http://localhost:8080/r/imgconvert/resize128 > thumbnail.jpg`
 
   ![](images/500/12.png)
 
 - Open both the **original and resized images** using one of the following commands to verify that the function did it's job -- which is to resize the image to 128px x 128px.
 
-  - Git Bash: `start sample-image.png && start thumbnail.png`
-  - Windows Command Prompt: `sample-image.png && thumbnail.png`
-  - macOS: `open sample-image.png && open thumbnail.png`
-  - Linux (if ImageMagick is installed): `display sample-image.png && display thumbnail.png`
+  - Git Bash: `start sample-image.jpg && start thumbnail.jpg`
+  - Windows Command Prompt: `sample-image.jpg && thumbnail.jpg`
+  - macOS: `open sample-image.jpg && open thumbnail.jpg`
+  - Linux (using Image Viewer): `eog sample-image.jpg & eog thumbnail.jpg &`
+  - Linux (if ImageMagick is installed): `display sample-image.jpg && display thumbnail.jpg`
 
 **NOTE**: You can also use your OS's file explorer to open the images if the above commands don't work.
 
@@ -106,7 +107,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   **NOTE**: See the [Fn Helm GitHub page](https://github.com/fnproject/fn-helm#prerequisites) for more details.
 
-- Open a **terminal or Git Bash** window and run the following commands to extract and initialize **Helm**. Replace ~/Downloads with the directory where you download the Helm archive in the previous step, and replace the filename of the Helm tar.gz file with the name of the one you downloaded. For all terminal commands, only include the .exe file extension if you are using Windows (and even then it's only necessary if the executable is not in your PATH).
+- Open a **terminal window** and run the following commands to extract and initialize **Helm**. Replace ~/Downloads with the directory where you download the Helm archive in the previous step, and replace the filename of the Helm tar.gz file with the name of the one you downloaded.
 
   **NOTE**: `kubectl` needs to be in your PATH for Helm to run. If you did not modify your system PATH when you installed kubectl in a previous lab, you can run `export PATH=$PATH:/the/directory/where/you/downloaded/kubectl` to alter the path in this shell. Do this before running `helm init` below.
 
@@ -115,9 +116,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   export KUBECONFIG=`pwd`/generated/kubeconfig
   cd ~/Downloads
   mkdir helm
-  tar -xf helm-v2.7.2-windows-amd64.tar.gz -C helm
+  tar -xf helm-v2.7.2-linux-amd64.tar.gz -C helm
   cd helm/*
-  ./helm.exe init --upgrade
+  ./helm init --upgrade
   ```
 
   ![](images/500/2.png)
@@ -137,15 +138,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/4.png)
 
-- Install the **Fn chart** by running:
-
-  `../helm install --name my-release fn`
-
-  ![](images/500/5.png)
-
-  **NOTE**: You may receive this error message instead: `Error: release my-release failed: namespaces "default" is forbidden: User "system:serviceaccount:kube-system:default" cannot get namespaces in the namespace "default"`.
-
-  **_Only if you encountered this error_**, run the following four commands, which will assign tiller to a service account with API permissions, and then run the above `helm instal...` command again.
+- By default, the server-side component of Helm (Tiller) does not have permissions to perform actions in the `default` namespace. Create a Service Account and bind to the Cluster Admin role to allow Tiller access. **NOTE**: In a production environment, you would want to restrict Tiller to a more limited role than Cluster Admin.
 
   ```bash
   kubectl create serviceaccount --namespace kube-system tiller
@@ -153,6 +146,12 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'      
   helm init --service-account tiller --upgrade
   ```
+
+- Install the **Fn chart** by running:
+
+  `../helm install --name my-release fn`
+
+  ![](images/500/5.png)
 
 - As directed by the output of the install command, set the `FN_API_URL` environment variable by waiting for the load balancer to be provisioned and using its external IP address in the URL.
 
@@ -170,25 +169,25 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
     ![](images/500/16.png)
 
-  **NOTE**: You can also find out the API URL from the [Kubernetes dashboard](). To check the status of the load balancer from the [Kubernetes dashboard](), click **Services** from the left side navigation menu and look at the **External endpoints** column of the **my-release-fn-api** service.   
+    **NOTE**: You can also find out the API URL from the [Kubernetes dashboard](). To check the status of the load balancer from the [Kubernetes dashboard](), click **Services** from the left side navigation menu and look at the **External endpoints** column of the **my-release-fn-api** service.   
 
-  ![](images/500/15.png)
+    ![](images/500/15.png)
 
   - Verify that the environment variable was set correctly by running the following command. Note that your IP address will differ from the screenshot.
 
-  `echo $FN_API_URL`
+    `echo $FN_API_URL`
 
-  ![](images/500/17.png)
+    ![](images/500/17.png)
 
 ### **STEP 8**: Deploy Your Function to Fn Server on Kubernetes
 
 - In the same **terminal window** from the previous step, change directories to cloned function directory from **STEP 2**.
 
-  `cd ~/Downloads/image-resize`
+  `cd ~/image-resize`
 
   ![](images/500/18.png)
 
-- Since we are pushing to a remote Fn Server, Fn will use Docker Hub as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to.
+- Since we are pushing to a remote Fn Server, Fn will use Docker Hub as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to. In the following command, **replace "your-docker-hub-registry"** with the name of your Docker Hub registry (not your Docker Hub email address):
 
   `export FN_REGISTRY=your-docker-hub-registry`
 
@@ -203,17 +202,18 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Test the function using **curl**, but this time using the URL of the remote Fn Server:
 
   ```bash
-  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" $FN_API_URL/r/imgconvert/resize128 > thumbnail-remote.png
+  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" $FN_API_URL/r/imgconvert/resize128 > thumbnail-remote.jpg
   ```
 
   ![](images/500/20.png)
 
-- Open **thumbnail-remote.png** (using the same method you used in the local test) to verify the function was successful:
+- Open **thumbnail-remote.jpg** (using the same method you used in the local test) to verify the function was successful:
 
-    - Git Bash: `start thumbnail-remote.png`
-    - Windows Command Prompt: `thumbnail-remote.png`
-    - macOS: `open thumbnail-remote.png`
-    - Linux (if ImageMagick is installed): `display thumbnail-remote.png`
+    - Git Bash: `start thumbnail-remote.jpg`
+    - Windows Command Prompt: `thumbnail-remote.jpg`
+    - macOS: `open thumbnail-remote.jpg`
+    - Linux (using Image Viewer): `eog thumbnail-remote.jpg`
+    - Linux (if ImageMagick is installed): `display thumbnail-remote.jpg`
 
   ![](images/500/21.png)
 

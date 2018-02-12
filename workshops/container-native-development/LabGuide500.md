@@ -48,7 +48,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ### **STEP 2**: Clone the Function Repository
 
-- Now we're ready to get a copy of the image resizing function and test it out on our local Fn Server. From a new **terminal window**, clone the Git repository into a directory of your choice using the following command:
+- Now we're ready to get a copy of the image resizing function and test it out on our local Fn Server. From a new **terminal window**, clone the Git repository into the home directory using the following command:
 
   `cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-resize`
 
