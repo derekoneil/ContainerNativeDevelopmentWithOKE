@@ -92,20 +92,16 @@ Compartments are used to isolate resources within your OCI tenant. User-based ac
 An API key is required for Terraform to authenticate to OCI in order to create compute instances for your Kubernetes master and worker nodes.
 
 - Open a terminal window and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called `.oci`, generate a new PEM private key, generate the corresponding public key, and copy the public key to the clipboard. For more information on this process, including the alternate commands to protect your key file with a passphrase, see the [official documentation](https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm#two).
-- If you're using **Windows**, you'll need to install [Git Bash for Windows](https://git-scm.com/download/win) and run the commands with that tool
+
 
 ```bash
 mkdir ~/.oci
 openssl genrsa -out ~/.oci/oci_api_key.pem 2048
 openssl rsa -pubout -in ~/.oci/oci_api_key.pem -out ~/.oci/oci_api_key_public.pem
-cat ~/.oci/oci_api_key_public.pem | pbcopy
+cat ~/.oci/oci_api_key_public.pem
 ```
 
-**Note:** For Windows Git Bash uses clip instead of pbcopy
-
-```bash
-cat ~/.oci/oci_api_key_public.pem | clip
-```
+- Select the entire public key, beginning with `-----BEGIN PUBLIC KEY-----` and ending with `-----END PUBLIC KEY-----` and **copy** it to the clipboard.
 
   ![](images/200/11.png)
 
@@ -145,6 +141,10 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   ![](images/200/59.png)
 
+- Click on the **Save File** option if you are prompted and then click on **OK** to download the file.
+
+  ![](images/200/59.1.png)
+
 - Run the following commands in a **terminal window** to extract the provider binary into the Terraform plugins folder (replace `linux.tar.gz` with the filename of the file you downloaded):
 
   ```bash
@@ -156,12 +156,20 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
 ### **STEP 6**: Download and Configure the OCI Terraform Kubernetes Installer
 
-- From the same **terminal window**, run the following commands to download the OCI Terraform Kubernetes Installer:
+- Terraform requires `kubectl`, the Kubernetes command line interface, to interact with Kubernetes from your local machine. If you don't have it already, install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
+
+- From the same **terminal window** you used in the previous step, run the following commands to download the OCI Terraform Kubernetes Installer:
 
   ```bash
   cd ~
   git clone https://github.com/oracle/terraform-kubernetes-installer.git
   cd terraform-kubernetes-installer
+  ```
+
+- Initialize this Terraform installer by running the following command:
+
+  ```bash
+  terraform init
   ```
 
 - Verify proper installation of both Terraform and the OCI provider by running the following command from your **terminal window**:
@@ -173,7 +181,7 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   ![](images/200/57.png)
 
-- If you got the expected output from `terraform --version`, proceed to the next instruction. Otherwise, go back to the previous step and complete the instructions to **Download Terraform and the OCI Terraform Provider**. If you installed Terraform yourself, also ensure that it is in your PATH for the current terminal window.
+- If you got the expected output from `terraform --version`, proceed to the next instruction. Otherwise, go back to the previous step and complete the instructions to **Download Terraform and the OCI Terraform Provider**. Also ensure that Terraform is in your PATH for the current terminal window.
 
 - Once you have Terraform and the OCI provider set up, you are ready to configure the Kubernetes installer with your OCI account information. Start by making a copy of the included TFVARS example file to edit. Run the following from your **terminal window**:
 
@@ -205,10 +213,11 @@ cat ~/.oci/oci_api_key_public.pem | clip
   ```
   compartment_ocid = "Compartment OCID"
   ```
-- The last piece of information we need to provide about your OCI tenant is the private key corresponding to the public API key you uploaded to the OCI console previously. Provide the path the the private key file on **line 5**. Note that your path may differ from the example given below. Note that your path may differ from the example given below. Your public key was created as a first task in Step 3, and the location of your oci_api_key.pem file can be determined from how you completed those instructions. 
+
+- The last piece of information we need to provide about your OCI tenant is the private key corresponding to the public API key you uploaded to the OCI console previously. Provide the path the the private key file on **line 5**. Note that _your path may differ_ from the example given below. Your public key was created as a first task in Step 3, and the location of your oci_api_key.pem file can be determined from how you completed those instructions.
 
   ```
-  private_key_path = "/Users/oracle/.oci/oci_api_key.pem"
+  private_key_path = "/Users/your-local-username/.oci/oci_api_key.pem"
   ```
 
 - The rest of the terraform.tfvars file controls the parameters used when creating your Kubernetes cluster. You can control how many OCPUs each node receives, whether nodes should be virtual machines or bare metal instances, how many availability domains to use, and more. We will modify three of the lines in the remainder of the file.
@@ -220,7 +229,14 @@ cat ~/.oci/oci_api_key_public.pem | clip
   k8sWorkerShape = "VM.Standard1.1"
   ```
 
-- The other change we will make is to open up the allowed Kubernetes master inbound IP address range, so that we can access our cluster from the internet. On **line 38**, remove the pound sign at the beginning of the line to uncomment it.
+- Next, we will specify the type of load balancers we want for the master and etcd VMs -- 400Mbps in this case. Alter **lines 30 and 31** to read:
+
+  ```
+  etcdLBShape = "400Mbps"
+  k8sMasterLBShape = "400Mbps"
+  ```
+
+- The last change we will make is to open up the allowed Kubernetes master inbound IP address range, so that we can access our cluster from the internet. On **line 38**, remove the pound sign at the beginning of the line to uncomment it.
 
   ```
   master_https_ingress = "0.0.0.0/0"
@@ -228,10 +244,9 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
   **NOTE**: The 0.0.0.0/0 value means that any IP address can access your cluster. A better security practice would be to determine your externally-facing IP address and restrict access to only that address. If you'd like, you can find out your IP address by running `curl ifconfig.co` in a terminal window, and place that address into the `master_https_ingress` parameter (e.g. `master_https_ingress = "11.12.13.14/32"`). Note that if you need remote assistance with the workshop, you may need to open this back up to 0.0.0.0/0 to allow access to your cluster.
 
-- Now we are ready to have Terraform provision our Kubernetes cluster. **Save and close** your terraform.tfvars file. In your open **terminal window**, run the following commands to initialize this directory and then have Terraform evaluate the various network and compute infrastructure that we are asking to be provisioned.
+- Now we are ready to have Terraform provision our Kubernetes cluster. **Save and close** your terraform.tfvars file. In your open **terminal window**, run the following command to have Terraform evaluate the various network and compute infrastructure that we are asking to be provisioned.
 
   ```bash
-  terraform init
   terraform plan
   ```
 
@@ -255,14 +270,16 @@ cat ~/.oci/oci_api_key_public.pem | clip
 
 - During provisioning, Terraform generated a `kubeconfig` file that will authenticate you to the cluster. Let's configure and start the kubectl proxy server to make sure our cluster is accessible.
 
-- First, you will need to install `kubectl`, the Kubernetes command line interface, to interact with Kubernetes from your local machine. Install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
-
-- Next, you will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Then you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL.
+- You will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Then you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL.
 
   ```bash
   export KUBECONFIG=`pwd`/generated/kubeconfig
   kubectl proxy
   ```
+
+  **NOTE**: Should you need to change the IP address of your cluster in the future, you can configure `kubectl` with the updated connection information by running the following command, which will pass the current address and authentication details to `kubectl`:
+
+  `terraform output kubeconfig | tr '\n' '\0' | xargs -0 -n1 sh -c`
 
 - Now that the proxy server is running, navigate to the **[Kubernetes dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)** in a new browser tab.
 
@@ -411,20 +428,20 @@ deploy-to-cluster:
 
 ### **STEP 10**: Set up environment variables in Wercker
 
-- Our first step is to set our cluster's authentication token as a Wercker environment variable. In your **terminal window**, run the following command to copy the token to your clipboard:
+- Our first step is to set our cluster's authentication token as a Wercker environment variable. In your **terminal window**, run the following command to output the token, then **select it and copy it** to your clipboard:
 
   ```bash
-  terraform output api_server_admin_token | pbcopy
+  terraform output api_server_admin_token
   ```
 
 - Back in your Wercker browser tab, click the **Environment** tab. In the key field of the empty row below the last environment variable, enter the key **KUBERNETES_TOKEN**. In the value field, **paste** the token we just copied. Check the **Protected** box and click **Add**.
 
   ![](images/200/37.png)
 
-- The other environment variable we need to add is the address of the Kubernetes master we want to deploy to. We can get the URL from `kubectl`. Run the following command in your **terminal window** to copy the URL to your clipboard:
+- The other environment variable we need to add is the address of the Kubernetes master we want to deploy to. We can get the URL from `kubectl`. Run the following command in your **terminal window** to output the URL, then **select it and copy it** to your clipboard:
 
   ```bash
-  echo $(kubectl config view | grep server | cut -f 2- -d ":" | tr -d " ") | pbcopy
+  echo $(kubectl config view | grep server | cut -f 2- -d ":" | tr -d " ")
   ```
 
 - In your Wercker browser tab, add a new environment variable with the key **KUBERNETES_MASTER**. In the value field, **paste** the value you copied from `kubectl`. The value **must start with https://** for Wercker to communicate with the cluster. When finished, click **Add**.
@@ -471,7 +488,7 @@ deploy-to-cluster:
 
 - In the shell that is displayed, **paste** the following command and press **Enter**.
 
-  **NOTE:** For windows you will need to use ctrl-shift-v to paste. Alternatively, you can use the mouse-driven browser menu to paste the command.
+  **NOTE:** You may need to use ctrl-shift-v to paste. Alternatively, you can use the mouse-driven browser menu to paste the command.
 
   `curl -s http://$HOSTNAME:8080/statictweets | head -c 100`
 
