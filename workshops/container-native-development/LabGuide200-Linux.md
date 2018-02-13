@@ -406,7 +406,7 @@ deploy-to-cluster:
 
   ![](images/200/30.png)
 
-- On the **Runs** tab you can see that Wercker has triggered another execution of our build and publish workflow, but it has not executed our new inject-secret and deploy-to-cluster pipelines. This is because we have not added the new pipelines to the workflow definition yet. Let's do that now -- click on the **Workflows** tab, then click the **Add new pipeline** button.
+- On the **Runs** tab you can see that Wercker has triggered another execution of our build and publish workflow, but it has not executed our new deploy-to-cluster pipeline. This is because we have not added the new pipeline to the workflow definition yet. Let's do that now -- click on the **Workflows** tab, then click the **Add new pipeline** button.
 
   ![](images/200/31.png)
 
