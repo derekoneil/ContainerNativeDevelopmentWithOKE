@@ -131,7 +131,10 @@ cat ~/.oci/oci_api_key_public.pem
 
 - **Unzip** the file you downloaded into the folder ~/terraform. You can use the command line or a graphical zip program for this operation. The example command below assumes you don't have other zip files in the current directory beginning with the string `terraform_`.
 
-  `mkdir ~/terraform && cat terraform_*.zip | tar -xvf - -C ~/terraform && cd ~/terraform`
+```
+cd ~/Downloads
+mkdir ~/terraform && cat terraform_*.zip | tar -xvf - -C ~/terraform && cd ~/terraform
+```
 
 - Add Terraform to your PATH in the **terminal window** that you will use for the next two steps using the following command:
 
@@ -139,7 +142,7 @@ cat ~/.oci/oci_api_key_public.pem
 
 ### **STEP 5**: Download the OCI Terraform Provider
 
-- Download the **OCI Terraform Provider** from the [GitHub release page](https://github.com/oracle/terraform-provider-oci/releases/latest). Select the package for your operating system.
+- Download the **OCI Terraform Provider** from the [GitHub release page](https://github.com/oracle/terraform-provider-oci/releases/latest). Select the package for your operating system. **Note:** for **Mac** use **darwin.tar.gz**
 
   ![](images/200/59.png)
 
@@ -191,13 +194,15 @@ cat ~/.oci/oci_api_key_public.pem
   cp terraform.example.tfvars terraform.tfvars
   ```
 
-- Open the `terraform.tfvars` file in your text editor of choice. On Linux you could run:
+- Open the `terraform.tfvars` file in your text editor of choice. On Linux you could run gedit. On a Mac, you can install gedit or use vi, but if you use TextEdit, ensure that any quotes (") you insert are not special characters:
 
   ```bash
   gedit terraform.tfvars
   ```
 
-- You should still have a browser tab open to your **User Details** page in the OCI Console. You will first remove the **#** comment character and replace in the values  in the terraform.tfvars file on lines **2, 4, 6, and 7**. **NOTE**: The **region** parameter may not already be present in your tfvars file. If it is not there, add it on a new line after the user_ocid parameter on line 6.
+- You should still have a browser tab open to your **User Details** page in the OCI Console. If not, you can get to the User Details by selecting **Identity** then **Users** from the top menu of the Console. Then click on your **User's Name**.
+
+- While editing the file, you will first remove the **#** comment character and replace in the values in the terraform.tfvars file on lines **2, 4, 6, and 7** using the examples in the next two images below. **NOTE**: The **region** parameter may not already be present in your tfvars file. If it is not there, add it on a new line after the user_ocid parameter on line 6.
 
   ![](images/200/57.1.png)
 
@@ -245,6 +250,8 @@ cat ~/.oci/oci_api_key_public.pem
   ```
 
   **NOTE**: The 0.0.0.0/0 value means that any IP address can access your cluster. A better security practice would be to determine your externally-facing IP address and restrict access to only that address. If you'd like, you can find out your IP address by running `curl ifconfig.co` in a terminal window, and place that address into the `master_https_ingress` parameter (e.g. `master_https_ingress = "11.12.13.14/32"`). Note that if you need remote assistance with the workshop, you may need to open this back up to 0.0.0.0/0 to allow access to your cluster.
+
+- **Double check** to ensure you removed the **#** character from in front of all the entries you modified 
 
 ### **STEP 7**: Provision Kubernetes on OCI
 
