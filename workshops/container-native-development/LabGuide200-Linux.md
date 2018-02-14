@@ -161,7 +161,7 @@ mkdir ~/terraform && cat terraform_*.zip | tar -xvf - -C ~/terraform && cd ~/ter
 
 ### **STEP 6**: Download and Configure the OCI Terraform Kubernetes Installer
 
-- Terraform requires `kubectl`, the Kubernetes command line interface, to interact with Kubernetes from your local machine. If you don't have it already, install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
+- **Install kubectl**, if you don't already have it. Terraform requires `kubectl`, the Kubernetes command line interface, to interact with Kubernetes from your local machine. You can install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
 
 - From the same **terminal window** you used in the previous step, run the following commands to download the OCI Terraform Kubernetes Installer:
 
@@ -288,9 +288,7 @@ mkdir ~/terraform && cat terraform_*.zip | tar -xvf - -C ~/terraform && cd ~/ter
   kubectl proxy
   ```
 
-  **NOTE**: Should you need to change the IP address of your cluster in the future, you can configure `kubectl` with the updated connection information by running the following command, which will pass the current address and authentication details to `kubectl`:
-
-  `terraform output kubeconfig | tr '\n' '\0' | xargs -0 -n1 sh -c`
+  **NOTE**: Should you need to change the IP address of your cluster in the future, you can configure `kubectl` with the updated connection information by running the following command, which will pass the current address and authentication details to **kubectl**: `terraform output kubeconfig | tr '\n' '\0' | xargs -0 -n1 sh -c`
 
 - Now that the proxy server is running, navigate to the **[Kubernetes dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)** in a new browser tab.
 
