@@ -48,7 +48,7 @@ You will take on 2 personas during the workshop. The Lead Developer Persona will
 
 - Create and Deploy to a Kubernetes Cluster
   - Set Up Oralce Cloud infrastructure
-  - Configure Wercker Cluster
+  - Provision Kubernetes Using Terraform
   - Configure and Run Wercker Deployment Pipelines
   - Deploy and Test the Product Catalog Application
 
