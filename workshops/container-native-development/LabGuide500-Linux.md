@@ -103,13 +103,15 @@ cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-res
 
 ### **STEP 5**: Install Helm on Your Local Machine
 
-- Helm is a package manager for Kubernetes that streamlines installing and managing applications on your Kubernetes cluster. We'll use Helm in this lab to install Fn on our cluster. If you are using an Oracle-provided client image, this step has been done for you. Skip to the next step. Otherwise, download the latest release for your operating system from the [Helm releases page](https://github.com/kubernetes/helm/releases/latest) in the **Installation and Upgrading** section.
+- Helm is a package manager for Kubernetes that streamlines installing and managing applications on your Kubernetes cluster. We'll use Helm in this lab to install Fn on our cluster. **Download** the latest release for your operating system from the [Helm releases page](https://github.com/kubernetes/helm/releases/latest) in the **Installation and Upgrading** section.
 
   ![](images/500/1.png)
 
   **NOTE**: See the [Fn Helm GitHub page](https://github.com/fnproject/fn-helm#prerequisites) for more details.
 
-- Open a **terminal window** and run the following commands to extract and initialize **Helm**, ***but first***, **replace ~/Downloads** with the directory where you download the Helm archive in the previous step, and **replace helm-v2.7.2-linux-amd64.tar.gz** with the name of the file you downloaded. **NOTE**: `kubectl` needs to be in your PATH for Helm to run. A good test to see if kubectl is in your path is to type: `which kubectl`. If you did not modify your system PATH when you installed kubectl in lab 200, you can run `export PATH=$PATH:/the/directory/where/you/downloaded/kubectl` to alter the path in this shell. Do this before running `helm init` below.
+- Open a **terminal window** and run the following commands to extract and initialize **Helm**, ***but first***, **replace ~/Downloads** with the directory where you download the Helm archive in the previous step, and **replace helm-v2.7.2-linux-amd64.tar.gz** with the name of the file you downloaded.
+
+  **NOTE**: `kubectl` needs to be in your PATH for Helm to run. A good test to see if kubectl is in your path is to type: `which kubectl`. If you did not modify your system PATH when you installed kubectl in lab 200, you can run `export PATH=$PATH:/the/directory/where/you/downloaded/kubectl` to alter the path in this shell. Do this before running `helm init` below.
 
   ```bash
   cd ~/terraform-kubernetes-installer
@@ -123,7 +125,6 @@ cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-res
 
   ![](images/500/2.png)
 
-
 ### **STEP 6**: Deploy Fn Server to Kubernetes Using Helm
 
 - Clone the **fn-helm git repository** using the following command.
@@ -131,6 +132,10 @@ cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-res
   `git clone https://github.com/fnproject/fn-helm.git && cd fn-helm`
 
   ![](images/500/3.png)
+
+- Specify the version of Fn we want to install by modifying the `values.yaml` file using this command:
+
+  `sed -i.bak 's/fnproject\/fnserver:latest/fnproject\/fnserver:0.3.327/' fn/values.yaml`
 
 - Prepare the **dependencies** of the Fn chart by running:
 
