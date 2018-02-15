@@ -59,7 +59,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Now we're ready to get a copy of the image resizing function and test it out on our local Fn Server. From a new **terminal window**, clone the Git repository into your home directory using the following command. If you choose to clone the repository into a different directory, modify the command in **STEP 8** to reflect your choice.
 
-  `cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-resize`
+```bash
+cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-resize
+```
 
   ![](images/500/10.png)
 
@@ -107,9 +109,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   **NOTE**: See the [Fn Helm GitHub page](https://github.com/fnproject/fn-helm#prerequisites) for more details.
 
-- Open a **terminal window** and run the following commands to extract and initialize **Helm**. Replace ~/Downloads with the directory where you download the Helm archive in the previous step, and replace the filename of the Helm tar.gz file with the name of the one you downloaded.
-
-  **NOTE**: `kubectl` needs to be in your PATH for Helm to run. If you did not modify your system PATH when you installed kubectl in a previous lab, you can run `export PATH=$PATH:/the/directory/where/you/downloaded/kubectl` to alter the path in this shell. Do this before running `helm init` below.
+- Open a **terminal window** and run the following commands to extract and initialize **Helm**, ***but first***, **replace ~/Downloads** with the directory where you download the Helm archive in the previous step, and **replace helm-v2.7.2-linux-amd64.tar.gz** with the name of the file you downloaded. **NOTE**: `kubectl` needs to be in your PATH for Helm to run. A good test to see if kubectl is in your path is to type: `which kubectl`. If you did not modify your system PATH when you installed kubectl in lab 200, you can run `export PATH=$PATH:/the/directory/where/you/downloaded/kubectl` to alter the path in this shell. Do this before running `helm init` below.
 
   ```bash
   cd ~/terraform-kubernetes-installer
