@@ -114,7 +114,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'      
   helm init --service-account tiller --upgrade
   ```
-- Install the **Fn chart** by running:
+- Install the **Fn chart** by running the following command. **NOTE** _DO NOT_ change the name of the release, `my-release`. This name becomes part of the Kubernetes service name, which is used for DNS routing. If the name is changed, the product catalog application will not be able to communicate with the deployed function.
 
   `helm install --name my-release fn`
 

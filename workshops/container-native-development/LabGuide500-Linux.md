@@ -152,7 +152,7 @@ cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-res
   helm init --service-account tiller --upgrade
   ```
 
-- Install the **Fn chart** by running:
+- Install the **Fn chart** by running the following command. **NOTE** _DO NOT_ change the name of the release, `my-release`. This name becomes part of the Kubernetes service name, which is used for DNS routing. If the name is changed, the product catalog application will not be able to communicate with the deployed function.
 
   `../helm install --name my-release fn`
 
