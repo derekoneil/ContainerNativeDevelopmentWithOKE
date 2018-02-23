@@ -7,7 +7,7 @@
         "versions": [
           {
             "name": "Oracle-Provided Image",
-            "description": "Use the Oracle-provided VirtualBox VM or hosted client",
+            "description": "Use the Oracle-provided VirtualBox or hosted client",
             "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/virtualbox.png"
           },
           {
