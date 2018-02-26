@@ -298,7 +298,7 @@ mkdir ~/terraform && cat terraform_*.zip | tar -xvf - -C ~/terraform && cd ~/ter
 
 ## Configure and Run Wercker Deployment Pipelines
 
-### **STEP 8**: Define Wercker Deployment Pipelines
+### **STEP 8**: Define Kubernetes Deployment Specification
 
 - From a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), scrolling down until you see the **Your repositories** box on the right side of the page, and clicking the **twitter-feed** link.
 

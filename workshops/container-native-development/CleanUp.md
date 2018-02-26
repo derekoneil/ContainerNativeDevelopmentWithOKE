@@ -31,6 +31,10 @@ If you are using the Oracle-provided client image, you only need to follow the i
 
 ### **STEP 1**: Destroy all Oracle Cloud Infrastructure
 
+- First we need to delete any load balancers created by Kubernetes outside of the Terraform infrastructure we provisioned. From a **terminal window** where you have the `KUBECONFIG` environment variable correctly set, run the following command:
+
+  `kubectl delete svc --all`
+
 - To remove all Terraform-created infrastructure from your Oracle Cloud trial account, we will make use of the `terraform-kubernetes-installer` configuration that you created in Lab 200 of the workshop. In a **terminal window**, navigate to the `terraform-kubernetes-installer` directory (your path may differ):
 
   `cd ~/terraform-kubernetes-installer`
