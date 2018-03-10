@@ -123,26 +123,28 @@ cat ~/.oci/oci_api_key_public.pem
 
 ### **STEP 4**: Download Terraform
 
-- If you are using the Oracle-provided client image, this step has been done for you. Skip to the next step. Otherwise, continue with this step to install Terraform.
-
 - Download the appropriate Terraform package for your operating system from the [terraform.io downloads page](https://www.terraform.io/downloads.html).
 
   ![](images/200/58.png)
 
 - **Unzip** the file you downloaded into the folder ~/terraform. You can use the command line or a graphical zip program for this operation. The example command below assumes you don't have other zip files in the current directory beginning with the string `terraform_`.
 
-```
+```bash
 cd ~/Downloads
-mkdir ~/terraform && cat terraform_*.zip | tar -xvf - -C ~/terraform && cd ~/terraform
+mkdir -p ~/terraform
+unzip terraform_*.zip
+mv terraform ~/terraform
+cd ~/terraform
 ```
 
-- Add Terraform to your PATH in the **terminal window** that you will use for the next two steps using the following command:
+- Add Terraform to your PATH in the **terminal window** that you will _use for the next two steps_ using the following command:
 
-  ``export PATH=$PATH:`pwd` ``
-
+```bash
+export PATH=$PATH:`pwd`
+```
 ### **STEP 5**: Download the OCI Terraform Provider
 
-- Download the **OCI Terraform Provider** from the [GitHub release page](https://github.com/oracle/terraform-provider-oci/releases/latest). Select the package for your operating system. **Note:** for **Mac** use **darwin.tar.gz**
+- Download the **OCI Terraform Provider** from the [GitHub release page](https://github.com/oracle/terraform-provider-oci/releases/latest). Select the package for your operating system. **Note:** for **Mac** use a **darwin** version of the tar file.
 
   ![](images/200/59.png)
 
@@ -150,20 +152,21 @@ mkdir ~/terraform && cat terraform_*.zip | tar -xvf - -C ~/terraform && cd ~/ter
 
   ![](images/200/59.1.png)
 
-- Run the following commands in a **terminal window** to extract the provider binary into the Terraform plugins folder (replace `linux.tar.gz` with the filename of the file you downloaded):
+- Run the following commands in a **terminal window** to extract the provider binary into the Terraform plugins folder. _Note:
+  replace_ the `linux_*.tar.gz` with the filename of the file you downloaded:
 
   ```bash
   cd ~/Downloads
-  mkdir -p ~/.terraform.d/plugins && cat linux.tar.gz | tar -zxvf - -C ~/.terraform.d/plugins/
+  mkdir -p ~/.terraform.d/plugins && cat linux_*.tar.gz | tar -zxvf - -C ~/.terraform.d/plugins/
   ```
 
 - Terraform will look in the `plugins` directory for the OCI provider when it is specified by an installer, as we will see in the next step.
 
 ### **STEP 6**: Download and Configure the OCI Terraform Kubernetes Installer
 
-- **Install kubectl**, if you don't already have it. Terraform requires `kubectl`, the Kubernetes command line interface, to interact with Kubernetes from your local machine. You can install it by following the instructions for your OS in the **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
+- _Install kubectl_. Terraform requires `kubectl` - the Kubernetes command line interface, to interact with Kubernetes from your local machine. You can install it by following the instructions for **Installing kubcectl binary via curl** for either mac or linux **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
 
-- From the same **terminal window** you used in the previous step, run the following commands to download the OCI Terraform Kubernetes Installer:
+- After you have installed kubectl, from the same **terminal window** you used in the previous step, run the following commands to download the OCI Terraform Kubernetes Installer:
 
   ```bash
   cd ~
@@ -275,7 +278,7 @@ mkdir ~/terraform && cat terraform_*.zip | tar -xvf - -C ~/terraform && cd ~/ter
 
   ![](images/200/62.png)
 
-- When provisioning is complete, Terraform will output the details of all created infrastructure to the terminal:
+- **When provisioning is complete**, Terraform will output the details of all created infrastructure to the terminal:
 
   ![](images/200/63.png)
 
@@ -519,7 +522,7 @@ deploy-to-cluster:
 
   ![](images/200/47.png)
 
-- Right click on the **Raw** button and choose **Save Link As**. In the save file dialog box that appears, note the location of the file and click **Save**
+- Right click on the **Raw** button and choose **Save Link As** or **Save As**. In the save file dialog box that appears, note the location of the file and click **Save**
 
   ![](images/200/48.png)
 
