@@ -55,7 +55,6 @@ If you are using the Oracle-provided client image, you only need to follow the i
 
 ### **STEP 3**: Remove Helm and the fn-helm Installer
 
-  <!-- how to remove load balancers created by kubernetes services?  -->
   `cd ~/Downloads/helm/*/fn-helm && ../helm delete --purge my-release`
   `rm -rf ~/Downloads/helm`
 

@@ -14,6 +14,11 @@
             "name": "Linux/Mac Workstation",
             "description": "Use your laptop or your own VM running Linux or OS X",
             "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/laptop.jpg"
+          },
+          {
+            "name": "Oracle Events",
+            "description": "An in-person workshop tailored for Cloud Trial Accounts at an Oracle Event (e.g. Code/SMB/Virtual).",
+            "imageUrl": "images/OracleCode.png"
           }
         ],
         "labs": [
@@ -58,6 +63,48 @@
                 "title": "Lab 500: Extend Your Application with a Function",
                 "description": "Install Fn in Kubernetes and Deploy a Function",
                 "labels": {"version": "Oracle-Provided Image"}
+            },
+            {
+                "number": "0",
+                "filename": "Intro-Cloud-Client.md",
+                "title": "Read Me First",
+                "description": "Step-by-step workshop instructions",
+                "labels": {"version": "Oracle Events"}
+            },
+            {
+                "number": "100",
+                "filename": "LabGuide100.md",
+                "title": "Lab 100: Containerize Your Java Microservice",
+                "description": "Use Wercker to automatically build your application and package it as a Docker image",
+                "labels": {"version": "Oracle Events"}
+            },
+            {
+                "number": "200",
+                "filename": "LabGuide200.md",
+                "title": "Lab 200: Automate Deployment to Kubernetes",
+                "description": "Use Wercker to set up a managed Kubernetes cluster and deploy to it",
+                "labels": {"version": "Oracle Events"}
+            },
+            {
+                "number": "300",
+                "filename": "LabGuide300.md",
+                "title": "Lab 300: Make a Bug Fix to Your Java Microservice",
+                "description": "Go from code change to production using Wercker",
+                "labels": {"version": "Oracle Events"}
+            },
+            {
+                "number": "400",
+                "filename": "LabGuide400.md",
+                "title": "Lab 400: Kubernetes Blue/Green Deployments",
+                "description": "Stage your new version without disrupting the current deployment",
+                "labels": {"version": "Oracle Events"}
+            },
+            {
+                "number": "500",
+                "filename": "LabGuide500-Cloud-Client.md",
+                "title": "Lab 500: Extend Your Application with a Function",
+                "description": "Install Fn in Kubernetes and Deploy a Function",
+                "labels": {"version": "Oracle Events"}
             },
             {
                 "number": "0",
