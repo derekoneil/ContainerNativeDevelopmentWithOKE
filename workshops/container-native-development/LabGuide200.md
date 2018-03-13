@@ -158,12 +158,11 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/57.1.png)
 
-
 - You will replace lines **2, 4, 6, and 7** with the values from the OCI Console, referring to the following screenshot for where to find them.
 
   ![](images/200/17.png)
 
-- As an exmaple, Your terraform.tfvars file should now appear similar to the image shown below:
+- As an example, Your terraform.tfvars file should now appear similar to the image shown below:
 
   ![](images/200/57.2.png)
 
@@ -175,10 +174,17 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
 - The last piece of information we need to provide about your OCI tenant is the private key corresponding to the public API key you uploaded to the OCI console previously. Provide the path and the private key file on **line 5** using the path below:
 
+  _Note:_ If using the VNC Provided environment, use this private_key_path
+
+  ```
+  private_key_path = "/u01/app/demo/homes/oracle/.oci/oci_api_key.pem"
+  ```
+
+  _Note:_ If using the Virtual Box Image, use this private_key_path
+
   ```
   private_key_path = "/home/oracle/.oci/oci_api_key.pem"
   ```
-
 - The rest of the terraform.tfvars file controls the parameters used when creating your Kubernetes cluster. You can control how many OCPUs each node receives, whether nodes should be virtual machines or bare metal instances, how many availability domains to use, and more. We will modify five of the lines in the remainder of the file.
 
 - First, we will specify that we want only one OCPU in each of the worker and master nodes. This reduces the hourly cost of running our cluster. On **lines 15 and 16**, uncomment the **k8sMasterShape** and **k8sWorkerShape** parameters, and set both values to **VM.Standard1.1**:
@@ -231,7 +237,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
 - During provisioning, Terraform generated a `kubeconfig` file that will authenticate you to the cluster. Let's configure and start the kubectl proxy server to make sure our cluster is accessible. Since you are using an Oracle-provided client image, `kubectl` -- the Kubernetes command line interface, has been **pre-installed** for you.
 
-- You will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Then you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL. Since you're using the Oracle-provided client image, we'll add the `KUBECONFIG` environment variable to your bash profile; that way it will be set for all new shells that you open:
+- You will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Then you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL. Since you're using the Oracle-provided client image, we'll add the `KUBECONFIG` environment variable to your bash profile; that way it will be set for all new shells that you open. Enter the following command into your terminal window:
 
   ```bash
   echo "export KUBECONFIG=`pwd`/generated/kubeconfig" >> ~/.bashrc
@@ -247,7 +253,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/64.png)
 
-- Great! We've got Kubernetes installed and accessible -- now we're ready to get our microservice deployed to the cluster. The next step is to tell Wercker how and where we would like to deploy our application. In your **terminal window**, press **Control-C** to terminate `kubectl proxy`. We will need the terminal window to gather some cluster info in another step. We'll start the proxy again later.
+- Great! We've got Kubernetes installed and accessible -- now we're ready to get our microservice deployed to the cluster. The next step is to tell Wercker how and where we would like to deploy our application. In your **terminal window**, press **Control-C** to terminate **kubectl proxy**. We will need the terminal window to gather some cluster info in another step. We'll start the proxy again later.
 
 ## Configure and Run Wercker Deployment Pipelines
 
@@ -261,7 +267,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/27.png)
 
-- In the **Name your file** input field, enter **kubernetes.yml.template**
+- In the **Name your file** input field, enter `kubernetes.yml.template`
 
   ![](images/200/28.png)
 
@@ -376,7 +382,7 @@ deploy-to-cluster:
 
   ![](images/200/31.png)
 
-- Enter **deploy-to-cluster** into both the Name and YML Pipleine name fields. Click **Create**.
+- Enter `deploy-to-cluster` into both the Name and YML Pipleine name fields. Click **Create**.
 
   ![](images/200/32.png)
 
@@ -394,9 +400,10 @@ deploy-to-cluster:
 
 ### **STEP 9**: Set up environment variables in Wercker
 
-- Our first step is to set our cluster's authentication token as a Wercker environment variable. In your **terminal window**, run the following command to copy the token to your clipboard:
+- Our first step is to set our cluster's authentication token as a Wercker environment variable. In your **terminal window**, change to the correct directory, and run the following command to copy the token to your clipboard:
 
   ```bash
+  cd ~/terraform-kubernetes-installer/
   terraform output api_server_admin_token | xclip -sel clip
   ```
 
@@ -444,7 +451,7 @@ deploy-to-cluster:
 
 - In a browser tab, navigate to the [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)
 
-- You should see the overview page. In the pods section, you should see two twitter-feed pods running. Click the **name of one of the pods** to go to the detail page.
+- Click on the **Overview** menu option in the Kubernetes dashboard **left-hand menu**. In the pods section, you should see two twitter-feed pods running. Click the **name of one of the pods** to go to the detail page.
 
   ![](images/200/44.png)
 
@@ -454,11 +461,11 @@ deploy-to-cluster:
 
 - In the shell that is displayed, **paste** the following command and press **Enter**.
 
-  **NOTE:** You may need to use ctrl-shift-v to paste. Alternatively, you can use the mouse-driven browser menu to paste the command.
+  **NOTE:** You may need to use **ctrl-shift-v** to paste. Alternatively, you can use the mouse-driven browser menu to paste the command.
 
   `curl -s http://$HOSTNAME:8080/statictweets | head -c 100`
 
-- You should see some JSON data being returned by our twitter feed service. Our microservice has been deployed successfully! But the twitter feed service is just one part of our product catalog application. Let's deploy the rest of the application so we can validate that everything works together as expected. Leave this browser tab open, as we will use it in a later step.
+- You should the first 100 characters of the JSON data being returned by our twitter feed service. Our microservice has been deployed successfully! But the twitter feed service is just one part of our product catalog application. Let's deploy the rest of the application so we can validate that everything works together as expected. Leave this browser tab open, as we will use it in a later step.
 
   ![](images/200/46.png)
 
@@ -476,7 +483,7 @@ deploy-to-cluster:
 
   ![](images/200/47.png)
 
-- Right click on the **Raw** button and choose **Save Link As**. In the save file dialog box that appears, note the location of the file and click **Save**
+- **Right click** on the **Raw** button and choose **Save Link As**. In the save file dialog box that appears, note the location of the file and click **Save**
 
   ![](images/200/48.png)
 
