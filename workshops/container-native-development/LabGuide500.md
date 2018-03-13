@@ -74,11 +74,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/12.png)
 
-- Open both the **original and resized images** using one of the following commands to verify that the function did it's job -- which is to resize the image to 128px x 128px.
+- Open both the **original and resized images** using one of the following commands to verify that the function did it's job -- which is to resize the image to 128px x 128px. _NOTE:_ You can also use your OS's file explorer to open the images if the command below does not work.
 
   `eog sample-image.jpg & eog thumbnail.jpg &`
-
-**NOTE**: You can also use your OS's file explorer to open the images if the above commands don't work.
 
   ![](images/500/13.png)
 

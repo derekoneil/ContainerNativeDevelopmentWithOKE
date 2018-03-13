@@ -74,11 +74,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/12.png)
 
-- Open both the **original and resized images** using one of the following commands to verify that the function did it's job -- which is to resize the image to 128px x 128px.
+- Open both the **original and resized images** using one of the following commands to verify that the function did it's job -- which is to resize the image to 128px x 128px. **NOTE**: You can also use your OS's file explorer to open the images if the commands below don't work.
 
   `google-chrome sample-image.jpg & google-chrome thumbnail.jpg &`
-
-**NOTE**: You can also use your OS's file explorer to open the images if the above commands don't work.
 
   ![](images/500/13.png)
 
@@ -86,7 +84,31 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ## Deploy Your Function to Fn on Kubernetes
 
-### **STEP 5**: Deploy Fn Server to Kubernetes Using Helm
+### **STEP 5**: Install Helm on Your Local Machine
+
+- Helm is a package manager for Kubernetes that streamlines installing and managing applications on your Kubernetes cluster. We'll use Helm in this lab to install Fn on our cluster. **Download** the latest release for your operating system from the [Helm releases page](https://github.com/kubernetes/helm/releases/latest) in the **Installation and Upgrading** section.
+
+  ![](images/500/1.png)
+
+  **NOTE**: See the [Fn Helm GitHub page](https://github.com/fnproject/fn-helm#prerequisites) for more details.
+
+- Open a **terminal window** and run the following commands to extract and initialize **Helm**, ***but first***, **replace ~/Downloads** with the directory where you download the Helm archive in the previous step, and **replace helm-v2.7.2-linux-amd64.tar.gz** with the name of the file you downloaded.
+
+  **NOTE**: `kubectl` needs to be in your PATH for Helm to run. A good test to see if kubectl is in your path is to type: `which kubectl`. If you did not modify your system PATH when you installed kubectl in lab 200, you can run `export PATH=$PATH:/the/directory/where/you/downloaded/kubectl` to alter the path in this shell. Do this before running `helm init` below.
+
+  ```bash
+  cd ~/terraform-kubernetes-installer
+  export KUBECONFIG=`pwd`/generated/kubeconfig
+  cd ~/Downloads
+  mkdir helm
+  tar -xf helm-v2.7.2-linux-amd64.tar.gz -C helm
+  cd helm/*
+  ./helm init --upgrade
+  ```
+
+  ![](images/500/2.png)
+
+### **STEP 6**: Deploy Fn Server to Kubernetes Using Helm
 
 - Since you are using the Oracle-provided client image, the **fn-helm installer** has been downloaded for you. Change directories to the installer with the following command:
 
@@ -146,7 +168,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
     ![](images/500/17.png)
 
-### **STEP 6**: Deploy Your Function to Fn Server on Kubernetes
+### **STEP 7**: Deploy Your Function to Fn Server on Kubernetes
 
 - In the same **terminal window** from the previous step, change directories to cloned function directory from **STEP 2**.
 
@@ -188,7 +210,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Our function is deployed and available on our remote Fn Server, which is running in our Kubernetes cluster. The last thing to verify is that the product catalog application is able to find and use our function. Let's test out the upload image feature.
 
-### **STEP 7**: Test Your Function in the Product Catalog
+### **STEP 8**: Test Your Function in the Product Catalog
 
 - Open the **product catalog** website in a browser. If you don't have the URL, you can look in the Kubernetes dashboard for the **external endpoint** of the product-catalog-service, or you can run the following command from your terminal window:
 
