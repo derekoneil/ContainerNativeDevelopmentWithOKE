@@ -92,7 +92,7 @@ Compartments are used to isolate resources within your OCI tenant. User-based ac
 
 An API key is required for Terraform to authenticate to OCI in order to create compute instances for your Kubernetes master and worker nodes.
 
-- Open a terminal window and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called `.oci`, generate a new PEM private key, generate the corresponding public key, and copy the public key to the clipboard. For more information on this process, including the alternate commands to protect your key file with a passphrase, see the [official documentation](https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm#two).
+- Open a terminal window (by right clicking on the desktop and and selecting Open Terminal) and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called `.oci`, generate a new PEM private key, generate the corresponding public key, and copy the public key to the clipboard. For more information on this process, including the alternate commands to protect your key file with a passphrase, see the [official documentation](https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm#two).
 
 
   ```bash
@@ -118,7 +118,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
 ## Provision Kubernetes Using Terraform
 
-### **STEP 4**: Download and Configure the OCI Terraform Kubernetes Installer
+### **STEP 4**: Configure the OCI Terraform Kubernetes Installer
 
 - The Oracle OCI Terraform Provider has already been installed for you, so the next step is to change to the Terraform Kubernetes Installer directory from the same **terminal window**:
 
@@ -174,13 +174,13 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
 - The last piece of information we need to provide about your OCI tenant is the private key corresponding to the public API key you uploaded to the OCI console previously. Provide the path and the private key file on **line 5** using the path below:
 
-  _Note:_ If using the VNC Provided environment, use this private_key_path
+  _Note:_ If using the **VNC** Provided environment, use this private_key_path
 
   ```
   private_key_path = "/u01/app/demo/homes/oracle/.oci/oci_api_key.pem"
   ```
 
-  _Note:_ If using the Virtual Box Image, use this private_key_path
+  _Note:_ If using the **Virtual Box Image**, use this private_key_path
 
   ```
   private_key_path = "/home/oracle/.oci/oci_api_key.pem"
