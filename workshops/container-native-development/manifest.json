@@ -6,18 +6,18 @@
         "interactive":"https://launch.oracle.com/?container-native-development",
         "versions": [
           {
-            "name": "Oracle-Provided Image",
-            "description": "Use the Oracle-provided VirtualBox or hosted client",
+            "name": "Virtual Box",
+            "description": "Use the Oracle-provided VirtualBox Image running on your laptop",
             "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/virtualbox.png"
           },
           {
-            "name": "Linux/Mac Workstation",
-            "description": "Use your laptop or your own VM running Linux or OS X",
+            "name": "Linux/Mac Local Install",
+            "description": "Setup you Linux own OS X laptop to run this workshop",
             "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/laptop.jpg"
           },
           {
-            "name": "Oracle Events",
-            "description": "An in-person workshop tailored for Cloud Trial Accounts at an Oracle Event (e.g. Code/SMB/Virtual).",
+            "name": "VNC Image",
+            "description": "Use an Oracle Provided Cloud Image to perform this Workshop.",
             "imageUrl": "images/OracleCode.png"
           }
         ],
@@ -27,126 +27,126 @@
                 "filename": "Intro.md",
                 "title": "Read Me First",
                 "description": "Step-by-step workshop instructions",
-                "labels": {"version": "Oracle-Provided Image"}
+                "labels": {"version": "Virtual Box"}
             },
             {
                 "number": "100",
                 "filename": "LabGuide100.md",
                 "title": "Lab 100: Containerize Your Java Microservice",
                 "description": "Use Wercker to automatically build your application and package it as a Docker image",
-                "labels": {"version": "Oracle-Provided Image"}
+                "labels": {"version": "Virtual Box"}
             },
             {
                 "number": "200",
                 "filename": "LabGuide200.md",
                 "title": "Lab 200: Automate Deployment to Kubernetes",
                 "description": "Use Wercker to set up a managed Kubernetes cluster and deploy to it",
-                "labels": {"version": "Oracle-Provided Image"}
+                "labels": {"version": "Virtual Box"}
             },
             {
                 "number": "300",
                 "filename": "LabGuide300.md",
                 "title": "Lab 300: Make a Bug Fix to Your Java Microservice",
                 "description": "Go from code change to production using Wercker",
-                "labels": {"version": "Oracle-Provided Image"}
+                "labels": {"version": "Virtual Box"}
             },
             {
                 "number": "400",
                 "filename": "LabGuide400.md",
                 "title": "Lab 400: Kubernetes Blue/Green Deployments",
                 "description": "Stage your new version without disrupting the current deployment",
-                "labels": {"version": "Oracle-Provided Image"}
+                "labels": {"version": "Virtual Box"}
             },
             {
                 "number": "500",
                 "filename": "LabGuide500.md",
                 "title": "Lab 500: Extend Your Application with a Function",
                 "description": "Install Fn in Kubernetes and Deploy a Function",
-                "labels": {"version": "Oracle-Provided Image"}
+                "labels": {"version": "Virtual Box"}
             },
             {
                 "number": "0",
                 "filename": "Intro-Cloud-Client.md",
                 "title": "Read Me First",
                 "description": "Step-by-step workshop instructions",
-                "labels": {"version": "Oracle Events"}
+                "labels": {"version": "VNC Image"}
             },
             {
                 "number": "100",
                 "filename": "LabGuide100.md",
                 "title": "Lab 100: Containerize Your Java Microservice",
                 "description": "Use Wercker to automatically build your application and package it as a Docker image",
-                "labels": {"version": "Oracle Events"}
+                "labels": {"version": "VNC Image"}
             },
             {
                 "number": "200",
                 "filename": "LabGuide200.md",
                 "title": "Lab 200: Automate Deployment to Kubernetes",
                 "description": "Use Wercker to set up a managed Kubernetes cluster and deploy to it",
-                "labels": {"version": "Oracle Events"}
+                "labels": {"version": "VNC Image"}
             },
             {
                 "number": "300",
                 "filename": "LabGuide300.md",
                 "title": "Lab 300: Make a Bug Fix to Your Java Microservice",
                 "description": "Go from code change to production using Wercker",
-                "labels": {"version": "Oracle Events"}
+                "labels": {"version": "VNC Image"}
             },
             {
                 "number": "400",
                 "filename": "LabGuide400.md",
                 "title": "Lab 400: Kubernetes Blue/Green Deployments",
                 "description": "Stage your new version without disrupting the current deployment",
-                "labels": {"version": "Oracle Events"}
+                "labels": {"version": "VNC Image"}
             },
             {
                 "number": "500",
                 "filename": "LabGuide500-Cloud-Client.md",
                 "title": "Lab 500: Extend Your Application with a Function",
                 "description": "Install Fn in Kubernetes and Deploy a Function",
-                "labels": {"version": "Oracle Events"}
+                "labels": {"version": "VNC Image"}
             },
             {
                 "number": "0",
                 "filename": "Intro-Linux.md",
                 "title": "Read Me First",
                 "description": "Step-by-step workshop instructions",
-                "labels": {"version": "Linux/Mac Workstation"}
+                "labels": {"version": "Linux/Mac Local Install"}
             },
             {
                 "number": "100",
                 "filename": "LabGuide100.md",
                 "title": "Lab 100: Containerize Your Java Microservice",
                 "description": "Use Wercker to automatically build your application and package it as a Docker image",
-                "labels": {"version": "Linux/Mac Workstation"}
+                "labels": {"version": "Linux/Mac Local Install"}
             },
             {
                 "number": "200",
                 "filename": "LabGuide200-Linux.md",
                 "title": "Lab 200: Automate Deployment to Kubernetes",
                 "description": "Use Wercker to set up a managed Kubernetes cluster and deploy to it",
-                "labels": {"version": "Linux/Mac Workstation"}
+                "labels": {"version": "Linux/Mac Local Install"}
             },
             {
                 "number": "300",
                 "filename": "LabGuide300.md",
                 "title": "Lab 300: Make a Bug Fix to Your Java Microservice",
                 "description": "Go from code change to production using Wercker",
-                "labels": {"version": "Linux/Mac Workstation"}
+                "labels": {"version": "Linux/Mac Local Install"}
             },
             {
                 "number": "400",
                 "filename": "LabGuide400.md",
                 "title": "Lab 400: Kubernetes Blue/Green Deployments",
                 "description": "Stage your new version without disrupting the current deployment",
-                "labels": {"version": "Linux/Mac Workstation"}
+                "labels": {"version": "Linux/Mac Local Install"}
             },
             {
                 "number": "500",
                 "filename": "LabGuide500-Linux.md",
                 "title": "Lab 500: Extend Your Application with a Function",
                 "description": "Install Fn in Kubernetes and Deploy a Function",
-                "labels": {"version": "Linux/Mac Workstation"}
+                "labels": {"version": "Linux/Mac Local Install"}
             }
         ]
     }
