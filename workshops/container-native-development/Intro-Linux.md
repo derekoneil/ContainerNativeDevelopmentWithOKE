@@ -59,7 +59,7 @@ _Please note that this email may arrive in your spam or promotions folder pendin
   - Verify Deployment to Kubernetes
   - Test the Product Catalog Application
 
-### Lab 400: Kubernetes Blue/Green Deployments - bjectives
+### Lab 400: Kubernetes Blue/Green Deployments - Objectives
 
 - Perform a Blue/Green Deployment to Kubernetes
   - Update Existing Deployment and Service with Blue Color Labels

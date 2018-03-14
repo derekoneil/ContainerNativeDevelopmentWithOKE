@@ -89,7 +89,7 @@ To provide the best possible experience during your time at Oracle Code your ins
   - Verify Deployment to Kubernetes
   - Test the Product Catalog Application
 
-### Lab 400: Kubernetes Blue/Green Deployments - bjectives
+### Lab 400: Kubernetes Blue/Green Deployments - Objectives
 
 - Perform a Blue/Green Deployment to Kubernetes
   - Update Existing Deployment and Service with Blue Color Labels
