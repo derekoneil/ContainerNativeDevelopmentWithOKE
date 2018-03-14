@@ -70,7 +70,7 @@ This label will identify our Kubernetes pods as the blue version of the code.
                 fieldPath: metadata.labels
 ```
 
-**NOTE**: YAML files are sensitive to indentation -- make sure that `volumeMounts` is indented to the same level as `ports` on line 23. Also ensure that `volumes` is indented to the same level as `containers` on line 19. Your file should look like this:
+**NOTE**: YAML files are _sensitive to indentation_ -- make sure that `volumeMounts` is indented to the same level as `ports` on line 23. Also ensure that `volumes` is indented to the same level as `containers` on line 19. Your file should look like this:
 
   ![](images/400/5.png)
 

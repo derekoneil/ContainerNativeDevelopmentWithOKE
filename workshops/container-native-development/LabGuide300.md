@@ -53,7 +53,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 
   ![](images/300/4.png)
 
-- Scroll down to **line 54**. This is the REST endpoint that should return only tweets that match a given search term, but it's not working. Delete **line 57** to fix the bug that is breaking this feature.
+- Scroll down to approximately **line 57**. This is the REST endpoint that should return only tweets that match a given search term, but it's not working. Delete **line 57** to fix the bug that is breaking this feature.
 
   ![](images/300/5.png)
 
@@ -71,7 +71,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 
   ![](images/300/7.png)
 
-- In a new browser tab, navigate to the **Kubernetes dashboard** at [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/). Click on **Overview** in the left side navigation menu. You should see two new twitter-feed pods with a very small `Age` (a few seconds to a few minutes, depending on how much time has elapsed between the end of the Workflow execution and now). If you get to the dashboard very quickly after the Workflow finishes, you may see the two old pods from the previous lab being terminated, as in the screenshot below. The old pods will be removed from the UI within a minute of the new pods being started.
+- In a new browser tab, navigate to the **Kubernetes dashboard** at [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/). Click on **Overview** in the left side navigation menu. You should see two new twitter-feed pods with a very small `Age` (a few seconds to a few minutes, depending on how much time has elapsed between the end of the Workflow execution and now). If you get to the dashboard very quickly after the Workflow finishes, you may see the two old pods from the previous lab being terminated, as in the screenshot below. **The old pods will be removed** from the UI within a minute of the new pods being started.
 
   ![](images/300/8.png)
 

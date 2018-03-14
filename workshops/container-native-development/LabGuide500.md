@@ -120,7 +120,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - As directed by the output of the install command, set the `FN_API_URL` environment variable by waiting for the load balancer to be provisioned and using its external IP address in the URL.
 
-  - To check the status of the load balancer from the command line, run the following command. Note, you can use Ctrl-C to stop the command running, and re-run to again check if the External-IP field is populated:
+  - To check the status of the load balancer from the command line, run the following command. **Note**, you can use Ctrl-C to stop the command running, and re-run to again check if the External-IP field is populated:
 
     `kubectl get svc --namespace default -w my-release-fn-api`
 
@@ -152,7 +152,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/18.png)
 
-- Since we are pushing to a remote Fn Server, Fn will use Docker Hub as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to. In the following command, **replace "your-docker-hub-registry"** with the name of your Docker Hub registry (not your Docker Hub email address):
+- Since we are pushing to a remote Fn Server, Fn will use Docker Hub as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to. In the following command, _replace "your-docker-hub-registry"_ with the name of your Docker Hub registry (not your Docker Hub email address):
 
   `export FN_REGISTRY=your-docker-hub-registry`
 
@@ -200,7 +200,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/23.png)
 
-- In the **Upload an image** pane, click **Choose file**. Select an image (the sample image or any other) and click **open**.
+- In the **Upload an image** pane, click **Choose file**. Select an image (the sample image or any other) and click **open**. NOTE: if running on Linux, you can do a `pwd` command to show your current directory where the sample-img.jpg file is located.
 
   ![](images/500/24.png)
 
