@@ -6,13 +6,6 @@ Now that you have completed the workshop, you may want to remove the artifacts l
 
 **_To log issues_**, click here to go to the [GitHub oracle](https://github.com/oracle/learning-library/issues/new) repository issue submission form.
 
-## Objectives
-
-**Remove All Deployed Workshop Components**
-
-- Clean up Oracle Cloud Account
-  - Destroy all Oracle Cloud Infrastructure
-
 # Remove All Deployed and Installed Workshop Components
 
 ## Clean up Oracle Cloud Account
@@ -64,7 +57,7 @@ Now that you have completed the workshop, you may want to remove the artifacts l
 
   ![](images/manualcleanup/pic11.png)
 
-### **STEP 1**: Delete the API Key Fingerprint
+### **STEP 4**: Delete the API Key Fingerprint
 
 - Using the top menu bar, go to **Identity > Users**.
 
