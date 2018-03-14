@@ -52,7 +52,7 @@ To provide the best possible experience during your time at Oracle Code your ins
 
 ![](images/oraclecode/code_7.png)
 
-## Workshop Details
+### **Step 3**: Navigate to the Lab Guides
 
 - _You can see a list of Lab Guides_ by clicking on the **Menu Icon** in the upper left corner of the browser window. You're now ready to continue with Lab 100.
 
@@ -60,9 +60,7 @@ To provide the best possible experience during your time at Oracle Code your ins
 
 ## Lab Overview
 
-## Lab 100: Containerize Your Java Microservice
-
-### Objectives
+### Lab 100: Containerize Your Java Microservice - Objectives
 
 - Create Wercker Application
   - Fork Java Application on GitHub
@@ -75,9 +73,7 @@ To provide the best possible experience during your time at Oracle Code your ins
   - Define Wercker Publish Pipeline
   - Validate Workflow Execution
 
-## Lab 200: Automate Deployment to Kubernetes
-
-### Objectives
+### Lab 200: Automate Deployment to Kubernetes- Objectives
 
 - Create and Deploy to a Kubernetes Cluster
   - Set Up Oralce Cloud infrastructure
@@ -85,9 +81,7 @@ To provide the best possible experience during your time at Oracle Code your ins
   - Configure and Run Wercker Deployment Pipelines
   - Deploy and Test the Product Catalog Application
 
-## Lab 300: Make a Bug Fix to Your Java Microservice
-
-### Objectives
+### Lab 300: Make a Bug Fix to Your Java Microservice - Objectives
 
 - Make a Bug Fix to Your Java Microservice
   - Modify Java Code and Commit to GitHub
@@ -95,9 +89,7 @@ To provide the best possible experience during your time at Oracle Code your ins
   - Verify Deployment to Kubernetes
   - Test the Product Catalog Application
 
-## Lab 400: Kubernetes Blue/Green Deployments
-
-### Objectives
+### Lab 400: Kubernetes Blue/Green Deployments - bjectives
 
 - Perform a Blue/Green Deployment to Kubernetes
   - Update Existing Deployment and Service with Blue Color Labels
@@ -107,9 +99,7 @@ To provide the best possible experience during your time at Oracle Code your ins
   - Reconfigure Service to Switch to Green Deployment
   - Validate Green Deployment Now Serves Traffic
 
-## Lab 500: Extend Your Application with a Function
-
-### Objectives
+### Lab 500: Extend Your Application with a Function - Objectives
 
 - Run Your Function Locally
   - Install Fn Server on Your Local Machine

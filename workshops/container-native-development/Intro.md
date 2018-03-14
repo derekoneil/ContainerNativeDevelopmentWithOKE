@@ -26,9 +26,9 @@ _Please note that this email may arrive in your spam or promotions folder pendin
 
 ### **Step 2**: Configure your Virtual Box Image
 
-Step to be added
+Documentation to be added
 
-## Workshop Details
+### **Step 4**: Navigate to the Lab Guides
 
 - _You can see a list of Lab Guides_ by clicking on the **Menu Icon** in the upper left corner of the browser window. You're now ready to continue with Lab 100.
 
@@ -36,9 +36,7 @@ Step to be added
 
 ## Lab Overview
 
-## Lab 100: Containerize Your Java Microservice
-
-### Objectives
+### Lab 100: Containerize Your Java Microservice - Objectives
 
 - Create Wercker Application
   - Fork Java Application on GitHub
@@ -51,9 +49,7 @@ Step to be added
   - Define Wercker Publish Pipeline
   - Validate Workflow Execution
 
-## Lab 200: Automate Deployment to Kubernetes
-
-### Objectives
+### Lab 200: Automate Deployment to Kubernetes- Objectives
 
 - Create and Deploy to a Kubernetes Cluster
   - Set Up Oralce Cloud infrastructure
@@ -61,9 +57,7 @@ Step to be added
   - Configure and Run Wercker Deployment Pipelines
   - Deploy and Test the Product Catalog Application
 
-## Lab 300: Make a Bug Fix to Your Java Microservice
-
-### Objectives
+### Lab 300: Make a Bug Fix to Your Java Microservice - Objectives
 
 - Make a Bug Fix to Your Java Microservice
   - Modify Java Code and Commit to GitHub
@@ -71,9 +65,7 @@ Step to be added
   - Verify Deployment to Kubernetes
   - Test the Product Catalog Application
 
-## Lab 400: Kubernetes Blue/Green Deployments
-
-### Objectives
+### Lab 400: Kubernetes Blue/Green Deployments - bjectives
 
 - Perform a Blue/Green Deployment to Kubernetes
   - Update Existing Deployment and Service with Blue Color Labels
@@ -83,9 +75,7 @@ Step to be added
   - Reconfigure Service to Switch to Green Deployment
   - Validate Green Deployment Now Serves Traffic
 
-## Lab 500: Extend Your Application with a Function
-
-### Objectives
+### Lab 500: Extend Your Application with a Function - Objectives
 
 - Run Your Function Locally
   - Install Fn Server on Your Local Machine
