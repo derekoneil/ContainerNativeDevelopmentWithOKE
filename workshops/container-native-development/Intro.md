@@ -31,23 +31,23 @@ _Please note that this email may arrive in your spam or promotions folder pendin
 - After downloading and installing Virtual Box, and also after downloading the Virtual Box Image for this workshop as instructed in at the beginning of this guide, **start the Virtual Box Application**.
 - From Virtual Box, select **File > Import Appliance**
 
-  ![](images/studentguide/Vbox01.png)
+  ![](images/studentguide/vbox01.png)
 
 - Located the **Appliance to Import** from your downloads directory, and click on the **Import** button.
 
-  ![](images/studentguide/Vbox02.png)
+  ![](images/studentguide/vbox02.png)
 
 - Once the import is complete, you'll see a summary of the Virtual Box image. _Make Note_ of the **password** in the **Description** panel. The password is needed if the Linux Image goes into screen saver mode.
 
-  ![](images/studentguide/Vbox03.png)
+  ![](images/studentguide/vbox03.png)
 
 - Click on the **Start** icon to load your Linux Image.
 
-  ![](images/studentguide/Vbox04.png)
+  ![](images/studentguide/vbox04.png)
 
 - The image will load automatically. Wait for it to fully load before continuing. 
 
-  ![](images/studentguide/Vbox05.png)
+  ![](images/studentguide/vbox05.png)
 
 ### **Step 4**: Navigate to the Lab Guides
 
