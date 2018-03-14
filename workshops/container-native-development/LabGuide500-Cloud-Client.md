@@ -88,31 +88,31 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Helm is a package manager for Kubernetes that streamlines installing and managing applications on your Kubernetes cluster. We'll use Helm in this lab to install Fn on our cluster. **Download** the latest release for your operating system from the [Helm releases page](https://github.com/kubernetes/helm/releases/latest) in the **Installation and Upgrading** section.
 
-  ![](images/500/1.png)
+  ![](images/500/1.linux.png)
 
-  **NOTE**: See the [Fn Helm GitHub page](https://github.com/fnproject/fn-helm#prerequisites) for more details.
+  **NOTE**: For additional background information, you can also visit the [Fn Helm GitHub page](https://github.com/fnproject/fn-helm#prerequisites) for more details.
 
-- Open a **terminal window** and run the following commands to extract and initialize **Helm**, ***but first***, **replace ~/Downloads** with the directory where you download the Helm archive in the previous step, and **replace helm-v2.7.2-linux-amd64.tar.gz** with the name of the file you downloaded.
-
-  **NOTE**: `kubectl` needs to be in your PATH for Helm to run. A good test to see if kubectl is in your path is to type: `which kubectl`. If you did not modify your system PATH when you installed kubectl in lab 200, you can run `export PATH=$PATH:/the/directory/where/you/downloaded/kubectl` to alter the path in this shell. Do this before running `helm init` below.
+- Open a **terminal window** and run the following commands to extract and initialize **Helm**.
 
   ```bash
   cd ~/terraform-kubernetes-installer
   export KUBECONFIG=`pwd`/generated/kubeconfig
   cd ~/Downloads
   mkdir helm
-  tar -xf helm-v2.7.2-linux-amd64.tar.gz -C helm
+  tar -xf helm-*tar.gz -C helm
   cd helm/*
   ./helm init --upgrade
   ```
 
-  ![](images/500/2.png)
+  ![](images/500/2.linux.png)
 
 ### **STEP 6**: Deploy Fn Server to Kubernetes Using Helm
 
-- Since you are using the Oracle-provided client image, the **fn-helm installer** has been downloaded for you. Change directories to the installer with the following command:
+- Clone the **fn-helm git repository** using the following command.
 
-  `cd ~/fn-helm`
+  `git clone https://github.com/fnproject/fn-helm.git && cd fn-helm`
+
+  ![](images/500/3.png)
 
 - Specify the version of Fn we want to install by modifying the `values.yaml` file using this command:
 
@@ -136,6 +136,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'      
   helm init --service-account tiller --upgrade
   ```
+
 - Install the **Fn chart** by running the following command. **NOTE** _DO NOT_ change the name of the release, `my-release`. This name becomes part of the Kubernetes service name, which is used for DNS routing. If the name is changed, the product catalog application will not be able to communicate with the deployed function.
 
   `helm install --name my-release fn`
