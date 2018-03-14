@@ -65,6 +65,13 @@
                 "labels": {"version": "Virtual Box"}
             },
             {
+                "number": "1000",
+                "filename": "ManualCleanUp.md",
+                "title": "Cloud Environment Post Workshop Cleanup",
+                "description": "Reset your cloud environment by removing the Cloud Instances, Networking, etc. created during the workshop",
+                "labels": {"version": "Virtual Box"}
+            },
+            {
                 "number": "0",
                 "filename": "Intro-Cloud-Client.md",
                 "title": "Read Me First",
@@ -107,6 +114,13 @@
                 "labels": {"version": "VNC Image"}
             },
             {
+                "number": "1000",
+                "filename": "ManualCleanUp.md",
+                "title": "Cloud Environment Post Workshop Cleanup",
+                "description": "Reset your cloud environment by removing the Cloud Instances, Networking, etc. created during the workshop",
+                "labels": {"version": "VNC Image"}
+            },
+            {
                 "number": "0",
                 "filename": "Intro-Linux.md",
                 "title": "Read Me First",
@@ -146,6 +160,13 @@
                 "filename": "LabGuide500-Linux.md",
                 "title": "Lab 500: Extend Your Application with a Function",
                 "description": "Install Fn in Kubernetes and Deploy a Function",
+                "labels": {"version": "Linux/Mac Local Install"}
+            },
+            {
+                "number": "1000",
+                "filename": "CleanUp.md",
+                "title": "Cloud Environments Post Workshop Cleanup",
+                "description": "Reset your laptop and cloud environment by removing the Cloud Instances, Networking, etc. created during the workshop",
                 "labels": {"version": "Linux/Mac Local Install"}
             }
         ]

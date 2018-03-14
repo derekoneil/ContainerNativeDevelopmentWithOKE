@@ -24,61 +24,56 @@ Now that you have completed the workshop, you may want to remove the artifacts l
 
   ![](images/manualcleanup/pic01.png)
 
+- We will now delete the three instances created by the Workshop. Delete each of the following three images by clicking in the **three dots** to the right of the image, then select **Terminate**
 
+  ![](images/manualcleanup/pic03.png)
 
-- First we need to delete any load balancers created by Kubernetes outside of the Terraform infrastructure we provisioned. From a **terminal window** where you have the `KUBECONFIG` environment variable correctly set, run the following command:
+- Ensure the **Permanently delete** box is checked, and click on **Terminate Instance**.
 
-  `kubectl delete svc --all`
+  ![](images/manualcleanup/pic04.png)
 
-- To remove all Terraform-created infrastructure from your Oracle Cloud trial account, we will make use of the `terraform-kubernetes-installer` configuration that you created in Lab 200 of the workshop. In a **terminal window**, navigate to the `terraform-kubernetes-installer` directory (your path may differ):
+- Repeat the previous steps to delete the other two instances, and wait until the instances show **Terminated**.
 
-  `cd ~/terraform-kubernetes-installer`
+### **STEP 2**: Delete Load Balancers
 
-- Remove all instances, load balancers, and virtual cloud networks from your account with the following command:
+  ![](images/manualcleanup/pic05.png)
 
-  `terraform destroy`
+- From the top menu bar, click on **Networking > Load Balancers**
 
-- Type `yes` when prompted to continue with the destroy command.
+  ![](images/manualcleanup/pic06.png)
 
-- Wait while Terraform removes your infrastructure and ensure that no errors occur.
+- Click on the **three dots** next to the First load balancer in the list, and click on **Terminate**
 
-## Clean up Locally Installed Software
+  ![](images/manualcleanup/pic07.png)
 
-### **STEP 2**: Remove Fn
+- Click on **OK**
 
-  `rm /usr/local/bin/fn`
+  ![](images/manualcleanup/pic08.png)
 
-### **STEP 3**: Remove Helm and the fn-helm Installer
+- **Repeat the steps** for the remaining Load Balancers until all used by the workshop have been removed.
 
-  `cd ~/Downloads/helm/*/fn-helm && ../helm delete --purge my-release`
-  `rm -rf ~/Downloads/helm`
+  ![](images/manualcleanup/pic09.png)
 
-### **STEP 5**: Remove terraform-kubernetes-installer
+### **STEP 3**: Delete the Virtual Network
 
-  **NOTE**: Do not remove this directory until you have successfully destroyed your infrastructure following the instructions in **STEP 1**. Terraform will not be able to automate the destruction of your infrastructure once you delete this directory.
+- Using the top menu bar, go to **Networking > Virtual Cloud Networks**.
 
-  `rm -rf ~/terraform-kubernetes-installer`
+  ![](images/manualcleanup/pic10.png)
 
-### **STEP 6**: Remove Terraform
+- Click on the **Three Dots** to the right of the Virtual Cloud Network, and click on **Terminate**.
 
-  `rm /usr/local/bin/terraform`
+  ![](images/manualcleanup/pic11.png)
 
-### **STEP 7**: Remove OCI API Keys
+### **STEP 1**: Delete the API Key Fingerprint
 
-  **NOTE**: Do not remove this directory until you have successfully destroyed your infrastructure following the instructions in **STEP 1**. Terraform will not be able to automate the destruction of your infrastructure once you delete this directory.
+- Using the top menu bar, go to **Identity > Users**.
 
-  `rm -rf ~/.oci`
+  ![](images/manualcleanup/pic12.png)
 
-### **STEP 8**: Remove image-resize Function
+- Click on the **User's Name**.
 
-  `rm -rf ~/image-resize`
+  ![](images/manualcleanup/pic13.png)
 
-### **STEP 9**: Uninstall Docker
+- From the **API Key** section, click on the **Delete** button to the right of the **Fingerprint** you created during this workshop. Confirm the delete by clicking on **OK** in the popup dialog box.
 
-  **MacOS**: `/Applications/Docker.app/Contents/MacOS/Docker --uninstall`
-  **Linux**:
-    `rm -rf /var/lib/docker`
-    AND
-    `sudo apt-get remove docker docker-engine docker.io`
-    OR
-    `sudo yum remove docker docker-common docker-selinux docker-engine`
+  ![](images/manualcleanup/pic14.png)
