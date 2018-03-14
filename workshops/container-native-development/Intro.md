@@ -4,7 +4,7 @@
 
 - To log issues and view the Lab Guide source, go to the [github oracle](https://github.com/oracle/learning-library/issues/new) repository.
 
-- This version of the lab guides requires the use of an Oracle-provided VirtualBox or Cloud-hosted client image to use during the workshop. Using this link, you can download the [VirtualBox image](https://objectstorage.us-ashburn-1.oraclecloud.com/n/gse00014514/b/PublicBucket/o/OL74_ClientImageFinalBeta5.ova) to run on your laptop, or switch to a different version of the lab guides using the dropdown menu at the top right of the page.
+- This version of the lab guides requires the use of an Oracle-provided VirtualBox or Cloud-hosted client image to use during the workshop. Using this link, you can download the [VirtualBox image](https://objectstorage.us-ashburn-1.oraclecloud.com/p/MFwgeCesukQMEkVUvOkq3D_R0DBzkKdb4G_bS8sxo44/n/gse00014514/b/PublicBucket/o/OL74_ClientImageFinalBeta5.ova) to run on your laptop, or switch to a different version of the lab guides using the dropdown menu at the top right of the page.
 
 - If you do not already have Virtual Box, the Virtual Box software can be downloaded from [this link](https://www.virtualbox.org/).
 
@@ -28,7 +28,26 @@ _Please note that this email may arrive in your spam or promotions folder pendin
 
 ### **Step 2**: Configure your Virtual Box Image
 
-Documentation to be added
+- After downloading and installing Virtual Box, and also after downloading the Virtual Box Image for this workshop as instructed in at the beginning of this guide, **start the Virtual Box Application**.
+- From Virtual Box, select **File > Import Appliance**
+
+  ![](images/studentguide/Vbox01.png)
+
+- Located the **Appliance to Import** from your downloads directory, and click on the **Import** button.
+
+  ![](images/studentguide/Vbox02.png)
+
+- Once the import is complete, you'll see a summary of the Virtual Box image. _Make Note_ of the **password** in the **Description** panel. The password is needed if the Linux Image goes into screen saver mode.
+
+  ![](images/studentguide/Vbox03.png)
+
+- Click on the **Start** icon to load your Linux Image.
+
+  ![](images/studentguide/Vbox04.png)
+
+- The image will load automatically. Wait for it to fully load before continuing. 
+
+  ![](images/studentguide/Vbox05.png)
 
 ### **Step 4**: Navigate to the Lab Guides
 
