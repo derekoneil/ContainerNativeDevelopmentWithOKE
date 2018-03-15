@@ -30,7 +30,7 @@ To provide the best possible experience during your time at Oracle Code your ins
 
 ![](images/oraclecode/code_2.png)
 
-- Your Instructor will you with access to a Linux image with all the required development software to complete today's Lab. Please look at the handout provided by your instructor and take note of the VNC host and password fields.
+- Your Instructor will provide you access to a Linux image with all the required development software to complete today's Lab. Please look at the handout provided by your instructor and take note of the VNC host and password fields.
 
 ![](images/oraclecode/code_3.png)
 
