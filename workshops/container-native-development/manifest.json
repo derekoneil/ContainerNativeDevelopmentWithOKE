@@ -107,13 +107,6 @@
                 "labels": {"version": "VNC Image"}
             },
             {
-                "number": "500",
-                "filename": "LabGuide500-Cloud-Client.md",
-                "title": "Lab 500: Extend Your Application with a Function",
-                "description": "Install Fn in Kubernetes and Deploy a Function",
-                "labels": {"version": "VNC Image"}
-            },
-            {
                 "number": "1000",
                 "filename": "ManualCleanUp.md",
                 "title": "Cloud Environment Post Workshop Cleanup",
