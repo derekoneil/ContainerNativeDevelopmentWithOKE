@@ -251,7 +251,13 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   `terraform output kubeconfig | tr '\n' '\0' | xargs -0 -n1 sh -c`
 
-- Now that the proxy server is running, navigate to the **[Kubernetes dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)** in a new browser tab.
+- Even though the Terraform provisioning has completed there is still configuration and set up being completed within the account. Make sure both Load Balancers are up and running before proceeding. In your account select **Networking-->Load Balancers** and wait for the green health checkmarks to show them up and running. 
+
+  ![](images/200/63.3.png)
+
+  ![](images/200/63.6.png)
+
+- With the proxy server running and the Load Balancers showing a running status, navigate to the **[Kubernetes dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)** in a new browser tab.
 
   ![](images/200/64.png)
 
