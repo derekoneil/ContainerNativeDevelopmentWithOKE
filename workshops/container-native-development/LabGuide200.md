@@ -402,7 +402,7 @@ deploy-to-cluster:
 
 ### **STEP 9**: Set up environment variables in Wercker
 
-- Our first step is to set our cluster's authentication token as a Wercker environment variable. In your **terminal window**, change to the correct directory, and run the following command to copy the token to your clipboard:
+- Our first step is to set our cluster's authentication token as a Wercker environment variable. In your **terminal window**, change to the correct directory, and run the following command to copy the token to your clipboard. Note - If your kubernetes proxy server is still running, you can enter Control-C to close the proxy:
 
   ```bash
   cd ~/terraform-kubernetes-installer/
