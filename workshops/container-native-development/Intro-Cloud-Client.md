@@ -34,7 +34,7 @@ To provide the best possible experience during your time at Oracle Code your ins
 
 ![](images/oraclecode/code_3.png)
 
-- Enter your VNC Host IP address into the VNC Viewer and press enter.
+- Enter your VNC Host IP address into the VNC Viewer and press enter. Note: when connecting to VNC, Port 5911 is a higher resolution setting , and 5910 is lower resolution.
 
 ![](images/oraclecode/code_4.png)
 

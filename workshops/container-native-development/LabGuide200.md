@@ -240,8 +240,10 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 - You will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Then you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL. Since you're using the Oracle-provided client image, we'll add the `KUBECONFIG` environment variable to your bash profile; that way it will be set for all new shells that you open. Enter the following command into your terminal window:
 
   ```bash
+  cd ~/terraform-kubernetes-installer/
   echo "export KUBECONFIG=`pwd`/generated/kubeconfig" >> ~/.bashrc
   source ~/.bash_profile
+  cd ~/terraform-kubernetes-installer/
   kubectl proxy
   ```
 
