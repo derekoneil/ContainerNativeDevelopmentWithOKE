@@ -235,6 +235,12 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/63.png)
 
+- Even though the Terraform provisioning has completed there is still configuration and setup being completed within the account. Make sure both Load Balancers are up and running before proceeding. In your account select **Networking-->Load Balancers**, and wait for the green health checkmarks to show that the Load Balances are up and running. 
+
+  ![](images/200/63.3.png)
+
+  ![](images/200/63.6.png)
+
 - During provisioning, Terraform generated a `kubeconfig` file that will authenticate you to the cluster. Let's configure and start the kubectl proxy server to make sure our cluster is accessible. Since you are using an Oracle-provided client image, `kubectl` -- the Kubernetes command line interface, has been **pre-installed** for you.
 
 - You will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Then you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL. Since you're using the Oracle-provided client image, we'll add the `KUBECONFIG` environment variable to your bash profile; that way it will be set for all new shells that you open. Enter the following command into your terminal window:
@@ -250,12 +256,6 @@ An API key is required for Terraform to authenticate to OCI in order to create c
   **NOTE**: Should you need to change the IP address of your cluster in the future, you can configure `kubectl` with the updated connection information by running the following command, which will pass the current address and authentication details to `kubectl`:
 
   `terraform output kubeconfig | tr '\n' '\0' | xargs -0 -n1 sh -c`
-
-- Even though the Terraform provisioning has completed there is still configuration and set up being completed within the account. Make sure both Load Balancers are up and running before proceeding. In your account select **Networking-->Load Balancers** and wait for the green health checkmarks to show them up and running. 
-
-  ![](images/200/63.3.png)
-
-  ![](images/200/63.6.png)
 
 - With the proxy server running and the Load Balancers showing a running status, navigate to the **[Kubernetes dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)** in a new browser tab.
 
