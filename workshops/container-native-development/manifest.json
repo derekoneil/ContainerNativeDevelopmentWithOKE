@@ -12,7 +12,7 @@
           },
           {
             "name": "Linux/Mac Local Install",
-            "description": "Setup you Linux own OS X laptop to run this workshop",
+            "description": "Setup your own Linux or Mac OS X laptop to run this workshop",
             "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/laptop.jpg"
           },
           {
