@@ -4,7 +4,7 @@
 
 - To log issues and view the Lab Guide source, go to the [github oracle](https://github.com/oracle/learning-library/issues/new) repository.
 
-- This version of the lab guides requires the use of an Oracle-provided VirtualBox or Cloud-hosted client image to use during the workshop. Using this link, you can download the [VirtualBox image](https://objectstorage.us-ashburn-1.oraclecloud.com/p/MFwgeCesukQMEkVUvOkq3D_R0DBzkKdb4G_bS8sxo44/n/gse00014514/b/PublicBucket/o/OL74_ClientImageFinalBeta5.ova) to run on your laptop, or switch to a different version of the lab guides using the dropdown menu at the top right of the page.
+- This version of the lab guides requires the use of an Oracle-provided VirtualBox or Cloud-hosted client image to use during the workshop. Using this link, you can download the [VirtualBox image](https://objectstorage.us-ashburn-1.oraclecloud.com/p/8wGcaLmafIn44PJi_r75ViSs6DffIYiXintnWGTCJQw/n/gse00014514/b/PublicBucket/o/OL74_ClientImageFinalBeta6.1.ova) to run on your laptop, or switch to a different version of the lab guides using the dropdown menu at the top right of the page.
 
 - If you do not already have Virtual Box, the Virtual Box software can be downloaded from [this link](https://www.virtualbox.org/).
 
