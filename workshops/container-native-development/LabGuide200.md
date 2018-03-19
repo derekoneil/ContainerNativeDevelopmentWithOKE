@@ -257,7 +257,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   `terraform output kubeconfig | tr '\n' '\0' | xargs -0 -n1 sh -c`
 
-- With the proxy server running and the Load Balancers showing a running status, navigate to the **[Kubernetes dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)** in a new browser tab.
+- With the proxy server running and the Load Balancers showing a running status, navigate to the [Kubernetes Dashboard by Right Clicking on this link](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/), and open in a ne browser tab.
 
   ![](images/200/64.png)
 
@@ -469,7 +469,7 @@ deploy-to-cluster:
 
 - In the shell that is displayed, **paste** the following command and press **Enter**.
 
-  **NOTE:** You may need to use **ctrl-shift-v** to paste. Alternatively, you can use the mouse-driven browser menu to paste the command.
+  **NOTE:** You may need to use **ctrl-shift-v** to paste, but if running in a Virtual Box image, you will need to type the command.
 
   `curl -s http://$HOSTNAME:8080/statictweets | head -c 100`
 
