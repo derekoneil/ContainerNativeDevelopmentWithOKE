@@ -30,39 +30,43 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
   - a **GitHub Account** - [https://github.com/join](https://github.com/join)
   - a **Docker Hub Account** - [https://hub.docker.com](https://hub.docker.com)
 
-## Install and Connect to VNC Cloud Hosted Client
+## Install and Configure Virtual Box
 
-### Install VNC Software
+### Install Virtual Box Software
 
-To provide the best possible experience during your time at Oracle Code your instructor has created a client VM prior to your arrival. The environment contains all the tools required to perform today's labs. To access the environments please follow the steps below.
+This version of the lab guides requires the use of an Oracle-provided VirtualBox or Cloud-hosted client image to use during the workshop. 
 
-- Download [VNC Viewer](https://www.realvnc.com/en/connect/download/viewer/).  
+- If you do not already have Virtual Box, use this [Virtual Box Software Link](https://www.virtualbox.org/) to download **Virtual Box**.
 
-![](images/oraclecode/code_1.png)
+### Download Virtual Box Image
 
-- Double Click on the downloaded file to open VNC Viewer.
+- Use this link to download the [VirtualBox image "OVA" file](https://objectstorage.us-ashburn-1.oraclecloud.com/p/SqwrD58l9JCOTuVK4OVbraDfp8IZVrMUoVYv2JalmpA/n/gse00014514/b/PublicBucket/o/OL74_ClientImageFinalBeta6.1.ova) that you will import into **Virtual Box**.
 
-![](images/oraclecode/code_2.png)
 
-### Connect to Your Cloud-Hosted Client VM
+### Import the Virtual Box Image
 
-- Your Instructor will provide you access to a Linux image with all the required development software to complete today's Lab. Please look at the handout provided by your instructor and take note of the VNC host and password fields.
+- After downloading and installing Virtual Box, and also after downloading the Virtual Box Image for this workshop as instructed at the beginning of this guide, **start the Virtual Box Application**.
+- From Virtual Box, select **File > Import Appliance**
 
-![](images/oraclecode/code_3.png)
+  ![](images/studentguide/vbox01.png)
 
-- Enter your VNC Host IP address into the VNC Viewer and press enter. Note: when connecting to VNC, Port 5911 is a higher resolution setting , and 5910 is lower resolution.
+- Located the **Appliance to Import** from your downloads directory, and click on the **Import** button. Note: The version number of the OVA file will changes as new release are provided.
 
-![](images/oraclecode/code_4.png)
+  ![](images/studentguide/vbox02.png)
 
-- Enter your VNC Host password into the VNC Viewer prompt and press enter.
+- Once the import is complete, you'll see a summary of the Virtual Box image. _Make Note_ of the **password** in the **Description** panel. The password is needed if the Linux Image goes into screen saver mode.
 
-![](images/oraclecode/code_5.png)
+  ![](images/studentguide/vbox03.png)
 
-- You receive the unecrypted connection message below, please check the box and press continue.
+- Click on the **Start** icon to load your Linux Image.
 
-![](images/oraclecode/code_8.png)
+  ![](images/studentguide/vbox04.png)
 
-- _You will now perform the remainder of this workshop's steps from within the VNC Session_.
+- The image will load automatically. Wait for it to fully load before continuing. 
+
+  ![](images/studentguide/vbox05.png)
+
+- _You will now perform the remainder of this workshop's steps from within the Virtual Box Image_.
 
 # Provision Kubernetes Using Terraform
 
@@ -82,8 +86,7 @@ To provide the best possible experience during your time at Oracle Code your ins
 
     [https://cloud.oracle.com/en_US/sign-in](https://cloud.oracle.com/en_US/sign-in)
 
-
-- Enter your **Cloud Account Name** in the input field and click the **My Services** button. If you have a trial account, this can be found in your welcome email.
+- Enter your **Cloud Account Name** in the input field and click the **My Services** button. If you have a trial account, this can be found in your welcome email. Otherwise, this will be supplied by your workshop instructor.
 
   ![](images/200/1.png)
 

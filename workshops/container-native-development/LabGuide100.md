@@ -30,10 +30,10 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
 ## Required Artifacts
 
-- The following lab requires:
-  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial Account
-  - a [GitHub account](https://github.com/join)
-  - a [Docker Hub account](https://hub.docker.com)
+Use the following links to set up:
+
+  - a [GitHub account - https://github.com/join](https://github.com/join)
+  - a [Docker Hub account - https://hub.docker.com](https://hub.docker.com)
 
 # Containerize Your Java Application and Automate Builds
 
