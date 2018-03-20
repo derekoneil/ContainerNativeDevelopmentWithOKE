@@ -158,6 +158,9 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/57.1.png)
 
+- Setting these variables can be a little tricky the first time you attempt it. [Checkout this video if you want to watch the steps performed. ](https://videohub.oracle.com/media/Lab+200A+Terraform+.tfvars+OCI+Configuration/0_vkxcw719)
+
+
 - You will replace lines **2, 4, 6, and 7** with the values from the OCI Console, referring to the following screenshot for where to find them.
 
   ![](images/200/17.png)
