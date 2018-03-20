@@ -36,29 +36,29 @@ To provide the best possible experience during your time at Oracle Code your ins
 
 - Download [VNC Viewer](https://www.realvnc.com/en/connect/download/viewer/).  
 
-![](images/oraclecode/code_1.png)
+  ![](images/oraclecode/code_1.png)
 
 - Double Click on the downloaded file to open VNC Viewer.
 
-![](images/oraclecode/code_2.png)
+  ![](images/oraclecode/code_2.png)
 
 ### Connect to Your Cloud-Hosted Client VM
 
 - Your Instructor will provide you access to a Linux image with all the required development software to complete today's Lab. Please look at the handout provided by your instructor and take note of the VNC host and password fields.
 
-![](images/oraclecode/code_3.png)
+  ![](images/oraclecode/code_3.png)
 
 - Enter your VNC Host IP address into the VNC Viewer and press enter. Note: when connecting to VNC, Port 5911 is a higher resolution setting , and 5910 is lower resolution.
 
-![](images/oraclecode/code_4.png)
+  ![](images/oraclecode/code_4.png)
 
 - Enter your VNC Host password into the VNC Viewer prompt and press enter.
 
-![](images/oraclecode/code_5.png)
+  ![](images/oraclecode/code_5.png)
 
 - You receive the unecrypted connection message below, please check the box and press continue.
 
-![](images/oraclecode/code_8.png)
+  ![](images/oraclecode/code_8.png)
 
 - _You will now perform the remainder of this workshop's steps from within the VNC Session_.
 
@@ -70,7 +70,7 @@ To provide the best possible experience during your time at Oracle Code your ins
 
 - If you are using a Trial Account, **you must wait until you receive this email** indicating that your Cloud Account has been provisioned. _Please note that this email may arrive in your spam or promotions folder pending your email settings._
 
-![](images/oraclecode/code_9.png)
+  ![](images/oraclecode/code_9.png)
 
 - Once you receive the **Get Started with Oracle Cloud** Email, make note of your **Username, Password and Cloud Account Name**.
 

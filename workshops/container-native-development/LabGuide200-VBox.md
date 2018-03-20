@@ -74,7 +74,7 @@ This version of the lab guides requires the use of an Oracle-provided VirtualBox
 
 - If you are using a Trial Account, **you must wait until you receive this email** indicating that your Cloud Account has been provisioned. _Please note that this email may arrive in your spam or promotions folder pending your email settings._
 
-![](images/oraclecode/code_9.png)
+  ![](images/oraclecode/code_9.png)
 
 - Once you receive the **Get Started with Oracle Cloud** Email, make note of your **Username, Password and Cloud Account Name**.
 
