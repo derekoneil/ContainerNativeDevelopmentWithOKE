@@ -26,8 +26,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 
 - The following lab requires:
   - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial Account
-  - a [GitHub account](https://github.com/join)
-  - a [Docker Hub account](https://hub.docker.com)
+
 
 # Provision Kubernetes Using Terraform
 
@@ -35,7 +34,15 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 
 ### **STEP 1**: Log in to your OCI dashboard
 
-- From any browser, go to:
+- If you are using a Trial Account, **you must wait until you receive this email** indicating that your Cloud Account has been provisioned. _Please note that this email may arrive in your spam or promotions folder pending your email settings._
+
+  ![](images/oraclecode/code_9.png)
+
+- Once you receive the **Get Started with Oracle Cloud** Email, make note of your **Username, Password and Cloud Account Name**.
+
+  ![](images/200/0.1.png)
+
+- From you you can also from any browser go to. :
 
     [https://cloud.oracle.com/en_US/sign-in](https://cloud.oracle.com/en_US/sign-in)
 

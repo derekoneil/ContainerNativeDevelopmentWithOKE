@@ -115,7 +115,7 @@
             },
             {
                 "number": "0",
-                "filename": "Intro-Linux.md",
+                "filename": "Intro.md",
                 "title": "Read Me First",
                 "description": "Step-by-step workshop instructions",
                 "labels": {"version": "Linux/Mac Local Install"}
