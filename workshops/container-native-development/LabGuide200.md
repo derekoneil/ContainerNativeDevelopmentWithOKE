@@ -24,9 +24,9 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 
 ## Required Artifacts
 
-- The following lab **requires**:
-  - a **GitHub Account** - [https://github.com/join](https://github.com/join)
-  - a **Docker Hub Account** - [https://hub.docker.com](https://hub.docker.com)
+- The following lab requires:
+  - an Oracle-provided or Cloud-hosted "VNC" Client Image
+  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial 
 
 ## Install and Connect to VNC Cloud Hosted Client
 

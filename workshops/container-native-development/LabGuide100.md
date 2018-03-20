@@ -30,7 +30,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on con
 
 ## Required Artifacts
 
-Use the following links to set up:
+For this lab you will need Github and Docker Hub Accounts. Use the following links to set up:
 
   - a [GitHub account - https://github.com/join](https://github.com/join)
   - a [Docker Hub account - https://hub.docker.com](https://hub.docker.com)
