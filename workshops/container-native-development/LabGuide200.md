@@ -24,6 +24,8 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 
 ## Required Artifacts
 
+### Create GitHub and Docker Hub Accounts
+
 - The following lab requires:
   - an Oracle-provided VirtualBox or Cloud-hosted Client Image
   - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial Account
