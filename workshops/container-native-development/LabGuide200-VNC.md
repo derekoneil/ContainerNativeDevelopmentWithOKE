@@ -218,17 +218,10 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
 - The last piece of information we need to provide about your OCI tenant is the private key corresponding to the public API key you uploaded to the OCI console previously. Provide the path and the private key file on **line 5** using the path below:
 
-  _Note:_ If using the **VNC** Provided environment, use this private_key_path
-
   ```
   private_key_path = "/u01/app/demo/homes/oracle/.oci/oci_api_key.pem"
   ```
 
-  _Note:_ If using the **Virtual Box Image**, use this private_key_path
-
-  ```
-  private_key_path = "/home/oracle/.oci/oci_api_key.pem"
-  ```
 - The rest of the terraform.tfvars file controls the parameters used when creating your Kubernetes cluster. You can control how many OCPUs each node receives, whether nodes should be virtual machines or bare metal instances, how many availability domains to use, and more. We will modify five of the lines in the remainder of the file.
 
 - First, we will specify that we want only one OCPU in each of the worker and master nodes. This reduces the hourly cost of running our cluster. On **lines 15 and 16**, uncomment the **k8sMasterShape** and **k8sWorkerShape** parameters, and set both values to **VM.Standard1.1**:

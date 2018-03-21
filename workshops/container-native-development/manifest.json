@@ -87,7 +87,7 @@
             },
             {
                 "number": "200",
-                "filename": "LabGuide200.md",
+                "filename": "LabGuide200-VNC.md",
                 "title": "Lab 200: Automate Deployment to Kubernetes",
                 "description": "Use Wercker to set up a managed Kubernetes cluster and deploy to it",
                 "labels": {"version": "VNC Image"}
