@@ -224,17 +224,17 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
 - The rest of the terraform.tfvars file controls the parameters used when creating your Kubernetes cluster. You can control how many OCPUs each node receives, whether nodes should be virtual machines or bare metal instances, how many availability domains to use, and more. We will modify five of the lines in the remainder of the file.
 
-- First, we will specify that we want only one OCPU in each of the worker and master nodes. This reduces the hourly cost of running our cluster. On **lines 15 and 16**, uncomment the **k8sMasterShape** and **k8sWorkerShape** parameters, and set both values to **VM.Standard1.1**:
+- First, we will specify shapes for our worker and master nodes base on our account limits/capacity. On **lines 15 and 16**, un-comment the **k8sMasterShape** and **k8sWorkerShape** parameters, and set both values to **VM.Standard1.1**:
 
   ```
-  k8sMasterShape = "VM.Standard1.1"
-  k8sWorkerShape = "VM.Standard1.1"
+  k8sMasterShape = "VM.Standard2.1"
+  k8sWorkerShape = "VM.Standard1.2"
   ```
 
-- Next, we will specify the type of load balancers we want for the master and etcd VMs -- 400Mbps in this case. Alter **lines 30 and 31** to read:
+- Next, we will specify the type of load balancers we want for the master and etcd VMs. We will also select the following settings based on our Account's capacity. Alter **lines 30 and 31** to read:
 
   ```
-  etcdLBShape = "400Mbps"
+  etcdLBShape = "100Mbps"
   k8sMasterLBShape = "400Mbps"
   ```
 
