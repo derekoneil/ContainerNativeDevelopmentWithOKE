@@ -26,13 +26,13 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 
 - The following lab requires:
   - an Oracle-provided VirtualBox or Cloud-hosted Client Image
-  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial 
+  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial
 
 ## Install and Configure Virtual Box
 
 ### Install Virtual Box Software
 
-This version of the lab guides requires the use of an Oracle-provided VirtualBox or Cloud-hosted client image to use during the workshop. 
+This version of the lab guides requires the use of an Oracle-provided VirtualBox or Cloud-hosted client image to use during the workshop.
 
 - If you do not already have Virtual Box, use this [Virtual Box Software Link](https://www.virtualbox.org/) to download **Virtual Box**.
 
@@ -60,7 +60,7 @@ This version of the lab guides requires the use of an Oracle-provided VirtualBox
 
   ![](images/studentguide/vbox04.png)
 
-- The image will load automatically. Wait for it to fully load before continuing. 
+- The image will load automatically. Wait for it to fully load before continuing.
 
   ![](images/studentguide/vbox05.png)
 
@@ -224,7 +224,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
   ```
   private_key_path = "/home/oracle/.oci/oci_api_key.pem"
   ```
-  
+
 - The rest of the terraform.tfvars file controls the parameters used when creating your Kubernetes cluster. You can control how many OCPUs each node receives, whether nodes should be virtual machines or bare metal instances, how many availability domains to use, and more. We will modify five of the lines in the remainder of the file.
 
 - First, we will specify shapes for our worker and master nodes base on our account limits/capacity. On **lines 15 and 16**, un-comment the **k8sMasterShape** and **k8sWorkerShape** parameters, and set the values to **VM.Standard2.1** and **VM.Standard1.2**:
@@ -237,7 +237,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 - Next, we will specify the type of load balancers we want for the master and etcd VMs. We will also select the following settings based on our Account's capacity. Alter **lines 30 and 31** to read:
 
   ```
-  etcdLBShape = "100Mbps"
+  etcdLBShape = "400Mbps"
   k8sMasterLBShape = "400Mbps"
   ```
 
@@ -275,7 +275,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/63.png)
 
-- Even though the Terraform provisioning has completed there is still configuration and setup being completed within the account. Make sure both Load Balancers are up and running before proceeding. In your account select **Networking-->Load Balancers**, and wait for the green health checkmarks to show that the Load Balances are up and running. 
+- Even though the Terraform provisioning has completed there is still configuration and setup being completed within the account. Make sure both Load Balancers are up and running before proceeding. In your account select **Networking-->Load Balancers**, and wait for the green health checkmarks to show that the Load Balances are up and running.
 
   ![](images/200/63.3.png)
 

@@ -26,7 +26,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 
 - The following lab requires:
   - an Oracle-provided or Cloud-hosted "VNC" Client Image
-  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial 
+  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial
 
 ## Install and Connect to VNC Cloud Hosted Client
 
@@ -234,7 +234,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 - Next, we will specify the type of load balancers we want for the master and etcd VMs. We will also select the following settings based on our Account's capacity. Alter **lines 30 and 31** to read:
 
   ```
-  etcdLBShape = "100Mbps"
+  etcdLBShape = "400Mbps"
   k8sMasterLBShape = "400Mbps"
   ```
 
@@ -272,7 +272,7 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/63.png)
 
-- Even though the Terraform provisioning has completed there is still configuration and setup being completed within the account. Make sure both Load Balancers are up and running before proceeding. In your account select **Networking-->Load Balancers**, and wait for the green health checkmarks to show that the Load Balances are up and running. 
+- Even though the Terraform provisioning has completed there is still configuration and setup being completed within the account. Make sure both Load Balancers are up and running before proceeding. In your account select **Networking-->Load Balancers**, and wait for the green health checkmarks to show that the Load Balances are up and running.
 
   ![](images/200/63.3.png)
 
