@@ -111,29 +111,30 @@ Compartments are used to isolate resources within your OCI tenant. User-based ac
 
   ![](images/200/6.png)
 
-- If your workshop instructor has directed you to use a pre-created compartment **_do not create a new one_**. Locate the compartment in the list and click **Copy** next to the displayed OCID. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Terraform where to set up our cluster in a later step. Proceed to **STEP 3**.
+- Look in the compartment list for a compartment called **Demo**. Next to the OCID of the Demo compartment, click **Copy**. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Terraform where to set up our cluster in a later step. Proceed to **STEP 3**.
 
-  Otherwise, if you are using a trial account or paid account, proceed to the next instruction to create a compartment.
+  ![](images/200/65.png)
 
-  ![](images/200/9.png)
+  **IMPORTANT**: _**Only if you do not have**_ a compartment called **Demo**, follow these steps to create a new compartment.
 
-- Click **Create Compartment**
+  - If you have a **Demo** compartment already, _**SKIP TO STEP 3**_. Otherwise, Click **Create Compartment**
 
-  ![](images/200/7.png)
+    ![](images/200/7.png)
 
-- In the **Name** field, enter `kubernetes`. Enter a description of your choice. Click **Create Compartment**.
+  - In the **Name** field, enter `kubernetes`. Enter a description of your choice. Click **Create Compartment**.
 
-  ![](images/200/8.png)
+    ![](images/200/8.png)
 
-- In a moment, your new Compartment will show up in the list. Locate it and click **Copy** in the OCID display. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Terraform where to set up our cluster in a later step.
+  - In a moment, your new Compartment will show up in the list. Locate it and click **Copy** in the OCID display. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Terraform where to set up our cluster in a later step.
 
-  ![](images/200/9.png)
+    ![](images/200/9.png)
+
 
 ### **STEP 3**: Create and upload a new API key
 
 An API key is required for Terraform to authenticate to OCI in order to create compute instances for your Kubernetes master and worker nodes.
 
-- Open a terminal window (by right clicking on the desktop and and selecting Open Terminal) and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called `.oci`, generate a new PEM private key, generate the corresponding public key, and copy the public key to the clipboard. For more information on this process, including the alternate commands to protect your key file with a passphrase, see the [official documentation](https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm#two).
+- Open a terminal window (by right clicking on the desktop and and selecting Open Terminal) and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called `.oci`, generate a new PEM private key, generate the corresponding public key, and copy the public key to the clipboard.
 
 
   ```bash
