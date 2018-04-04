@@ -86,7 +86,7 @@ Compartments are used to isolate resources within your OCI tenant. User-based ac
 
     ![](images/200/7.png)
 
-  - In the **Name** field, enter `kubernetes`. Enter a description of your choice. Click **Create Compartment**.
+  - In the **Name** field, enter `Demo`. Enter a description of your choice. Click **Create Compartment**.
 
     ![](images/200/8.png)
 
@@ -112,7 +112,7 @@ cat ~/.oci/oci_api_key_public.pem
 
   ![](images/200/11.png)
 
-- In your browser window showing the OCI Console, click the **Identity** menu item. You will be brought to the **Users** menu. Find your username in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
+- In your browser window showing the OCI Console, click the **Identity** menu item. Find the user called **api.user***, or for a trial account, find *your username** in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
 
   ![](images/200/56.png)
 
@@ -231,7 +231,7 @@ export PATH=$PATH:`pwd`
 
   ![](images/200/57.2.png)
 
-- Now follow the same process of removing the comment character **#**, and fill in the OCI Compartment ID on **line 3**. Paste the value that you saved to a text file after creating the kubernetes **compartment** in the OCI Console. If you have lost it, you can retrieve it from the OCI Console compartment list (refer to **STEP 2**).
+- Now follow the same process of removing the comment character **#**, and fill in the OCI Compartment ID on **line 3**. Paste the value that you saved to a text file after locating or creating the Demo **compartment** in the OCI Console. If you have lost it, you can retrieve it from the OCI Console compartment list (refer to **STEP 2**).
 
   ```
   compartment_ocid = "Compartment OCID"
@@ -287,7 +287,7 @@ export PATH=$PATH:`pwd`
 
   ![](images/200/61.png)
 
-- It will take several minutes to create the required Virtual Cloud Networks, load balancers, and compute instances that make up a Kubernetes cluster. If you'd like, you can observe the objects being created in the **OCI Console** -- click on **Compute** or **Networking** from the navigation menu and be sure to select the **kubernetes compartment** from the dropdown on the left side of the page.
+- It will take several minutes to create the required Virtual Cloud Networks, load balancers, and compute instances that make up a Kubernetes cluster. If you'd like, you can observe the objects being created in the **OCI Console** -- click on **Compute** or **Networking** from the navigation menu and be sure to select the **Demo compartment** from the dropdown on the left side of the page.
 
   ![](images/200/62.png)
 
