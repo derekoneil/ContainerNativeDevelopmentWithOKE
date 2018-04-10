@@ -9,17 +9,19 @@ As you go through this workshop you can watch recordings of the steps inside the
 
 ![](images/oraclecode/youtube.png)
 
-_Note: When clicking on links in this labguide_, it is best to **Right Click** on the link, and select **Open Link in New Tab**, as this will allow you to access the link without nagivating away from the Lab Guide. 
+_Note: When clicking on links in this labguide_, it is best to **Right Click** on the link, and select **Open Link in New Tab**, as this will allow you to access the link without nagivating away from the Lab Guide.
 
 [You Tube Recordings](https://www.youtube.com/playlist?list=PLPIzp-E1msrarZljayc5JwyrYA2vqWZJ_)
 
-### **Step 1**: Acquire an Oracle Cloud Trial Account
+### **Step 1**: Acquire an Oracle Cloud Trial or Workshop Account
 
-- If you do not have a trial account please click on this URL [cloud.oracle.com/tryit](http://cloud.oracle.com/tryit&intcmp=DeveloperInnovation-HOL-11NOV17), and complete all the required steps to get your free Oracle Cloud Trial Account.
+- If you are participating in an Oracle-proctored workshop, temporary Oracle Cloud workshop environments may be provided for you. Your instructor will distribute credentials for these environments. In this case, you **DO NOT** need to obtain a trial account.
 
-- You will eventually receive the following email. _You may begin working on Lab 100 before you receive this email_, but you will not be able to start Lab 200 until you have received it.
+- If you are not provided with workshop accounts, please click on this URL [cloud.oracle.com/tryit](http://cloud.oracle.com/tryit&intcmp=DeveloperInnovation-HOL-11NOV17), and complete all the required steps to get your free Oracle Cloud Trial Account.
 
-![](images/oraclecode/code_9.png)
+  - You will eventually receive the following email. _You may begin working on Lab 100 before you receive this email_, but you will not be able to start Lab 200 until you have received it.
+
+  ![](images/oraclecode/code_9.png)
 
 
 

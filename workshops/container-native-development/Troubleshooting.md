@@ -11,8 +11,31 @@
 
 ## Kubectl Errors
 
-- Kubectl proxy not working, dashboard does not load in browser. This is usually caused by the load balancer not being fully provisioned in OCI. Verify load balancer health in OCI console (Networking->Load Balancers->Health column). If the health is 'Unknown', most likely the load balancer is still being provisioned, which can take between 5 and 15 minutes. If the health is 'Critical' for more than 10 minutes, try deleting the load balancer (... menu->Terminate) and recreating it by re-running `terraform apply` (assuming this is a terraform-created load balancer in Lab 200). Note that after recreating the load balancer, the kubeconfig file will be out of date. Instructions f for refreshing `kubectl` using `terraform output` are included in Lab 200.
+- Kubectl needs to have a **KUBECONFIG** environment variable configured that contains the path to the correct `kubeconfig` file for the cluster. If `kubectl proxy` or other `kubectl` commands do not work, ensure that the current shell has the **KUBECONFIG** environment variable set using `echo $KUBECONFIG`. This may need to be reset for each new terminal window opened if bashrc/bash_profile is not modified. If the path looks correct, check which cluster kubectl is trying to reach by running `kubectl cluster-info`. The IP address of the cluster returned by this command should match the public IP of the **lb-k8smaster** load balancer, which can be found on in the OCI Console under **Networking->Load Balancers** in the **Demo** compartment.
 
-  Possible errors caused by load balancer issues may look like:
-  - I0309 11:30:11.494513   16565 logs.go:41] http: proxy error: read tcp 192.168.1.226:49199->129.213.67.19:443: read: connection reset by peer
-  - I0309 11:30:12.670309   16565 logs.go:41] http: proxy error: EOF
+- Kubectl may be pointing to the correct cluster, but dashboard may not load in browser. Check that the correct dashboard URL is being used (from the links in the lab guide, not http://localhost:8001/ui). Next, check that there are no load balancers (Networking->Load Balancers) or compute instances (Compute) that are in a red **FAILED** state, or in a yellow **PROVISIONING** state for an extended period of time. If there are, delete the infrastructure with `terraform destroy` and reprovision it with `terraform apply`. It is possible that you will need to delete/terminate an instance or load balancer using the OCI console if terraform is unable to remove it.
+
+
+## YAML Errors
+
+- Two YAML files are critical to the workshop -- `wercker.yml` and `kubernetes.yml.template`, both found in the **twitter-feed** GitHub repository. If wercker pipelines are failing, check the formatting and completeness of these YAML files.
+
+  - One common issue is missing indentation. In YAML files, indentation is the only way that parent/child relationships are identified. Ensure that the indentation in both files matches the lab guide's relevant code snippet and screenshot (generally, check wercker.yml for errors shown in wercker, and kubernetes.yml.template for errors shown in kubernetes). Proper indentation is two spaces for each level.
+
+  - Another possible issue is missing lines in the YAML file, such as the `steps:` header between the name of a pipeline and its commands. This is likely if the YAML was typed by hand instead of copied and pasted into GitHub.
+
+  - A third potential issue with YAML files is also related to indentation. In this case, a child is indented either too much or too little, so that it lines up under wrong parent. This will produce valid YAML, but not be syntactically correct. The most common place this happens is in lab 400, step 1. `volumeMounts` should be indented two spaces farther than `volumes` for the file to be correct.
+
+## Environment Variables
+
+- Wercker environment variables are important for every pipeline that gets run in the labs. Several common problems may arise:
+
+  - Environment variables can be assigned to an individual pipeline, or to the application as a whole. All environment variables in this workshop should be assigned to the **application**, not to a pipeline. This is because they are reused in various pipelines. Check that the main Environment tab in Wercker (at the same level as Runs and Workflows) lists all required environment variables.
+
+  - Environment variables are case sensitive, and for this workshop they keys should always be in **ALL CAPS**.
+
+  - Check that there are no typos in the keys and values, such as a misspelling of KUBERNETES or any whitespace before or after the text.
+
+## Incorrect OCI Compartment Used
+
+- This issue is common in GSE environments. If compartments other than **Demo** exist in the the tenant, ensure that the **Demo** compartment OCID has been specified in the `terraform.tfvars` file. If another compartment has been specified, terraform will encounter errors when provisioning resources because the GSE user account only has permissions to work in the Demo compartment. This will look like an HTTP 4XX error in the terraform output.

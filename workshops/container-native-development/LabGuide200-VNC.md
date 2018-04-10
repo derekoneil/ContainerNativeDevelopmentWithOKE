@@ -173,6 +173,12 @@ An API key is required for Terraform to authenticate to OCI in order to create c
   cd terraform-kubernetes-installer
   ```
 
+- Download the latest updates by running the following command:
+
+  ```bash
+  git pull
+  ```
+
 - Initialize this Terraform installer by running the following command:
 
   ```bash
@@ -277,27 +283,41 @@ An API key is required for Terraform to authenticate to OCI in order to create c
 
   ![](images/200/63.png)
 
-- Even though the Terraform provisioning has completed there is still configuration and setup being completed within the account. Make sure both Load Balancers are up and running before proceeding. In your account select **Networking-->Load Balancers**, and wait for the green health checkmarks to show that the Load Balances are up and running.
+- During provisioning, Terraform generated a `kubeconfig` file that will authenticate you to the cluster. Let's configure and start a kubectl monitoring loop to find out when our cluster is accessible. Since you are using an Oracle-provided client image, `kubectl` -- the Kubernetes command line interface, has been **pre-installed** for you.
 
-  ![](images/200/63.3.png)
-
-  ![](images/200/63.6.png)
-
-- During provisioning, Terraform generated a `kubeconfig` file that will authenticate you to the cluster. Let's configure and start the kubectl proxy server to make sure our cluster is accessible. Since you are using an Oracle-provided client image, `kubectl` -- the Kubernetes command line interface, has been **pre-installed** for you.
-
-- You will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Then you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL. Since you're using the Oracle-provided client image, we'll add the `KUBECONFIG` environment variable to your bash profile; that way it will be set for all new shells that you open. Enter the following command into your terminal window:
+- You will need to set an environment variable to point `kubectl` to the location of your Terraform-generated `kubeconfig` file. Let's set the environment variable, then start up an infinite loop that will check to see if our Kubernetes installation is ready for use. Since you're using the Oracle-provided client image, we'll add the `KUBECONFIG` environment variable to your bash profile; that way it will be set for all new shells that you open. Enter the following command into your terminal window:
 
   ```bash
   cd ~/terraform-kubernetes-installer/
   echo "export KUBECONFIG=`pwd`/generated/kubeconfig" >> ~/.bashrc
   source ~/.bash_profile
   cd ~/terraform-kubernetes-installer/
+  while true; do kubectl get nodes; sleep 10; done
+  ```
+
+- For the first few minutes, it is normal to see connection errors and server errors returned while your infrastructure is starting up. When you see that both the master and worker nodes have a 'STATUS' of **Ready**, press **Control-C** to stop the monitoring loop.
+
+  ![](images/200/68.png)
+
+  **TROUBLESHOOTING**:
+
+  >If more than 15 minutes have passed and you do not have both nodes 'Ready', there may be a problem with your infrastructure. Navigate to the OCI console in your browser to check.
+
+  >First, select **Networking-->Load Balancers** to view the status of your load balancers. Look at the colored hexagons on the left side of the table. Both load balancers should have green hexagons and have a status of 'ACTIVE'. If either one has a red hexagon and a status of 'FAILED', you will need to reprovision your infrastructure. Note that this is NOT the 'Health' indicator on the right side of the table, which will fluctuate between states for the first 20-30 minutes after provisioning.
+
+  >Second, click on **Compute**. You should see three compute instances with green 'RUNNING' status indicators. If any are in the red **FAILED** state or the yellow **PROVISIONING** state after 15 minutes, you will need to reprovision your infrastructure.
+
+  >**To reprovision your infrastructure**, first run `terraform destroy` from your terminal window, then run `terraform apply` again. You will need to type `yes` when prompted to confirm each command. After the provisioning, re-run the monitoring loop to see the status of your installation: `while true; do kubectl get nodes; sleep 10; done`
+
+- Now that the nodes are ready, you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL.
+
+  ```bash
   kubectl proxy
   ```
 
   **NOTE**: Should you need to change the IP address of your cluster in the future, you can configure `kubectl` with the updated connection information by running the following command, which will pass the current address and authentication details to **kubectl**: `terraform output kubeconfig | tr '\n' '\0' | xargs -0 -n1 sh -c`
 
-- With the proxy server running and the Load Balancers showing a running status, navigate to the [Kubernetes Dashboard by Right Clicking on this link](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/), and open in a ne browser tab.
+- With the proxy server running, navigate to the [Kubernetes Dashboard by Right Clicking on this link](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/), and choosing 'open in a new browser tab'.
 
   ![](images/200/64.png)
 
