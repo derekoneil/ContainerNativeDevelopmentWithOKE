@@ -112,7 +112,7 @@ cat ~/.oci/oci_api_key_public.pem
 
   ![](images/200/11.png)
 
-- In your browser window showing the OCI Console, click the **Identity** menu item. Find the user called **api.user***, or for a trial account, find *your username** in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
+- In your browser window showing the OCI Console, click the **Identity** menu item. Find the user called **api.user**, or for a trial account, find **your username** in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
 
   ![](images/200/56.png)
 
