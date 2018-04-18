@@ -38,7 +38,7 @@ This version of the lab guides requires the use of an Oracle-provided VirtualBox
 
 ### Download Virtual Box Image
 
-- Use this link to download the [VirtualBox image "OVA" file](https://objectstorage.us-ashburn-1.oraclecloud.com/p/SqwrD58l9JCOTuVK4OVbraDfp8IZVrMUoVYv2JalmpA/n/gse00014514/b/PublicBucket/o/OL74_ClientImageFinalBeta6.1.ova) that you will import into **Virtual Box**.
+- Use this link to download the [VirtualBox image "OVA" file](https://objectstorage.us-ashburn-1.oraclecloud.com/p/9k4pHoiqplo6MuwLn9TTzCtQvdQFR_15xniJ6Cp5ol0/n/gse00014514/b/PublicBucket/o/OL74_ClientImagev1.01.ova) that you will import into **Virtual Box**.
 
 
 ### Import the Virtual Box Image
