@@ -42,7 +42,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/8.png)
 
-- You should see the Fn logo printed to the console, as well as a message indicating the port that the Fn Server is using: `Fn serving on ':8080'`. From a browser, navigate to **[http://localhost:8080](http://localhost:8080)**, substituting the port listed in the log message for 8080 if it differs. You should see a 'hello world' message in your browser, confirming that the Fn Server is up and running. If you do not see this message, but did not receive an error, don't be concerned - continue with the next step. 
+- You should see the Fn logo printed to the console, as well as a message indicating the port that the Fn Server is using: `Fn serving on ':8080'`. From a browser, navigate to **[http://localhost:8080](http://localhost:8080)**, substituting the port listed in the log message for 8080 if it differs. You should see a 'hello world' message in your browser, confirming that the Fn Server is up and running. If you do not see this message, but did not receive an error, don't be concerned - continue with the next step.
 
   ![](images/500/9.png)
 
@@ -89,6 +89,10 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Since you are using the Oracle-provided client image, the **fn-helm installer** has been downloaded for you. Change directories to the installer with the following command:
 
   `cd ~/fn-helm`
+
+- Retrieve the correct version of the Helm chart by running the following command:
+
+  `git checkout 4e4988`
 
 - Specify the version of Fn we want to install by modifying the `values.yaml` file using this command:
 

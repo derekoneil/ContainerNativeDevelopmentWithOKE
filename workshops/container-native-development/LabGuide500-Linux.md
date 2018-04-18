@@ -133,6 +133,10 @@ cd ~ && git clone https://github.com/derekoneil/image-resize.git && cd image-res
 
   ![](images/500/3.png)
 
+- Retrieve the correct version of the Helm chart by running the following command:
+
+  `git checkout 4e4988`
+
 - Specify the version of Fn we want to install by modifying the `values.yaml` file using this command:
 
   `sed -i.bak 's/fnproject\/fnserver:latest/fnproject\/fnserver:0.3.327/' fn/values.yaml`
