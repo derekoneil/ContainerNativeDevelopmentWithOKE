@@ -1,12 +1,15 @@
 # Container Native Application Development Workshop
 
-Welcome to the Oracle Public Cloud Container Native Development workshop. This workshop will walk you through the process of moving an existing application into a containerized CI/CD pipeline and deploying it to a managed Kubernetes service in the Oracle Public Cloud. To learn more about this workshop please watch the video below.
+Welcome to the Oracle Public Cloud Container Native Development workshop. This workshop will walk you through the process of moving an existing application into a containerized CI/CD pipeline and deploying it to a managed Kubernetes service in the Oracle Public Cloud. 
+To learn more about this workshop please watch the video below.
 
 ![](images/oraclecode/youtube.png)
 
 <a href="https://youtu.be/9n8JMlvjFiw" target="_video">Workshop Overview</a>
 
 ### **Step 1**: Acquire an Oracle Cloud Trial or Workshop Account
+
+- Bookmark this page for future reference.
 
 - Please click on the URL to create your Free Account <a href="http://cloud.oracle.com/tryit&intcmp=DeveloperInnovation-HOL-11NOV17" target="_trial">cloud.oracle.com/tryit</a>, and complete all the required steps to get your free Oracle Cloud Trial Account. When you complete the registration process you'll receive a $300 credit that will enable you to complete the lab for free.  Additionally, you'll have 1000s of hours left over to continue to explore the Oracle Cloud.
 
