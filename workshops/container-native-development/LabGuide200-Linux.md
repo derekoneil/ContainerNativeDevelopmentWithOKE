@@ -72,9 +72,11 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 
 Compartments are used to isolate resources within your OCI tenant. User-based access policies can be applied to manage access to compute instances and other resources within a Compartment.
 
-- Hover over the **Identity** menu in the top navigation bar and click **Compartments**
+- Click the **hamburger icon** in the upper left corner to open the navigation menu. Under the **Identity** section of the menu, click **Compartments**
 
-  ![](images/200/6.png)
+  ![](images/200/69.png)
+
+  ![](images/200/70.png)
 
 - Look in the compartment list for a compartment called **Demo**. Next to the OCID of the Demo compartment, click **Copy**. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Terraform where to set up our cluster in a later step. Proceed to **STEP 3**.
 
@@ -112,7 +114,9 @@ cat ~/.oci/oci_api_key_public.pem
 
   ![](images/200/11.png)
 
-- In your browser window showing the OCI Console, click the **Identity** menu item. Find the user called **api.user**, or for a trial account, find **your username** in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
+- In your browser window showing the OCI Console, click the **hamburger icon** to open the navigation menu. Under the **Identity** section, click **Users**. Find the user called **api.user**, or for a trial account, find **your username** in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
+
+  ![](images/200/71.png)
 
   ![](images/200/56.png)
 
@@ -312,9 +316,9 @@ export PATH=$PATH:`pwd`
 
   >If more than 15 minutes have passed and you do not have both nodes 'Ready', there may be a problem with your infrastructure. Navigate to the OCI console in your browser to check.
 
-  >First, select **Networking-->Load Balancers** to view the status of your load balancers. Look at the colored hexagons on the left side of the table. Both load balancers should have green hexagons and have a status of 'ACTIVE'. If either one has a red hexagon and a status of 'FAILED', you will need to reprovision your infrastructure. Note that this is NOT the 'Health' indicator on the right side of the table, which will fluctuate between states for the first 20-30 minutes after provisioning.
+  >First, click the hamburger icon to open the navigation menu. Then, under the Networking section, click **Load Balancers** to view the status of your load balancers. Look at the colored hexagons on the left side of the table. Both load balancers should have green hexagons and have a status of 'ACTIVE'. If either one has a red hexagon and a status of 'FAILED', you will need to reprovision your infrastructure. Note that this is NOT the 'Health' indicator on the right side of the table, which will fluctuate between states for the first 20-30 minutes after provisioning.
 
-  >Second, click on **Compute**. You should see three compute instances with green 'RUNNING' status indicators. If any are in the red **FAILED** state or the yellow **PROVISIONING** state after 15 minutes, you will need to reprovision your infrastructure.
+  >Second, click on **Compute** from the navigation menu. You should see three compute instances with green 'RUNNING' status indicators. If any are in the red **FAILED** state or the yellow **PROVISIONING** state after 15 minutes, you will need to reprovision your infrastructure.
 
   >**To reprovision your infrastructure**, first run `terraform destroy` from your terminal window, then run `terraform apply` again. You will need to type `yes` when prompted to confirm each command. After the provisioning, re-run the monitoring loop to see the status of your installation: `while true; do kubectl get nodes; sleep 10; done`
 
