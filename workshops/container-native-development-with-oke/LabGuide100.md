@@ -117,7 +117,11 @@ For this lab you will need a Github account. Use the following link to set one u
 
   ![](images/100/19.png)
 
-- Now that you've created the pipeline, click on the **Workflows** tab to return to the workflow editor. Click the **plus sign** next to the build pipeline in the editor.
+- You will be presented with the pipeline's environment variable screen. We do not need to add any pipeline-specific environment variables, so just click on the **Workflows** tab to return to the workflow editor.
+
+  ![](images/100/LabGuide100-6f799cee.png)
+
+- Click the **plus sign** next to the build pipeline in the editor.
 
   ![](images/100/20.png)
 
@@ -209,7 +213,7 @@ For this lab you will need a Github account. Use the following link to set one u
 
 - Switch to your Github browser tab, click on the **wercker.yml** file, and click the **pencil icon** to begin editing.
 
-  ![](images/100/27.png)
+  ![](images/100/LabGuide100-72ec3350.png)
 
 - After the definition of the build pipeline, **paste** the following YAML:
 
