@@ -433,7 +433,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   - In order to interact with your cluster and view the dashboard, you will need to install the Kubernetes command line interface, `kubectl`. We will do that next.
 
-  ### **STEP 9**: Install and Test kubectl on Your Local Machine
+### **STEP 9**: Install and Test kubectl on Your Local Machine
 
   - The method you choose to install `kubectl` will depend on your operating system and any package managers that you may already use. The generic method of installation, downloading the binary file using `curl`, is given below (**run the appropriate command in a terminal or command prompt**). If you prefer to use a package manager such as apt-get, yum, homebrew, chocolatey, etc, please find the specific command in the [Kubernetes Documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
@@ -500,7 +500,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ## Configure and Run Wercker Deployment Pipelines
 
-### **STEP 9**: Define Kubernetes Deployment Specification
+### **STEP 10**: Define Kubernetes Deployment Specification
 
 - From a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), clicking the **Repositories** tab at the top of the page, and clicking the **twitter-feed-oke** link.
 
@@ -517,49 +517,49 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 - **Copy** the YAML below and **paste** it into the file editor.
 
     ```yaml
-      apiVersion: extensions/v1beta1
-      kind: Deployment
-      metadata:
-        name: twitter-feed-v1
-        labels:
-          commit: ${WERCKER_GIT_COMMIT}
-      spec:
-        replicas: 2
-        selector:
-          matchLabels:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    metadata:
+      name: twitter-feed-v1
+      labels:
+        commit: ${WERCKER_GIT_COMMIT}
+    spec:
+      replicas: 2
+      selector:
+        matchLabels:
+          app: twitter-feed
+      template:
+        metadata:
+          labels:
             app: twitter-feed
-        template:
-          metadata:
-            labels:
-              app: twitter-feed
-              commit: ${WERCKER_GIT_COMMIT}
-          spec:
-            containers:
+            commit: ${WERCKER_GIT_COMMIT}
+        spec:
+          containers:
+          - name: twitter-feed
+            image: ${DOCKER_REGISTRY}/${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+            imagePullPolicy: Always
+            ports:
             - name: twitter-feed
-              image: ${DOCKER_REGISTRY}/${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
-              imagePullPolicy: Always
-              ports:
-              - name: twitter-feed
-                containerPort: 8080
-                protocol: TCP
-            imagePullSecrets:
-              - name: wercker
-      ---
-      apiVersion: v1
-      kind: Service
-      metadata:
-        name: twitter-feed
-        labels:
-          app: twitter-feed
-          commit: ${WERCKER_GIT_COMMIT}
-      spec:
-        ports:
-        - port: 30000
-          targetPort: 8080
-        selector:
-          app: twitter-feed
-        type: ClusterIP
-      ---
+              containerPort: 8080
+              protocol: TCP
+          imagePullSecrets:
+            - name: wercker
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: twitter-feed
+      labels:
+        app: twitter-feed
+        commit: ${WERCKER_GIT_COMMIT}
+    spec:
+      ports:
+      - port: 30000
+        targetPort: 8080
+      selector:
+        app: twitter-feed
+      type: ClusterIP
+    ---
     ```
   >This configuration consists of two parts. The first section (up to line 28) defines a **Deployment**, which tells Kubernetes about the application we want to deploy. In this Deployment we instruct Kubernetes to create two Pods (`replicas: 2`) that will run our application. Within those pods, we specify that we want one Docker container to be run, and compose the link to the image for that container using environment variables specific to this workflow execution (`image: ${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}`).
 
@@ -573,7 +573,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   - Since you've committed to the repository, Wercker will trigger another execution of your workflow. We haven't defined the deployment pipelines yet, so this will just result in a new entry in Wercker's Runs tab and a new image pushed to the container registry. You don't need to do anything with those; you can move on to the next step.
 
-  ### **STEP 9**: Define Wercker Deployment Pipelines
+### **STEP 11**: Define Wercker Deployment Pipelines
 
   - Click the file **wercker.yml** and then click the **pencil** button to begin editing the file.
 
@@ -628,7 +628,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 - Since you've committed to the repository again, Wercker will once again trigger an execution of your workflow. We still haven't configured the deployment pipelines in Wercker yet, so we'll still end up with a new Run and a new image, but not a deployment to Kubernetes.
 
-### **STEP 10**: Set up deployment pipelines in Wercker
+### **STEP 12**: Set up deployment pipelines in Wercker
 
 - Open **[Wercker](https://app.wercker.com)** in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Pipelines**, then click on your **twitter-feed** application.
 
@@ -654,7 +654,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 - Now we've got our workflow updated with our deployment pipelines, but there's one more thing we need to do before we can actually deploy. We need to set a few environment variables that tell Wercker the address of our Kubernetes master and provide authentication tokens for Wercker to issue commands to Kubernetes and to OCI.
 
-### **STEP 11**: Set up environment variables in Wercker
+### **STEP 13**: Set up environment variables in Wercker
 
 - Our first step is to set our cluster's authentication token as a Wercker environment variable. In your **terminal window**, run the following commands to output the token, then **select it and copy it** to your clipboard:
 
@@ -722,7 +722,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 - Now we're ready to try out our workflow from start to finish. We could do that by making another commit on GitHub, since Wercker is monitoring our source code. We can also trigger a workflow execution right from Wercker. We'll see how in the next step.
 
-### **STEP 12**: Trigger a retry of the pipeline
+### **STEP 14**: Trigger a retry of the pipeline
 
 - On your Wercker application page in your browser, click the **Runs** tab. Your most recent run should have a successful build pipeline and a failed push-release pipeline. Click the **push-release** pipeline.
 
@@ -736,7 +736,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   ![](images/200/42.png)
 
-### **STEP 13**: Validate deployment
+### **STEP 15**: Validate deployment
 
 - First we will validate that our Docker image is visible in the OCI Registry. In your **OCI Console** browser tab, select **Registry (OCIR)** from the navigation menu, under the Developer Services category.
 
@@ -779,7 +779,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ## Deploy and Test the Product Catalog Application
 
-### **STEP 14**: Download the Product Catalog Kubernetes YAML file
+### **STEP 16**: Download the Product Catalog Kubernetes YAML file
 
 - From a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), clicking the **Repositories** tab at the top of the page, and clicking the **twitter-feed-oke** link.
 
@@ -795,7 +795,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 **NOTE**: This YAML file contains the configuration for a Kubernetes deployment and service, much like the configuration for our twitter feed microservice. In a normal development environment, the product catalog application would be managed by Wercker as well, so that builds and deploys would be automated. In this workshop, however, you will perform a one-off deployment of a pre-built Docker image containing the product catalog application from within the Kubernetes dashboard.
 
-### **STEP 15**: Deploy and test the Product Catalog using the Kubernetes dashboard
+### **STEP 17**: Deploy and test the Product Catalog using the Kubernetes dashboard
 
 - Switch back to your **Kubernetes dashboard** browser tab. If you have closed it, navigate to the Kubernetes dashboard at [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
 

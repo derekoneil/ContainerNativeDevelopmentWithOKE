@@ -199,10 +199,10 @@ For this lab you will need a Github account. Use the following link to set one u
   ![](images/100/LabGuide100-ee6f3221.png)
 
   ```
-    Key:              Value:
-    DOCKER_USERNAME   <your-identity-domain-name>/cluster-admin
-    DOCKER_REGISTRY   iad.ocir.io
-    DOCKER_REPO       <your-identity-domain-name>/twitter-feed
+  Key:              Value:
+  DOCKER_USERNAME   <your-identity-domain-name>/cluster-admin
+  DOCKER_REGISTRY   iad.ocir.io
+  DOCKER_REPO       <your-identity-domain-name>/twitter-feed
   ```
 
   ![](images/100/LabGuide100-f2311d38.png)
