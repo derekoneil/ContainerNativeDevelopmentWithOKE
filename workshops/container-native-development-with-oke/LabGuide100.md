@@ -213,20 +213,20 @@ For this lab you will need a Github account. Use the following link to set one u
 
 - After the definition of the build pipeline, **paste** the following YAML:
 
-  ```yaml
-  #Push the docker image with our built and tested application to the Oracle Container Registry
-  push-release:
-    steps:
-      - internal/docker-push:
-          username: $DOCKER_USERNAME
-          password: $OCI_AUTH_TOKEN
-          repository: $DOCKER_REGISTRY/$DOCKER_REPO
-          registry: https://$DOCKER_REGISTRY/v2
-          tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
-          working-dir: /pipeline/source
-          ports: $PORT
-          cmd: sh target/bin/start
-  ```
+    ```yaml
+    #Push the docker image with our built and tested application to the Oracle Container Registry
+    push-release:
+      steps:
+        - internal/docker-push:
+            username: $DOCKER_USERNAME
+            password: $OCI_AUTH_TOKEN
+            repository: $DOCKER_REGISTRY/$DOCKER_REPO
+            registry: https://$DOCKER_REGISTRY/v2
+            tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
+            working-dir: /pipeline/source
+            ports: $PORT
+            cmd: sh target/bin/start
+    ```
 
   ![](images/100/LabGuide100-0274b607.png)
 
