@@ -49,26 +49,29 @@ During this lab, you will take on the **DevOps Engineer Persona** and perform a 
 
 - After **line 16** in the **spec.template.metadata.labels** section of your Deployment definition, paste the following label on a new line:
 
-`color: blue`
+    ```
+    color: blue
+    ```
+
 This label will identify our Kubernetes pods as the blue version of the code.
 
   ![](images/400/4.png)
 
 - After **line 26**, in the **spec.template.spec.containers** section of your Deployment definition, paste the following YAML. This will create and mount a volume on our pods that uses the Kubernetes [Downward API](https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/) to expose the pod's labels to our application. The application will display the pod's color so we can see which version (blue or green) served our webpage.
 
-```yaml
-        volumeMounts:
-            - name: podinfo
-              mountPath: /tmp
-              readOnly: false
-      volumes:
-        - name: podinfo
-          downwardAPI:
-            items:
-            - path: "labels"
-              fieldRef:
-                fieldPath: metadata.labels
-```
+  ```yaml
+          volumeMounts:
+              - name: podinfo
+                mountPath: /tmp
+                readOnly: false
+        volumes:
+          - name: podinfo
+            downwardAPI:
+              items:
+              - path: "labels"
+                fieldRef:
+                  fieldPath: metadata.labels
+  ```
 
 **NOTE**: YAML files are _sensitive to indentation_ -- make sure that `volumeMounts` is indented to the same level as `ports` on line 23. Also ensure that `volumes` is indented to the same level as `containers` on line 19. Your file should look like this:
 
@@ -122,7 +125,11 @@ This selector will instruct your load balancer to only route traffic to the blue
 
   ![](images/400/14.png)
 
-- Change **line 17**, in the **spec.template.metadata.labels** section of your deployment, to read `color: green`.
+- Change **line 17**, in the **spec.template.metadata.labels** section of your deployment, to read:
+
+    ```
+    color: green
+    ```
 
   ![](images/400/15.png)
 
