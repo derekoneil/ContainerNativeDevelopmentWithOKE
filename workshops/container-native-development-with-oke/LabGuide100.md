@@ -139,22 +139,22 @@ For this lab you will need a Github account. Use the following link to set one u
 
 - In the **Edit new file** input box, **paste** the following:
 
-  ```yaml
-  #Use OpenJDK base docker image from dockerhub and open the application port on the docker container
-  box:
-    id: openjdk
-    ports:
-      - 8080
+    ```yaml
+    #Use OpenJDK base docker image from dockerhub and open the application port on the docker container
+    box:
+      id: openjdk
+      ports:
+        - 8080
 
-  #Build our application using Maven, just as we always have
-  build:
-    steps:
-      - install-packages:
-          packages: maven
-      - script:
-          name: maven build
-          code: mvn clean assembly:assembly
-  ```
+    #Build our application using Maven, just as we always have
+    build:
+      steps:
+        - install-packages:
+            packages: maven
+        - script:
+            name: maven build
+            code: mvn clean assembly:assembly
+    ```
 
 - You should have **14 lines** of YAML in the editor:
 

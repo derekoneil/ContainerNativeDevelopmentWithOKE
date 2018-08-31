@@ -500,7 +500,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ## Configure and Run Wercker Deployment Pipelines
 
-### **STEP 8**: Define Kubernetes Deployment Specification
+### **STEP 9**: Define Kubernetes Deployment Specification
 
 - From a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), clicking the **Repositories** tab at the top of the page, and clicking the **twitter-feed-oke** link.
 
@@ -516,79 +516,74 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 - **Copy** the YAML below and **paste** it into the file editor.
 
+  ```yaml
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    metadata:
+      name: twitter-feed-v1
+      labels:
+        commit: ${WERCKER_GIT_COMMIT}
+    spec:
+      replicas: 2
+      selector:
+        matchLabels:
+          app: twitter-feed
+      template:
+        metadata:
+          labels:
+            app: twitter-feed
+            commit: ${WERCKER_GIT_COMMIT}
+        spec:
+          containers:
+          - name: twitter-feed
+            image: ${DOCKER_REGISTRY}/${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+            imagePullPolicy: Always
+            ports:
+            - name: twitter-feed
+              containerPort: 8080
+              protocol: TCP
+          imagePullSecrets:
+            - name: wercker
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: twitter-feed
+      labels:
+        app: twitter-feed
+        commit: ${WERCKER_GIT_COMMIT}
+    spec:
+      ports:
+      - port: 30000
+        targetPort: 8080
+      selector:
+        app: twitter-feed
+      type: ClusterIP
+    ---
+  ```
   >This configuration consists of two parts. The first section (up to line 28) defines a **Deployment**, which tells Kubernetes about the application we want to deploy. In this Deployment we instruct Kubernetes to create two Pods (`replicas: 2`) that will run our application. Within those pods, we specify that we want one Docker container to be run, and compose the link to the image for that container using environment variables specific to this workflow execution (`image: ${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}`).
 
   >The second part of the file defines a **Service**. A Service defines how Kubernetes should expose our application to traffic from outside the cluster. In this case, we are asking for a cluster-internal IP address to be assigned (`type: ClusterIP`). This means that our twitter feed will only be accessible from inside the cluster. This is ok, because the twitter feed will be consumed by the product catalog application that we will deploy later. We can still verify that our twitter feed is deployed properly -- we'll see how in a later step.
 
   >A `.yml` file is a common format for storing Kubernetes configuration data. The `.template` suffix in this file, however, is not a Kubernetes concept. We will use a Wercker step called **bash-template** to process any `.template` files in our project by substituting environment variables into the template wherever `${variables}` appear. You'll add that command to a new pipeline in the next step.
 
-  ```yaml
-  apiVersion: extensions/v1beta1
-  kind: Deployment
-  metadata:
-    name: twitter-feed-v1
-    labels:
-      commit: ${WERCKER_GIT_COMMIT}
-  spec:
-    replicas: 2
-    selector:
-      matchLabels:
-        app: twitter-feed
-    template:
-      metadata:
-        labels:
-          app: twitter-feed
-          commit: ${WERCKER_GIT_COMMIT}
-      spec:
-        containers:
-        - name: twitter-feed
-          image: ${DOCKER_REGISTRY}/${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
-          imagePullPolicy: Always
-          ports:
-          - name: twitter-feed
-            containerPort: 8080
-            protocol: TCP
-        imagePullSecrets:
-          - name: wercker
-  ---
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: twitter-feed
-    labels:
-      app: twitter-feed
-      commit: ${WERCKER_GIT_COMMIT}
-  spec:
-    ports:
-    - port: 30000
-      targetPort: 8080
-    selector:
-      app: twitter-feed
-    type: ClusterIP
-  ---
-  ```
+  - At the bottom of the page, click **Commit new file**
 
-- At the bottom of the page, click **Commit new file**
+    ![](images/200/29.png)
 
-  ![](images/200/29.png)
+  - Since you've committed to the repository, Wercker will trigger another execution of your workflow. We haven't defined the deployment pipelines yet, so this will just result in a new entry in Wercker's Runs tab and a new image pushed to the container registry. You don't need to do anything with those; you can move on to the next step.
 
-- Since you've committed to the repository, Wercker will trigger another execution of your workflow. We haven't defined the deployment pipelines yet, so this will just result in a new entry in Wercker's Runs tab and a new image pushed to the container registry. You don't need to do anything with those; you can move on to the next step.
+  ### **STEP 9**: Define Wercker Deployment Pipelines
 
-### **STEP 9**: Define Wercker Deployment Pipelines
+  - Click the file **wercker.yml** and then click the **pencil** button to begin editing the file.
 
-- Click the file **wercker.yml** and then click the **pencil** button to begin editing the file.
+    ![](images/200/26.png)
 
-  ![](images/200/26.png)
+  - **Copy** the YAML below and **paste** it below the pipelines we defined earlier.
 
-- **Copy** the YAML below and **paste** it below the pipelines we defined earlier.
-
-  >This will define a new **Pipeline** called deploy-to-cluster. The pipeline will make use of a new type of step: **kubectl**. If you have used Kubernetes before, you will be familiar with kubectl, the standard command line interface for managing Kubernetes. The kubectl Wercker step can be used to execute Kubernetes commands from within a Pipeline.
-
-  >The **deploy-to-cluster** Pipeline will prepare our kubernetes.yml file by filling in some environment variables. It will then use kubectl to tell Kubernetes to apply that configuration to our cluster.
-
-  ```yaml
-  #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
-  deploy-to-cluster:
+    ```yaml
+    #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
+    deploy-to-cluster:
       box:
           id: alpine
           cmd: /bin/sh
@@ -621,7 +616,11 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
           token: $KUBERNETES_AUTH_TOKEN
           insecure-skip-tls-verify: true
           command: apply -f kubernetes.yml
-  ```
+    ```
+
+    >This will define a new **Pipeline** called deploy-to-cluster. The pipeline will make use of a new type of step: **kubectl**. If you have used Kubernetes before, you will be familiar with kubectl, the standard command line interface for managing Kubernetes. The kubectl Wercker step can be used to execute Kubernetes commands from within a Pipeline.
+
+    >The **deploy-to-cluster** Pipeline will prepare our kubernetes.yml file by filling in some environment variables. It will then use kubectl to tell Kubernetes to apply that configuration to our cluster.
 
 - At the bottom of the page, click **Commit new file**
 
