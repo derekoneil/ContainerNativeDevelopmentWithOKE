@@ -124,12 +124,18 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ## Deploy Your Function to Fn on Kubernetes
 
-### **STEP 5**: Install Helm on Your Local Machine
+### **STEP 5**: Install Helm on Your Cloud VM
 
 - Helm is a package manager for Kubernetes that streamlines installing and managing applications on your Kubernetes cluster. We'll use Helm in this lab to install Fn on our Kubernetes cluster. Run the following command to install the latest version:
 
   ```bash
   curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+  ```
+
+- Copy the `kubeconfig` file from the OPC user's home directory to root's home directory by running:
+
+  ```bash
+  cp -r /home/opc/.kube /root
   ```
 
 - Run the following command to initialize **Helm**
