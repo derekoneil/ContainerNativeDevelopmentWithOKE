@@ -128,7 +128,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ### **STEP 4**: Add a Policy Statement for OKE
 
-  - Before the Oracle managed Kubernetes service can create compute instances in your OCI tenancy, we must explicitly give it permission to do so using a policy statement. From the OCI Console navigation menu, choose **Identiy->Policies**.
+  - Before the Oracle managed Kubernetes service can create compute instances in your OCI tenancy, we must explicitly give it permission to do so using a policy statement. From the OCI Console navigation menu, choose **Identity->Policies**.
 
     ![](images/200/LabGuide200-13c980fa.png)
 
@@ -249,7 +249,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
       - When you SSH to your instance in a later step, use PuTTY to connect instead of a command-line ssh session.
 
-  - With the keys generated, we are ready to launch an instance. From the OCI Console navigation menu, select **Compute->Instances**
+  - With the keys generated, we are ready to launch an instance. From the OCI Console navigation menu, select **Compute->Instances**. Ensure you are still working in the **Demo** compartment using the drop down list in the left pane.
 
     ![](images/200/LabGuide200-bdda7d5d.png)
 
