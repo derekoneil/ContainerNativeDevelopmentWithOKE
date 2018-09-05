@@ -74,7 +74,29 @@ Now that you have completed the workshop, you may want to remove the artifacts l
 
   ![](images/manualcleanup/ManualCleanUp-970b4a3e.png)
 
-### **STEP 5**: Delete Cluster-Admin User
+### **STEP 5**: Delete Images from Container Registry
+
+  - Log in to the OCI Console as `cluster-admin`.
+
+  - From the navigation menu, select **Developer Services -> Registry (OCIR)**
+
+  ![](images/manualcleanup/ManualCleanUp-5613e0ba.png)
+
+  - Click the **twitter-feed** repository.
+
+  ![](images/manualcleanup/ManualCleanUp-1a6eebe2.png)
+
+  - From the Actions menu, select **Delete Repository**
+
+  ![](images/manualcleanup/ManualCleanUp-6d8e9559.png)
+
+  - In the confirmation dialog, click **Delete**
+
+  ![](images/manualcleanup/ManualCleanUp-b6b5bd91.png)
+
+  - Repeat the last three instructions to delete the repository **resize128**.
+
+### **STEP 6**: Delete Cluster-Admin User
 
 - In the OCI Console navigation menu, select **Identity -> Groups**
 
@@ -100,7 +122,7 @@ Now that you have completed the workshop, you may want to remove the artifacts l
 
   ![](images/manualcleanup/ManualCleanUp-f8ca55d6.png)
 
-### **STEP 6**: Remove OKE Policy statement
+### **STEP 7**: Remove OKE Policy statement
 
 - In the OCI Console navigation menu, select **Identity -> Policies**
 
@@ -122,7 +144,7 @@ Now that you have completed the workshop, you may want to remove the artifacts l
 
   ![](images/manualcleanup/ManualCleanUp-8197b266.png)
 
-### **STEP 7**: (Optional) Delete Wercker Application
+### **STEP 8**: (Optional) Delete Wercker Application
 
 - Navigate to the **twitter-feed-oke** application on [app.wercker.com](app.wercker.com)
 
@@ -134,7 +156,7 @@ Now that you have completed the workshop, you may want to remove the artifacts l
 
   ![](images/manualcleanup/ManualCleanUp-18bff4f7.png)
 
-### **STEP 8**: (Optional) Delete twitter-feed-oke Fork on GitHub
+### **STEP 9**: (Optional) Delete twitter-feed-oke Fork on GitHub
 
 - Navigate to your **twitter-feed-oke fork** on [GitHub](github.com) and click the **Settings tab**
 
