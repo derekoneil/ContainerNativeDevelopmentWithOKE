@@ -94,9 +94,12 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ### **STEP 3**: Deploy the Function Locally
 
-- Now that you have the function 'code', you can deploy it to the local Fn Server you started earlier by running the following command in your terminal window:
+- Now that you have the function 'code', you can deploy it to the local Fn Server you started earlier by running the following commands in your terminal window:
 
-  `fn deploy --app imgconvert --local`
+  ```bash
+  fn migrate
+  fn deploy --app imgconvert --local
+  ```
 
   **NOTE**: The `--app imgconvert` tells Fn to create a new application named imgconvert and associate this function with it. In general, the application can be named anything you like, but by default the name will show up in the function URL. Since the product catalog application is expecting the app to be named `imgconvert`, don't alter the name.
 
@@ -107,7 +110,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - With the function deployed to our local Fn Server, we can use **curl** to test it. Execute the following command while still in the image-resize directory:
 
   ```bash
-  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" http://localhost:8080/r/imgconvert/resize128 > thumbnail.jpg
+  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" http://localhost:8080/t/imgconvert/resize128 > thumbnail.jpg
   ```
 
   ![](images/500/12.png)
@@ -156,6 +159,18 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/LabGuide500-0745fded.png)
 
+- Customize the chart with our preferred version of fn by running:
+
+  ```bash
+  sed -i.bak '/fnproject\/fnserver/{n;s/.*/  tag: 0.3.579/}' fn/values.yaml
+  ```
+
+- Update the readiness probe URL for v2 of the fn API by running:
+
+  ```bash
+  sed -i.bak 's/\/v1\/apps/\/v2\/apps/' fn/templates/fn-daemonset.yaml
+  ```
+
 - Prepare the **dependencies** of the Fn chart by running:
 
   ```bash
@@ -163,6 +178,14 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   ```
 
   ![](images/500/LabGuide500-49869624.png)
+
+//TODO: update fn version in chart:
+
+fnserver:
+  image: fnproject/fnserver
+  tag: 0.3.579
+
+//TODO: update readiness URL to /v2/apps
 
 - Install the **Fn chart** by running the following command. **NOTE** _DO NOT_ change the name of the release, `my-release`. This name becomes part of the Kubernetes service name, which is used for DNS routing. If the name is changed, the product catalog application will not be able to communicate with the deployed function.
 
@@ -257,7 +280,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Test the function using **curl**, but this time using the URL of the remote Fn Server:
 
   ```bash
-  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" $FN_API_URL/r/imgconvert/resize128 > thumbnail-remote.jpg
+  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" $FN_API_URL/t/imgconvert/resize128 > thumbnail-remote.jpg
   ```
 
   ![](images/500/20.png)
@@ -290,7 +313,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/24.png)
 
-- You'll see a loading spinner in the upload pane while your browser uploads the full size image to the product catalog server. The product catalog server invokes your function (resolved using Kubernetes DNS service at the URL `http://my-release-fn-api/r/imgconvert/resize128`). The thumbnail is returned to the product catalog server, which passes it back to your browser to be displayed. If everything worked correctly, you'll see the generated thumbnail displayed in the upload pane.
+- You'll see a loading spinner in the upload pane while your browser uploads the full size image to the product catalog server. The product catalog server invokes your function (resolved using Kubernetes DNS service at the URL `http://my-release-fn-api/t/imgconvert/resize128`). The thumbnail is returned to the product catalog server, which passes it back to your browser to be displayed. If everything worked correctly, you'll see the generated thumbnail displayed in the upload pane.
 
   ![](images/500/25.png)
 

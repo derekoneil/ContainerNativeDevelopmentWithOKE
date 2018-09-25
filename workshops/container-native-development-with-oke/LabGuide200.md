@@ -303,7 +303,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   - Fill out the form with the following information:
     - Name: **managed-kubernetes**
-    - Version: **1.11.1**
+    - Version: **1.10.3**
     - VCN: **vcn201...**
     - Kubernetes LB Subnets: **Public Subnet xxxx:US-YYYY-AD-1** and **Public Subnet xxxx:US-YYYY-AD-2**
     - Leave the CIDR blocks and Additional Add Ons at their defaults
