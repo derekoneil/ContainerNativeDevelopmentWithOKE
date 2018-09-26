@@ -179,14 +179,6 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/LabGuide500-49869624.png)
 
-//TODO: update fn version in chart:
-
-fnserver:
-  image: fnproject/fnserver
-  tag: 0.3.579
-
-//TODO: update readiness URL to /v2/apps
-
 - Install the **Fn chart** by running the following command. **NOTE** _DO NOT_ change the name of the release, `my-release`. This name becomes part of the Kubernetes service name, which is used for DNS routing. If the name is changed, the product catalog application will not be able to communicate with the deployed function.
 
   ```bash
