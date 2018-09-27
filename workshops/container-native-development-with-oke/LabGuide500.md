@@ -213,7 +213,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
     ![](images/500/17.png)
 
-### **STEP 8**: Deploy Your Function to Fn Server on Kubernetes
+### **STEP 7**: Deploy Your Function to Fn Server on Kubernetes
 
 - In your SSH session, change directories to cloned function directory from **STEP 2**.
 
@@ -287,7 +287,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Our function is deployed and available on our remote Fn Server, which is running in our Kubernetes cluster. The last thing to verify is that the product catalog application is able to find and use our function. Let's test out the upload image feature.
 
-### **STEP 9**: Test Your Function in the Product Catalog
+### **STEP 8**: Test Your Function in the Product Catalog
 
 - Open the **product catalog** website in a browser _on your local machine_. If you don't have the URL, you can look in the Kubernetes dashboard for the **external endpoint** of the product-catalog-service, or you can run the following command from your SSH session:
 
