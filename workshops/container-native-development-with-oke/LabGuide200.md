@@ -378,7 +378,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
   - After initiating `oci setup config`, respond to the prompts as follows:
     - Enter a location for your config: **accept default by pressing enter**
     - Enter a user OCID: copy your OCID by clicking **Copy** in the **User Information** box in OCI Console
-    - Enter a tenancy OCID: copy the **Tenancy OCID** from the footer of the OCI Console page
+    - Enter a tenancy OCID: copy the **Tenancy OCID** from the tenancy details page (found under the administration section of the OCI navigation menu)
     - Enter a region: type the **region shown in the upper right** corner of OCI Console
     - Do you want to generate a new RSA key pair?: **Y**
     - Enter a directory for your keys to be created: **accept default by pressing enter**

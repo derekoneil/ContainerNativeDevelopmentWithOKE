@@ -54,11 +54,11 @@ For this lab you will need a Github account. Use the following link to set one u
   **NOTE** If you already have a Wercker account, use your account to log into Wercker, and proceed to **STEP 3**. If you have not associated your existing Wercker account with your GitHub account, you can do so in the **Settings->Git Connections** menu, found in the user dropdown in the top right corner of Wercker.
 
 - In a new browser tab, go to:
-    [http://www.wercker.com/](http://www.wercker.com/)
+    [http://app.wercker.com/](http://app.wercker.com/)
 
 - Click **Sign Up** in the upper right hand corner of the browser. Alternately, if you have already signed up for a Wercker account, click **log in** and then **log in with GitHub** and skip to **STEP 3**.
 
-  ![](images/100/2.png)
+  ![](images/100/LabGuide100-ce2ae3c1.png)
 
 - Click **Sign Up Using GitHub**
 
