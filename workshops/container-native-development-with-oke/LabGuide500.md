@@ -168,7 +168,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Update the readiness probe URL for v2 of the fn API by running:
 
   ```bash
-  sed -i.bak 's/\/v1\/apps/\/v2\/apps/' fn/templates/fn-daemonset.yaml
+  sed 's/\/v1\/apps/\/v2\/apps/' fn/templates/fn-daemonset.yaml
   ```
 
 - Prepare the **dependencies** of the Fn chart by running:
