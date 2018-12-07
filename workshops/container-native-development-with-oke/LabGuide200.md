@@ -83,56 +83,13 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/LabGuide200-9341ed24.png)
 
-### **STEP 3**: Create a Cluster Administrator User
-
-  - In order to create and manage Kubernetes clusters in OCI, we will need to create a local user with the correct roles and privileges. In the OCI Console navigation menu, choose **Identity->Users**
-
-    ![](images/200/LabGuide200-a94354df.png)
-
-  - Click the **Create User** button
-
-    ![](images/200/LabGuide200-883c9388.png)
-
-  - In the Name field, enter **cluster-admin**. Also enter a description for this user and click **Create**.
-
-    ![](images/200/LabGuide200-238e4e0d.png)
-
-  - Now that we've created a user, we need to set the password. Click **cluster-admin** from the users list to view the account's detail page.
-
-    ![](images/200/LabGuide200-11418a6e.png)
-
-  - Click **Create/Reset Password**.
-
-    ![](images/200/LabGuide200-1f55362e.png)
-
-  - Click **Create/Reset Password** in the dialog box that appears. Then click **Copy**. **Paste** the password into a password manager or text file for later use. Click **Close**
-
-    ![](images/200/LabGuide200-c1fdd74b.png)
-    ![](images/200/LabGuide200-581e7739.png)
-
-  - Now let's give our user the role they need to create infrastructure components in OCI. In the OCI Console navigation menu, select **Identity->Groups**.
-
-    ![](images/200/LabGuide200-a84f62dd.png)
-
-  - Click **Administrators**
-
-    ![](images/200/LabGuide200-8fc08979.png)
-
-  - Click the **Add User to Group** button
-
-    ![](images/200/LabGuide200-9ae26802.png)
-
-  - Select **cluster-admin** from the drop down list and click **Add**.
-
-    ![](images/200/LabGuide200-7876b8c1.png)
-
-### **STEP 4**: Add a Policy Statement for OKE
+### **STEP 3**: Add a Policy Statement for OKE
 
   - Before the Oracle managed Kubernetes service can create compute instances in your OCI tenancy, we must explicitly give it permission to do so using a policy statement. From the OCI Console navigation menu, choose **Identity->Policies**.
 
     ![](images/200/LabGuide200-13c980fa.png)
 
-  - In the Compartment drop down menu on the left side, choose the **root compartment**. It will have the same name as your OCI tenancy.
+  - In the Compartment drop down menu on the left side, choose the **root compartment**. It will have the same name as your OCI tenancy (Cloud Account Name).
 
     ![](images/200/LabGuide200-a321171a.png)
 
@@ -148,49 +105,38 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/LabGuide200-bd5bcbd1.png)
 
-### **STEP 5**: Create a Virtual Cloud Network for your Kubernetes Cluster
+### **STEP 4**: Provision Kubernetes Using the OCI Console
 
-  - Before we can allow OKE to launch Kubernetes components in your tenancy, we must create a Virtual Cloud Network with several subnets to host the Kubernetes worker nodes and load balancers. To begin, choose **Networking->Virtual Cloud Networks** from the OCI Console navigation menu.
+  - Now we're ready to create our Kubernetes cluster. From the OCI Console navigation menu, select **Developer Services->Container Clusters (OKE)**.
 
-    ![](images/200/LabGuide200-ec938194.png)
+    ![](images/200/LabGuide200-5c0a2b4c.png)
 
-  - Select the **Demo compartment** you created from the Compartment drop  own list on the left side of the page. Then click the **Create Virtual Cloud Network** button.
+  - In the Compartments drop down, select the **Demo** compartment.
 
-    ![](images/200/LabGuide200-571d20e2.png)
+    ![](images/200/LabGuide200-4071818d.png)
 
-  - Select the radio button for **Create Virtual Cloud Network Plus Related Resources** and click **Create Virtual Cloud Network**. If a summary dialog is displayed, click **Close** to dismiss it.
+  - Click **Create Cluster**
 
-    ![](images/200/LabGuide200-a3cf010a.png)
-    ![](images/200/LabGuide200-7b34e6de.png)
-    ![](images/200/LabGuide200-9f96b230.png)
+    ![](images/200/LabGuide200-2e2ab7ca.png)
 
-  - Now that we have created a new VCN, we need to open up the security list to allow traffic between our worker node subnets as well as inbound from the Kubernetes master nodes which are managed by Oracle. Click the **name of the new network (vcn201...)** to view the detail page, then click the name of the security list, **Default Security List for vcn201...**.
+  - We don't need to make any changes to the default values on this form, but let's look at what will be created when we submit it.
 
-    ![](images/200/LabGuide200-dc6fa8d2.png)
-    ![](images/200/LabGuide200-09d68f43.png)
+    ![](images/LabGuide200-6ff14524.png)
+    ![](images/LabGuide200-11191333.png)
 
-  - Click the **Edit All Rules** button.
+    - Starting at the top you'll notice that the cluster will be created in our **Demo** compartment.
+    - We can customize the name of this cluster if we want
+    - Multiple versions of Kubernetes are available, with the newest version selected by default
+    - The default cluster creation mode will automatically create a Virtual Cloud Network for our cluster, including 2 load balancer subnets and 3 subnets for our worker VMs
+    - We can customize the size and quantity of worker VMs in the node pool; by default we will get 3x 1 OCPU VMs, one in each Availability Domain.
+    - We can also add more node pools to the cluster after creation.
+    - The dashboard and Tiller will be installed by default.
 
-    ![](images/200/LabGuide200-b2a978f9.png)
+  - Click **Create**. You will be brought to the cluster detail page. Your cluster will take a while to provision, so let's use this time to create a cloud VM that we can use to manage our cluster using the command line.
 
-  - _**IMPORTANT**_: For the purposes of this workshop, we are going to configure our network security list to **allow all inbound and outbound traffic to and from our Kubernetes worker nodes**. In a production or production-like environment, this would not be appropriate, as much more restrictive security list rules would provide a layer of protection against attacks targeting the worker nodes.
+### **STEP 5**: Launch a Cloud Compute Instance for Cluster Management
 
-  Using these permissive rules, we are relying on the OS-level firewall to protect the worker nodes from unauthorized access. Please see the appendix lab guide **Network Security Best Practices** for an example of a production-ready networking setup for OKE.
-
-  - Under the **Allow Rules for Ingress** section, click **Add Rule**. Fill in the new rule as follows:
-    - Stateless: **checked**
-    - Source CIDR: **0.0.0.0/0**
-    - IP Protocol: **All Protocols**
-
-  - Under the **Allow Rules for Egress** section, check the box for **Stateless** next to the existing rule (0.0.0.0/0 for All Protocols), then click **Save Security List Rules**
-
-    ![](images/200/LabGuide200-c18b6389.png)
-
-  - At this point, our networking is all set up and ready for us to create our Kubernetes worker nodes and load balancers. Our next step will be to launch a compute instance in the cloud which we will use to interact with the cluster via its API once it is set up. The instance will take a few minutes to launch, so we'll start it now and come back to it in a later step.
-
-### **STEP 6**: Launch a Cloud Compute Instance for Cluster Management
-
-  - Before we can launch a compute instance, we need to generate an SSH key pair to be able to authenticate to the instance once created. The method of generating an SSH key pair will depend on your operating system.
+  - Before we can launch a compute instance, we need two things: a Virtual Cloud Network to connect it to, and an SSH key pair to use for authentication. We could create a new VCN, but since the cluster wizard is already going to create one, we will just make use of that. So let's work on creating an SSH key pair for our instance. The method of generating an SSH key pair will depend on your operating system.
 
     **NOTE**: There are several files that will be downloaded or created on your local machine during this workshop. We recommend creating a directory to store them in for ease of locating and cleaning up. In this step, you will create a directory inside your home/user directory called `container-workshop`. You are free to change the location and name of this directory, but the lab guide will assume it is located at `~/container-workshop/`. **You will need to modify the given terminal commands throughout this lab** if you change the location or name of the directory.
 
@@ -257,85 +203,41 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/LabGuide200-071f038f.png)
 
-  - In the Shape drop down, change the Shape to **VM.Standard1.1**.
+  - Leave the Availability Domain, Image Source, and Instance Type settings at the defaults.
 
-    ![](images/200/LabGuide200-5b5bf95e.png)
+    ![](images/LabGuide200-026d5a7f.png)
 
-  - In the Choose SSH Key files area, click **Browse** and select the **ssh public key** you generated at the beginning of this step (e.g. `~/container-workshop/ssh-keys/ssh-key.pub`).
+  - In the Instance Shape field, click **Change Shape**. We will use a 2-OCPU VM, since we are using all of our available 1-OCPU VMs for Kubernetes worker nodes.
 
-    ![](images/200/LabGuide200-638c1f0c.png)
+    ![](images/LabGuide200-e8686157.png)
 
-  - In the Subnet drop down list, select **Public Subnet xxx:US-YYYY-AD-1**
+  - In the Browse All Shapes pane, check the box next to **VM.Standard2.2** and click **Select Shape**.
 
-    ![](images/200/LabGuide200-9c876df0.png)
+    ![](images/LabGuide200-e02b046c.png)
 
-  - Click **Create Instance**
+  - In the Add SSH Key area, click **Choose Files** and select the **ssh public key** you generated at the beginning of this step (e.g. `~/container-workshop/ssh-keys/ssh-key.pub`).
 
-    ![](images/200/LabGuide200-d9bc07e1.png)
+    ![](images/LabGuide200-4b3f9759.png)
 
-  - While the instance provisions, we can move on to creating our Kubernetes cluster. We will come back to this instance after the cluster is created to access our `kubeconfig` file.
+  - Make the following selections in the **Configure Networking** form:
+    - In the VCN Compartment field, ensure **Demo** is selected.
+    - In the VCN field, ensure **oke-vcn-quick-cluster1** is selected (if you changed the name of your cluster, the `cluster1` portion of these name will differ).
+    - In the Subnet Compartment field, ensure **Demo** is selected.
+    - In the Subnet field, select the subnet that begins with **oke-subnet-quick-cluster1**. Take care __not__ to select the subnet that begins with oke-svclbsubnet, as this one has a wide open security list (it is meant only for load balancers).  
 
-### **STEP 7**: Provision Kubernetes Using the OCI Console
+    ![](images/LabGuide200-e67f88fa.png)
 
-  - To create our Kubernetes cluster, we will need to use the `cluster-admin` user that we created earler. From the **user menu** in the upper right corner, click **Sign Out**
+  - Click **Create**
 
-    ![](images/200/LabGuide200-b421ea3c.png)
+    ![](images/LabGuide200-68185e86.png)
 
-  - At the sign-in page, enter your username and password in the boxes on the right, under the Oracle Cloud Infrastructure section. Enter **cluster-admin** for the username and the temporary password you saved in **Step 3**.
+  - You will be brought to the instance details page. Wait for your instance to transition from the Provisioning state to the **Running** state before proceeding.
 
-    ![](images/200/LabGuide200-28630aeb.png)
+    ![](images/LabGuide200-585fa5fe.png)
 
-  - You will be prompted to change the temporary password. Enter the temporary password again in the **Current Password** field, and enter a new password of your choice in the two **New Password** fields. Click **Save New Password**.
+### **STEP 6**: Prepare OCI CLI for Cluster Access and Download kubeconfig
 
-    ![](images/200/LabGuide200-d20e3615.png)
-
-  - Once you are signed in as `cluster-admin`, you are ready to create a Kubernetes cluster. From the OCI Console navigation menu, select **Developer Services->Container Clusters (OKE)**.
-
-    ![](images/200/LabGuide200-5c0a2b4c.png)
-
-  - In the Compartments drop down, select the **Demo** compartment.
-
-    ![](images/200/LabGuide200-4071818d.png)
-
-  - Click **Create Cluster**
-
-    ![](images/200/LabGuide200-2e2ab7ca.png)
-
-  - Fill out the form with the following information:
-    - Name: **managed-kubernetes**
-    - Version: **1.10.3**
-    - VCN: **vcn201...**
-    - Kubernetes LB Subnets: **Public Subnet xxxx:US-YYYY-AD-1** and **Public Subnet xxxx:US-YYYY-AD-2**
-    - Leave the CIDR blocks and Additional Add Ons at their defaults
-
-      ![](images/200/LabGuide200-368ca47b.png)
-
-    - Click **Add Node Pool**
-    - In the **Node Pool** configuration section, enter:
-      - Name: **node-pool-1**
-      - Version: **1.10.3**
-      - Image: **Oracle-Linux-7.4**
-      - Shape: **VM.Standard2.1**
-      - Subnets: **Public Subnet xxxx:US-YYYY-AD-3**
-      - Quantity Per Subnet: **2**
-
-      ![](images/200/LabGuide200-d6fd3be2.png)
-
-  - Then click **Create**. Your cluster will show up in the table with the status **Creating**. It will take several minutes to become available. While it provisions, we can go back to our client instance and prepare it for command line access to our cluster.
-
-    ![](images/200/LabGuide200-f9e0afd7.png)
-
-    ![](images/200/LabGuide200-e801724b.png)
-
-### **STEP 8**: Prepare OCI CLI for Cluster Access and Download kubeconfig
-
-  - From the OCI Console navigation menu, select **Compute->Instances**
-    ![](images/200/LabGuide200-000274fe.png)
-
-  - The instance we created earlier should be in the Running state. Click its name, **instance-201xxxxx-yyyy**.
-    ![](images/200/LabGuide200-d396371f.png)
-
-  - On the instance details page, find the **Public IP Address** and copy it to the clipboard.
+  - Your instance should now be in the **Running** state. Let's SSH into the instance and install the command line utility that will let us interact with our cluster. Still on the instance details page, find the **Public IP Address** and copy it to the clipboard.
     ![](images/200/LabGuide200-3986ce91.png)
 
   - Open an SSH connection to the instance using the following OS-specific method:
@@ -401,15 +303,15 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/LabGuide200-cc48303b.png)
 
-  - You are now ready to download the `kubeconfig` file using the OCI CLI that you just installed. From the OCI Console navigation menu, select **Developer Services->Container Clusters (OKE)**, then click the name of your cluster, **managed-kubernetes**
+  - You are now ready to download the `kubeconfig` file using the OCI CLI that you just installed. From the OCI Console navigation menu, select **Developer Services->Container Clusters (OKE)**, then click the name of your cluster, **cluster1**
 
     ![](images/200/LabGuide200-5c0a2b4c.png)
 
-    ![](images/200/LabGuide200-687aefdb.png)
+    ![](images/LabGuide200-931bae7f.png)
 
   - Click **Access Kubeconfig**.
 
-    ![](images/200/LabGuide200-61d280a8.png)
+    ![](images/LabGuide200-2adad8f0.png)
 
   - Two commands are displayed in the dialog box. **Copy and paste** each command (one at a time) into your _SSH session_ and run them. The first creates a directory to store the `kubeconfig` file, and the second invokes the OCI CLI to download and store the `kubeconfig` file on your client virtual machine. Then click **Close**.
 
@@ -433,7 +335,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   - In order to interact with your cluster and view the dashboard, you will need to install the Kubernetes command line interface, `kubectl`. We will do that next.
 
-### **STEP 9**: Install and Test kubectl on Your Local Machine
+### **STEP 7**: Install and Test kubectl on Your Local Machine
 
   - The method you choose to install `kubectl` will depend on your operating system and any package managers that you may already use. The generic method of installation, downloading the binary file using `curl`, is given below (**run the appropriate command in a terminal or command prompt**). If you prefer to use a package manager such as apt-get, yum, homebrew, chocolatey, etc, please find the specific command in the [Kubernetes Documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
@@ -500,7 +402,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ## Configure and Run Wercker Deployment Pipelines
 
-### **STEP 10**: Define Kubernetes Deployment Specification
+### **STEP 8**: Define Kubernetes Deployment Specification
 
 - From a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), clicking the **Repositories** tab at the top of the page, and clicking the **twitter-feed-oke** link.
 
@@ -573,7 +475,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   - Since you've committed to the repository, Wercker will trigger another execution of your workflow. We haven't defined the deployment pipelines yet, so this will just result in a new entry in Wercker's Runs tab and a new image pushed to the container registry. You don't need to do anything with those; you can move on to the next step.
 
-### **STEP 11**: Define Wercker Deployment Pipelines
+### **STEP 9**: Define Wercker Deployment Pipelines
 
   - Click the file **wercker.yml** and then click the **pencil** button to begin editing the file.
 
@@ -628,7 +530,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 - Since you've committed to the repository again, Wercker will once again trigger an execution of your workflow. We still haven't configured the deployment pipelines in Wercker yet, so we'll still end up with a new Run and a new image, but not a deployment to Kubernetes.
 
-### **STEP 12**: Set up deployment pipelines in Wercker
+### **STEP 10**: Set up deployment pipelines in Wercker
 
 - Open **[Wercker](https://app.wercker.com)** in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Pipelines**, then click on your **twitter-feed** application.
 
@@ -654,7 +556,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 - Now we've got our workflow updated with our deployment pipelines, but there's one more thing we need to do before we can actually deploy. We need to set a few environment variables that tell Wercker the address of our Kubernetes master and provide authentication tokens for Wercker to issue commands to Kubernetes and to OCI.
 
-### **STEP 13**: Set up environment variables in Wercker
+### **STEP 11**: Set up environment variables in Wercker
 
 - Our first step is to set our cluster's authentication token as a Wercker environment variable. In your **terminal window**, run the following commands to output the token, then **select it and copy it** to your clipboard:
 
@@ -722,7 +624,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 - Now we're ready to try out our workflow from start to finish. We could do that by making another commit on GitHub, since Wercker is monitoring our source code. We can also trigger a workflow execution right from Wercker. We'll see how in the next step.
 
-### **STEP 14**: Trigger a retry of the pipeline
+### **STEP 12**: Trigger a retry of the pipeline
 
 - On your Wercker application page in your browser, click the **Runs** tab. Your most recent run should have a successful build pipeline and a failed push-release pipeline. Click the **push-release** pipeline.
 
@@ -736,7 +638,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   ![](images/200/42.png)
 
-### **STEP 15**: Validate deployment
+### **STEP 13**: Validate deployment
 
 - First we will validate that our Docker image is visible in the OCI Registry. In your **OCI Console** browser tab, select **Registry (OCIR)** from the navigation menu, under the Developer Services category.
 
@@ -779,7 +681,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ## Deploy and Test the Product Catalog Application
 
-### **STEP 16**: Download the Product Catalog Kubernetes YAML file
+### **STEP 14**: Download the Product Catalog Kubernetes YAML file
 
 - From a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), clicking the **Repositories** tab at the top of the page, and clicking the **twitter-feed-oke** link.
 
@@ -795,7 +697,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 **NOTE**: This YAML file contains the configuration for a Kubernetes deployment and service, much like the configuration for our twitter feed microservice. In a normal development environment, the product catalog application would be managed by Wercker as well, so that builds and deploys would be automated. In this workshop, however, you will perform a one-off deployment of a pre-built Docker image containing the product catalog application from within the Kubernetes dashboard.
 
-### **STEP 17**: Deploy and test the Product Catalog using the Kubernetes dashboard
+### **STEP 15**: Deploy and test the Product Catalog using the Kubernetes dashboard
 
 - Switch back to your **Kubernetes dashboard** browser tab. If you have closed it, navigate to the Kubernetes dashboard at [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
 
@@ -830,64 +732,3 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 - Some tweets are indeed displayed, but they aren't relevant to this product. It looks like there is a bug in our twitter feed microservice! Continue on to the next lab to explore how to make bug fixes and updates to our microservice.
 
 **You are now ready to move to the next lab.**
-
-
-
-
-
-<!-- ### **STEP 3**: Install the OCI CLI Using the Installer
-
-The OCI CLI provides a convenient way for you to interact with your Oracle cloud services using the command line. We will install it using the guided installer, following the prompts along the way. Once our Kubernetes cluster is up and running, we will use the OCI CLI to download the `kubeconfig` file, which contains our Kubernetes authentication token.
-
-- Follow the instructions for your operating system below:
-
-  **Mac/Linux**
-
-
-  **Windows**
-    - Open **Powershell** using the **Run as Administrator** option. One way to do this is:
-
-      - Open **Task Manager** by pressing **Control-Shift-Escape**. Click **More Details** if prompted and then select **File->Run New Task**.
-
-      - In the run dialog box, type **powershell**. Under the text box, check the box next to **Create this task with administrative privileges**.
-
-    - We have to change the execution policy to allow the installer to run. In Powershell, run this command, answering **A** to the prompt when asked if you want to change the policy:
-
-      ```Set-ExecutionPolicy RemoteSigned```
-
-    - Now we are ready to run the OCI CLI installer. Execute the following command in Powershell:
-
-      ```powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.ps1'))"```
-
-    - Respond to the installer's prompts. If you do not have Python installed, the installer will prompt you to install it. Answer **Y**.
-
-    - Continue responding to the prompts, accepting the default paths and folder names. When prompted to generate a new API key, answer **Y**. This is the key that we will use to authenticate to OCI. We will upload the public key to the OCI Console in the next step.
-
-      ```bash
-      cat ~/.oci/oci_api_key_public.pem
-      ```
-
-- Select the entire public key, beginning with `-----BEGIN PUBLIC KEY-----` and ending with `-----END PUBLIC KEY-----` and **copy** it to the clipboard.
-
-TODO: new ss
-  ![](images/200/11.png)
-
-- In your browser window showing the OCI Console, click the **hamburger icon** to open the navigation menu. Under the **Identity** section, click **Users**. Find the user called **api.user**, or for a trial account, find **your username** in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
-
-  ![](images/200/71.png)
-
-  ![](images/200/56.png)
-
-  **NOTE**: You may not see any users in the list, or there may be only administrator users that you cannot modify. In that case, you can access your current logged-in user settings by hovering over your username in the top right of the page and clicking **User Settings**.
-
-    ![](images/200/66.png)
-
-- Click **Add Public Key**
-
-  ![](images/200/12.png)
-
-- **Paste** the public key from your clipboard into the text field and click **Add**. Note: The public key was copied to the clipboard when you ran the `cat` command from the terminal window, which copied the results to the clipboard using the `clip` command.
-
-  ![](images/200/13.png)
-
-- **Leave this browser window open**, as we will need to copy and paste some of this information into the Terraform configuration file. -->
