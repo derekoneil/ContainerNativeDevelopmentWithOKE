@@ -173,7 +173,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
         ![](images/200/LabGuide200-2f7bb25a.png)
 
         - In the save dialog box:
-          - Navigate to your home directory/user folder (usually **C:\Users\<username>**).
+          - Navigate to your home directory/user folder (usually **C:\Users\\<username\>**).
           - Click **New Folder** and name the folder `container-workshop`.
 
             ![](images/200/LabGuide200-b203da00.png)
@@ -273,7 +273,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/LabGuide200-dd2c64cd.png)
 
-  - When the install is finished, configure the OCI CLI by running `oci setup config` in your SSH session. In a web browser on your local machine, open your **User Settings** page by selecting User Settings from the user menu in the top right corner. You will need some details from this page to complete the setup.
+  - When the install is finished, configure the OCI CLI by running `oci setup config` in your SSH session. In a web browser on your local machine, open your **User Settings** page by selecting User Settings from the user menu in the top right corner. If User Settings does not appear, use the navigation menu to go to Identity->Users and select **View User Details** from the three-dots menu for your user. You will need some details from this page to complete the setup.
 
     ![](images/200/LabGuide200-854c3c06.png)
 

@@ -43,8 +43,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - From this point forward, all command line instructions should be run _inside your SSH session_, not in a command prompt/shell on your local machine. Switch to the `root` user in your SSH session and install the prerequisite packages (and a few extras) by running:
 
   ```bash
-  sudo su -
-  yum -y install docker kubectl git caca-utils
+  sudo yum -y install docker kubectl git caca-utils
   ```
 
   **NOTE**: Docker and kubectl are prerequisites of Fn. Git and caca-utils are used in this lab for downloading repositories from GitHub and displaying images in the terminal, respectively.
@@ -52,7 +51,25 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Start Docker by running:
 
   ```bash
-  systemctl start docker
+  sudo systemctl start docker
+  ```
+
+- **Add your user** to the Docker user's group by running:
+
+  ```bash
+  sudo usermod -aG docker $USER
+  ```
+
+- **Exit your SSH session** to have your group membership reevaluated:
+
+  ```bash
+  exit
+  ```
+
+- **Reestablish your SSH session** using the same command or method you used in the first instruction of this step.
+
+  ```bash
+  cd ~/container-workshop/ssh-keys; ssh -i ssh-key opc@<IP-Address-of-Your-VM>
   ```
 
 - Now we're ready to install the Fn CLI onto our VM. Run:
@@ -135,12 +152,6 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
   ```
 
-- Copy the `kubeconfig` file from the OPC user's home directory to root's home directory by running:
-
-  ```bash
-  cp -r /home/opc/.kube /root
-  ```
-
 - Run the following command to initialize **Helm**
 
   ```bash
@@ -158,18 +169,6 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   ```
 
   ![](images/500/LabGuide500-0745fded.png)
-
-- Customize the chart with our preferred version of fn by running:
-
-  ```bash
-  sed -i.bak '/fnproject\/fnserver/{n;s/.*/  tag: 0.3.579/}' fn/values.yaml
-  ```
-
-- Update the readiness probe URL for v2 of the fn API by running:
-
-  ```bash
-  sed 's/\/v1\/apps/\/v2\/apps/' fn/templates/fn-daemonset.yaml
-  ```
 
 - Prepare the **dependencies** of the Fn chart by running:
 
@@ -223,7 +222,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/LabGuide500-8c45e01e.png)
 
-- Since we are pushing to a remote Fn Server, Fn will use Oracle's Docker registry, OCIR, as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to. In the following command, **replace "<your-tenancy-name\>"** with the name of your Oracle Cloud tenancy, found under the User menu in the OCI Console:
+- Since we are pushing to a remote Fn Server, Fn will use Oracle's Docker registry, OCIR, as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to. In the following command, **replace `<your-tenancy-name>`** with the name of your Oracle Cloud tenancy, found under the User menu in the OCI Console:
 
   ![](images/500/LabGuide500-e51e6a21.png)
 
@@ -251,10 +250,10 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
     ![](images/500/LabGuide500-68cfd98c.png)
 
-- In your _SSH session_, run the following command, **substituting your OCI tenancy name** for "<your-tenancy-name\>":
+- In your _SSH session_, run the following command, **substituting your OCI tenancy name and your Oracle Cloud username (probably your email address)** for `<your-tenancy-name> and <your-oracle-cloud-username>`:
 
   ```bash
-  docker login -u <your-tenancy-name>/cluster-admin iad.ocir.io
+  docker login -u <your-tenancy-name>/<your-oracle-cloud-username> iad.ocir.io
   ```
 
 - You will be prompted for your registry password. Click the **Copy** link from the OCI Console browser window displaying your newly-generated Auth Token. Then **paste** the token into the password prompt in your SSH session and press enter.
