@@ -194,18 +194,18 @@ For this lab you will need a Github account. Use the following link to set one u
 
   ![](images/100/31.png)
 
-- Create an environment variable by filling in the **Key** and **Value** boxes and clicking **Add**. _Be sure to click **Add**_ after each environment variable, or they will not be saved. Repeat this step for each variable listed below.
+- Create an environment variable by filling in the **Key** and **Value** boxes and clicking **Add**. _Be sure to click **Add**_ after each environment variable, or they will not be saved. Repeat this step for each variable listed below. Replace `<your-identity-domain-name>` and `<your-oracle-cloud-username>` in the variable values with the specific tenancy name and username for your cloud account.
 
-  ![](images/100/LabGuide100-ee6f3221.png)
+  ![](images/LabGuide100-9f627c8b.png)
 
   ```
   Key:              Value:
-  DOCKER_USERNAME   <your-identity-domain-name>/cluster-admin
+  DOCKER_USERNAME   <your-identity-domain-name>/<your-oracle-cloud-username>
   DOCKER_REGISTRY   iad.ocir.io
   DOCKER_REPO       <your-identity-domain-name>/twitter-feed
   ```
 
-  ![](images/100/LabGuide100-f2311d38.png)
+  ![](images/LabGuide100-a7311e6c.png)
 
 - This is all of the environment variables that we can fill in at this point. However, we will need to provide one more piece of information to Wercker before we can successfully push an image to the OCIR Docker repository -- an OCI authentication token. We will log in to the OCI console and generate that token in Lab 200. For now, let's finish setting up the `push-release` pipeline in Wercker so that it will be ready to go once we have the token.
 
@@ -228,7 +228,7 @@ For this lab you will need a Github account. Use the following link to set one u
             registry: https://$DOCKER_REGISTRY/v2
             tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
             working-dir: /pipeline/source
-            ports: $PORT
+            ports: 8080
             cmd: sh target/bin/start
     ```
 

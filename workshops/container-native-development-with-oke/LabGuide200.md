@@ -238,6 +238,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 ### **STEP 6**: Prepare OCI CLI for Cluster Access and Download kubeconfig
 
   - Your instance should now be in the **Running** state. Let's SSH into the instance and install the command line utility that will let us interact with our cluster. Still on the instance details page, find the **Public IP Address** and copy it to the clipboard.
+
     ![](images/200/LabGuide200-3986ce91.png)
 
   - Open an SSH connection to the instance using the following OS-specific method:
@@ -273,9 +274,11 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/LabGuide200-dd2c64cd.png)
 
-  - When the install is finished, configure the OCI CLI by running `oci setup config` in your SSH session. In a web browser on your local machine, open your **User Settings** page by selecting User Settings from the user menu in the top right corner. If User Settings does not appear, use the navigation menu to go to Identity->Users and select **View User Details** from the three-dots menu for your user. You will need some details from this page to complete the setup.
+  - When the install is finished, configure the OCI CLI by running `oci setup config` in your SSH session. In a web browser on your local machine, open your **User Details** page by selecting Identity->Users from the navigation menu and select **View User Details** from the three-dots menu for your user. You will need some details from this page to complete the setup.
 
-    ![](images/200/LabGuide200-854c3c06.png)
+    ![](images/LabGuide200-6f162893.png)
+
+    ![](images/LabGuide200-fbfddd39.png)
 
   - After initiating `oci setup config`, respond to the prompts as follows:
     - Enter a location for your config: **accept default by pressing enter**
@@ -483,42 +486,42 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   - **Copy** the YAML below and **paste** it below the pipelines we defined earlier.
 
-      ```yaml
-      #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
-      deploy-to-cluster:
-        box:
-            id: alpine
-            cmd: /bin/sh
+    ```yaml
+    #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
+    deploy-to-cluster:
+      box:
+          id: alpine
+          cmd: /bin/sh
 
-        steps:
+      steps:
 
-        - bash-template
+      - bash-template
 
-        - kubectl:
-            name: delete secret
-            server: $KUBERNETES_MASTER
-            token: $KUBERNETES_AUTH_TOKEN
-            insecure-skip-tls-verify: true
-            command: delete secret wercker; echo delete registry secret
+      - kubectl:
+          name: delete secret
+          server: $KUBERNETES_MASTER
+          token: $KUBERNETES_AUTH_TOKEN
+          insecure-skip-tls-verify: true
+          command: delete secret wercker; echo delete registry secret
 
-        - kubectl:
-            name: create secret
-            server: $KUBERNETES_MASTER
-            token: $KUBERNETES_AUTH_TOKEN
-            insecure-skip-tls-verify: true
-            command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-email=nobody@oracle.com --docker-username=$DOCKER_USERNAME --docker-password='$OCI_AUTH_TOKEN'; echo create registry secret
+      - kubectl:
+          name: create secret
+          server: $KUBERNETES_MASTER
+          token: $KUBERNETES_AUTH_TOKEN
+          insecure-skip-tls-verify: true
+          command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-email=nobody@oracle.com --docker-username=$DOCKER_USERNAME --docker-password='$OCI_AUTH_TOKEN'; echo create registry secret
 
-        - script:
-            name: "Visualise Kubernetes config"
-            code: cat kubernetes.yml
+      - script:
+          name: "Visualise Kubernetes config"
+          code: cat kubernetes.yml
 
-        - kubectl:
-            name: deploy to kubernetes
-            server: $KUBERNETES_MASTER
-            token: $KUBERNETES_AUTH_TOKEN
-            insecure-skip-tls-verify: true
-            command: apply -f kubernetes.yml
-      ```
+      - kubectl:
+          name: deploy to kubernetes
+          server: $KUBERNETES_MASTER
+          token: $KUBERNETES_AUTH_TOKEN
+          insecure-skip-tls-verify: true
+          command: apply -f kubernetes.yml
+    ```
 
     >This will define a new **Pipeline** called deploy-to-cluster. The pipeline will make use of a new type of step: **kubectl**. If you have used Kubernetes before, you will be familiar with kubectl, the standard command line interface for managing Kubernetes. The kubectl Wercker step can be used to execute Kubernetes commands from within a Pipeline.
 
@@ -602,7 +605,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   ![](images/200/LabGuide200-ad86d83b.png)
 
-- Switch to your **OCI Console** browser tab and select **User Settings** from the user drop down menu in the upper right corner. You should still be logged in as `cluster-admin`. If you've closed the tab, [log in again](https://console.us-ashburn-1.oraclecloud.com).
+- Switch to your **OCI Console** browser tab and select **User Settings** from the user drop down menu in the upper right corner. If you've closed the tab, [log in again](https://console.us-ashburn-1.oraclecloud.com).
 
   ![](images/200/LabGuide200-854c3c06.png)
 
