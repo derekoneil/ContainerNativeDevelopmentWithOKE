@@ -26,7 +26,7 @@ During this lab, you will take on the **DevOps Engineer Persona** and perform a 
 ## Required Artifacts
 
 - The following lab requires:
-  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial Account
+  - an Oracle Cloud Trial Account
   - a [GitHub account](https://github.com/join)
 
 # Perform a Blue/Green Deployment to Kubernetes

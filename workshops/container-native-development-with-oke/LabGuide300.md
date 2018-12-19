@@ -24,7 +24,7 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 ## Required Artifacts
 
 - The following lab requires:
-  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial Account
+  - an Oracle Cloud Trial Account
   - a [GitHub account](https://github.com/join)
 
 # Make a Bug Fix to Your Java Microservice

@@ -15,7 +15,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 **Extend Your Application Using a Function**
 
 - Run Your Function Locally
-  - Install Fn Server on Your Virutal Machine
+  - Install Fn Server on Your Virtual Machine
   - Clone the Function Repository
   - Deploy the Function Locally
   - Test the Function Using curl
@@ -26,7 +26,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ## Required Artifacts
 - The following lab requires:
-  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial Account
+  - an Oracle Cloud Trial Account
   - a [GitHub account](https://github.com/join)
 
 # Extend Your Application Using a Function
