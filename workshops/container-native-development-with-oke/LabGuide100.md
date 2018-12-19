@@ -162,7 +162,7 @@ For this lab you will need a Github account. Use the following link to set one u
 
 - You should have **14 lines** of YAML in the editor:
 
-  ![](images/100/LabGuide100-6742f55d.png)
+  ![](images/LabGuide100-f5af715a.png)
 
 - Let's look at the two sections of YAML that we've just added. The first section describes a **box**. A **box** is the image that you want Wercker to pull from a Docker registry (the default is Docker Hub) to build your pipeline from. In our case, we need a Java environment to run our application, so we will pull the **openjdk** image from Docker Hub.
 
