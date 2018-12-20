@@ -273,9 +273,9 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/LabGuide200-dd2c64cd.png)
 
-  - When the install is finished, configure the OCI CLI by running `oci setup config` in your SSH session. In a web browser on your local machine, open your **User Settings** page by selecting User Settings from the user menu in the top right corner. If User Settings does not appear, use the navigation menu to go to Identity->Users and select **View User Details** from the three-dots menu for your user. You will need some details from this page to complete the setup.
+  - When the install is finished, configure the OCI CLI by running `oci setup config` in your SSH session. In a web browser on your local machine, open your **User Settings** page: use the navigation menu to go to Identity->Users and select **View User Details** from the three-dots menu for your user. You will need some details from this page to complete the setup.
 
-    ![](images/200/LabGuide200-854c3c06.png)
+    ![](images/LabGuide200-f1749ef3.png)
 
   - After initiating `oci setup config`, respond to the prompts as follows:
     - Enter a location for your config: **accept default by pressing enter**
@@ -602,9 +602,11 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   ![](images/200/LabGuide200-ad86d83b.png)
 
-- Switch to your **OCI Console** browser tab and select **User Settings** from the user drop down menu in the upper right corner. You should still be logged in as `cluster-admin`. If you've closed the tab, [log in again](https://console.us-ashburn-1.oraclecloud.com).
+- Switch to your **OCI Console** browser tab. Use the navigation menu to go to Identity->Users and select **View User Details** from the three-dots menu for your user. If you've closed the tab, [log in again](https://console.us-ashburn-1.oraclecloud.com).
 
-  ![](images/200/LabGuide200-854c3c06.png)
+  ![](images/LabGuide200-f1749ef3.png)
+
+  **NOTE**: You may see two users in the list, one that is named with just your email address, and another that is named `oracleidentitycloudservice`/your-email-address. **Choose the one that is named just your-email-address.**
 
 - In the Resources menu of the user settings page, click **Auth Tokens**. Then click **Generate Token**.
 

@@ -123,6 +123,13 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ### **STEP 4**: Test the Function Using curl
 
+- Before we can test our function, we must disable SELinux, as it interferes with the ability of Fn to run containers. Run these commands to **disable SELinux**
+
+  ```bash
+  sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
+  sudo setenforce 0
+  ```
+
 - With the function deployed to our local Fn Server, we can use **curl** to test it. Execute the following command while still in the image-resize directory:
 
   ```bash
@@ -163,7 +170,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   - Container image: **fnproject/fnserver** (this is the official Fn Project Fn Server image)
   - Number of Pods: **1** (this can be customized)
   - Service: **External** (this will create a load balancer for our service)
-  - Port: **38080** (this can be customized)
+  - Port: **80** (this must match the port that the Product Catalog will try to access)
   - Target Port: **8080** (this is the port that Fn is listening on inside its container)
   - Click **Show Advanced Options**
 
@@ -195,15 +202,15 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   export FN_API_URL=<Paste-URL-From-Clipboard>
   ```
 
-  - **NOTE**: You can alternatively get the load balancer IP address from `kubectl`, which is useful for scripting and automation:  `export FN_API_URL=http://$(kubectl get svc --namespace default my-release-fn-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):38080`
+  - **NOTE**: You can alternatively get the load balancer IP address from `kubectl`, which is useful for scripting and automation:  `export FN_API_URL=http://$(kubectl get svc --namespace default my-release-fn-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):38080/`
 
-  - Verify that the environment variable was set correctly by running the following command. Note that your IP address will differ from the screenshot.
+  - Verify that the environment variable was set correctly by running the following command. Note that your IP address will differ from the screenshot. Ensure that your URL contains a **trailing forward slash**.
 
     `echo $FN_API_URL`
 
-    ![](images/LabGuide500-e920a7d9.png)
+    ![](images/LabGuide500-186575c2.png)
 
-### **STEP 7**: Deploy Your Function to Fn Server on Kubernetes
+### **STEP 6**: Deploy Your Function to Fn Server on Kubernetes
 
 - In your _SSH session_, change directories to cloned function directory from **STEP 2**.
 
@@ -223,9 +230,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/LabGuide500-21bab048.png)
 
-- In order to push our function Docker image into our OCI Registry, we will need to log in using the Docker CLI. The password we use to authenticate is an **OCI Auth Token**, just as we created for Wercker in Lab 200. Navigate to the **OCI Console** in a web browser on your local machine. Open your **User Settings** page by selecting User Settings from the user menu in the top right corner.
+- In order to push our function Docker image into our OCI Registry, we will need to log in using the Docker CLI. The password we use to authenticate is an **OCI Auth Token**, just as we created for Wercker in Lab 200. Navigate to the **OCI Console** in a web browser on your local machine. Open your **User Settings** page by using the navigation menu to go to Identity->Users and select **View User Details** from the three-dots menu for your user.
 
-    ![](images/200/LabGuide200-854c3c06.png)
+  ![](images/LabGuide200-f1749ef3.png)
 
 - In the Resources menu of the user settings page, click **Auth Tokens**. Then click **Generate Token**.
 
@@ -274,7 +281,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Now, back in the _SSH session_, test the function using **curl**, but this time using the URL of the remote Fn Server:
 
   ```bash
-  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" $FN_API_URL/t/imgconvert/resize128 > thumbnail-remote.jpg
+  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" ${FN_API_URL}t/imgconvert/resize128 > thumbnail-remote.jpg
   ```
 
   ![](images/500/20.png)
@@ -289,7 +296,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Our function is deployed and available on our remote Fn Server, which is running in our Kubernetes cluster. The last thing to verify is that the product catalog application is able to find and use our function. Let's test out the upload image feature.
 
-### **STEP 8**: Test Your Function in the Product Catalog
+### **STEP 7**: Test Your Function in the Product Catalog
 
 - Open the **product catalog** website in a browser _on your local machine_. If you don't have the URL, you can look in the Kubernetes dashboard for the **external endpoint** of the product-catalog-service, or you can run the following command from your SSH session:
 
