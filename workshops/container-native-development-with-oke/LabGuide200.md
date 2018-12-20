@@ -733,4 +733,4 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 - Some tweets are indeed displayed, but they aren't relevant to this product. It looks like there is a bug in our twitter feed microservice! Continue on to the next lab to explore how to make bug fixes and updates to our microservice.
 
-**You are now ready to move to the next lab.**
+**You are now ready to move to the next lab: [Lab 300](LabGuide300.md)**

@@ -256,4 +256,4 @@ For this lab you will need a Github account. Use the following link to set one u
 
   ![](images/100/LabGuide100-72a5f4d0.png)
 
-**You are now ready to move to the next lab.**
+**You are now ready to move to the next lab: [Lab 200](LabGuide200.md)**

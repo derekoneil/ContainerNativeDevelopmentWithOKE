@@ -93,4 +93,4 @@ During this lab, you will take on the **Lead Developer Persona** and work on fix
 
   ![](images/300/13.png)
 
-**You are now ready to move to the next lab.**
+**You are now ready to move to the next lab: [Lab 400](LabGuide400.md)**
