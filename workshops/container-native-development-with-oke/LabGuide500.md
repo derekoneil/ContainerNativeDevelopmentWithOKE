@@ -208,7 +208,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
     `echo $FN_API_URL`
 
-    ![](images/LabGuide500-186575c2.png)
+    ![](images/LabGuide500-aab88037.png)
 
 ### **STEP 6**: Deploy Your Function to Fn Server on Kubernetes
 
