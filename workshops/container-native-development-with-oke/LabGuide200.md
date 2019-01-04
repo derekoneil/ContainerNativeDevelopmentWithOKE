@@ -483,42 +483,42 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   - **Copy** the YAML below and **paste** it below the pipelines we defined earlier.
 
-      ```yaml
-      #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
-      deploy-to-cluster:
-        box:
-            id: alpine
-            cmd: /bin/sh
+    ```yaml
+    #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
+    deploy-to-cluster:
+      box:
+          id: alpine
+          cmd: /bin/sh
 
-        steps:
+      steps:
 
-        - bash-template
+      - bash-template
 
-        - kubectl:
-            name: delete secret
-            server: $KUBERNETES_MASTER
-            token: $KUBERNETES_AUTH_TOKEN
-            insecure-skip-tls-verify: true
-            command: delete secret wercker; echo delete registry secret
+      - kubectl:
+          name: delete secret
+          server: $KUBERNETES_MASTER
+          token: $KUBERNETES_AUTH_TOKEN
+          insecure-skip-tls-verify: true
+          command: delete secret wercker; echo delete registry secret
 
-        - kubectl:
-            name: create secret
-            server: $KUBERNETES_MASTER
-            token: $KUBERNETES_AUTH_TOKEN
-            insecure-skip-tls-verify: true
-            command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-email=nobody@oracle.com --docker-username=$DOCKER_USERNAME --docker-password='$OCI_AUTH_TOKEN'; echo create registry secret
+      - kubectl:
+          name: create secret
+          server: $KUBERNETES_MASTER
+          token: $KUBERNETES_AUTH_TOKEN
+          insecure-skip-tls-verify: true
+          command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-email=nobody@oracle.com --docker-username=$DOCKER_USERNAME --docker-password='$OCI_AUTH_TOKEN'; echo create registry secret
 
-        - script:
-            name: "Visualise Kubernetes config"
-            code: cat kubernetes.yml
+      - script:
+          name: "Visualise Kubernetes config"
+          code: cat kubernetes.yml
 
-        - kubectl:
-            name: deploy to kubernetes
-            server: $KUBERNETES_MASTER
-            token: $KUBERNETES_AUTH_TOKEN
-            insecure-skip-tls-verify: true
-            command: apply -f kubernetes.yml
-      ```
+      - kubectl:
+          name: deploy to kubernetes
+          server: $KUBERNETES_MASTER
+          token: $KUBERNETES_AUTH_TOKEN
+          insecure-skip-tls-verify: true
+          command: apply -f kubernetes.yml
+    ```
 
     >This will define a new **Pipeline** called deploy-to-cluster. The pipeline will make use of a new type of step: **kubectl**. If you have used Kubernetes before, you will be familiar with kubectl, the standard command line interface for managing Kubernetes. The kubectl Wercker step can be used to execute Kubernetes commands from within a Pipeline.
 
@@ -566,6 +566,10 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
     cat kubeconfig | grep token | awk '{print $2}'
     ```
 
+    **NOTE**: You may have to use Bash Shell or Git Bash to run the command above. If you don't have either one available, you can open the `kubeconfig` file in Notepad, find the `token:` section at the bottom of the file, and copy the token value from there.
+
+      ![](images/LabGuide200-406fe845.png)
+      
   **Mac/Linux**
     ```bash
     cd ~/container-workshop
