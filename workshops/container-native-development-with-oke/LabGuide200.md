@@ -569,7 +569,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
     **NOTE**: You may have to use Bash Shell or Git Bash to run the command above. If you don't have either one available, you can open the `kubeconfig` file in Notepad, find the `token:` section at the bottom of the file, and copy the token value from there.
 
       ![](images/LabGuide200-406fe845.png)
-      
+
   **Mac/Linux**
     ```bash
     cd ~/container-workshop
@@ -591,7 +591,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   **Mac/Linux**
     ```bash
-    echo $(kubectl config view | grep server | cut -f 2- -d ":" | tr -d " ")
+    echo $(./kubectl config view | grep server | cut -f 2- -d ":" | tr -d " ")
     ```
 
 - In your Wercker browser tab, add a new environment variable with the key **KUBERNETES_MASTER**. In the value field, **paste** the value you copied from `kubectl`. The value **must start with https://** for Wercker to communicate with the cluster. When finished, click **Add**.
