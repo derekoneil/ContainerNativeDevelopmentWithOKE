@@ -79,9 +79,9 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/7.png)
 
-  - In the **Name** field, enter `Demo`. Enter a description of your choice. Click **Create Compartment**.
+  - In the **Name** field, enter `Demo`. Enter a description of your choice. In the **Parent Compartment** field, ensure that the `root` compartment is selected (it will have the same name as your Oracle Cloud Account). Click **Create Compartment**.
 
-    ![](images/200/LabGuide200-9341ed24.png)
+    ![](images/LabGuide200-2b3b6b30.png)
 
 ### **STEP 3**: Add a Policy Statement for OKE
 
