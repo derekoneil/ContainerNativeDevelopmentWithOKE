@@ -337,56 +337,64 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ### **STEP 7**: Install and Test kubectl on Your Local Machine
 
-  - The method you choose to install `kubectl` will depend on your operating system and any package managers that you may already use. The generic method of installation, downloading the binary file using `curl`, is given below (**run the appropriate command in a terminal or command prompt**). If you prefer to use a package manager such as apt-get, yum, homebrew, chocolatey, etc, please find the specific command in the [Kubernetes Documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+- The method you choose to install `kubectl` will depend on your operating system and any package managers that you may already use. The generic method of installation, downloading the binary file using `curl`, is given below (**run the appropriate command in a terminal or command prompt**). If you prefer to use a package manager such as apt-get, yum, homebrew, chocolatey, etc, please find the specific command in the [Kubernetes Documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
 
-    **Windows**
-      ```bash
-      cd %USERPROFILE%\container-workshop
-      curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.11.2/bin/windows/amd64/kubectl.exe
-      ```
+  **Windows**
+    ```bash
+    cd %USERPROFILE%\container-workshop
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.11.2/bin/windows/amd64/kubectl.exe
+    ```
 
-    **Mac**
-      ```bash
-      cd ~/container-workshop
-      curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
-      chmod +x ./kubectl
-      ```
+  **Mac**
+    ```bash
+    cd ~/container-workshop
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
+    chmod +x ./kubectl
+    ```
 
-    **Linux**
-      ```bash
-      cd ~/container-workshop
-      curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-      chmod +x ./kubectl
-      ```
+  **Linux**
+    ```bash
+    cd ~/container-workshop
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    chmod +x ./kubectl
+    ```
 
-  - In your terminal window or command prompt, run the following commands to verify that `kubectl` is able to communicate with your cluster. You should see `cluster-info` print out the URL of the Kubernetes Master node and `get nodes` print out the IP address and status of each of the worker nodes.
+- In your terminal window or command prompt, run the following commands to verify that `kubectl` is able to communicate with your cluster. You should see `cluster-info` print out the URL of the Kubernetes Master node and `get nodes` print out the IP address and status of each of the worker nodes.
 
-    **Windows**
-      ```bash
-      set KUBECONFIG=%USERPROFILE%\container-workshop\kubeconfig
-      kubectl.exe cluster-info
-      kubectl.exe get nodes
-      ```
+  **Windows**
+    ```bash
+    set KUBECONFIG=%USERPROFILE%\container-workshop\kubeconfig
+    kubectl.exe cluster-info
+    kubectl.exe get nodes
+    ```
 
-    **Mac/Linux**
-      ```bash
-      export KUBECONFIG=~/container-workshop/kubeconfig
-      ./kubectl cluster-info
-      ./kubectl get nodes
-      ```
+  **Mac/Linux**
+    ```bash
+    export KUBECONFIG=~/container-workshop/kubeconfig
+    ./kubectl cluster-info
+    ./kubectl get nodes
+    ```
 
-  - Now that we have verified that `kubectl` is connected to our cluster, we can use it to start a proxy that will give us access to the Kubernetes Dashboard through a web browser at a localhost URL. Run the following command in the same terminal window:
+- Now that we have verified that `kubectl` is connected to our cluster, let's increase the default auto-logout time so that we don't have to keep re-authenticating during the workshop. Note that the default logout time of 15 minutes is set for security reasons. The `--token-ttl:43200"` argument in the following command is the only change that we are making to the dashboard.
 
-    **Windows**
-      ```bash
-      kubectl.exe proxy
-      ```
+  ```bash
+  kubectl patch deployment kubernetes-dashboard -n kube-system -p '{"spec": {"template": {"spec": {"containers": [{"name": "kubernetes-dashboard", "args": ["--token-ttl:43200", "--auto-generate-certificates"]}]}}}}'
+  ```
 
-    **Mac/Linux**
-      ```bash
-      ./kubectl proxy
-      ```
+  ![](images/LabGuide200-a5c59f02.png)
+
+- Now that we've increased the session timeout, we can use `kubectl` to start a proxy that will give us access to the Kubernetes Dashboard through a web browser at a localhost URL. Run the following command in the same terminal window:
+
+  **Windows**
+    ```bash
+    kubectl.exe proxy
+    ```
+
+  **Mac/Linux**
+    ```bash
+    ./kubectl proxy
+    ```
 
 - Leave the proxy server running and navigate to the [Kubernetes Dashboard by Right Clicking on this link](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/), and choosing **open in a new browser tab**.
 
