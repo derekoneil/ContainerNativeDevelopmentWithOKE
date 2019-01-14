@@ -205,8 +205,10 @@ For this lab you will need a Github account. Use the following link to set one u
   DOCKER_REPO       <your-identity-domain-name>/twitter-feed
   ```
 
-  ![](images/LabGuide100-a7311e6c.png)
+  ![](images/LabGuide100-ff28ad1b.png)
 
+  **NOTE**: The `DOCKER_REGISTRY` value above assumes your Oracle Cloud account is in the `iad` region, also known as `US-Ashburn`. We will confirm or correct this in the next lab.
+  
 - This is all of the environment variables that we can fill in at this point. However, we will need to provide one more piece of information to Wercker before we can successfully push an image to the OCIR Docker repository -- an OCI authentication token. We will log in to the OCI console and generate that token in Lab 200. For now, let's finish setting up the `push-release` pipeline in Wercker so that it will be ready to go once we have the token.
 
 ### **STEP 7**: Define Wercker Publish Pipeline
@@ -255,5 +257,7 @@ For this lab you will need a Github account. Use the following link to set one u
   ![](images/100/LabGuide100-a6bd0f55.png)
 
   ![](images/100/LabGuide100-72a5f4d0.png)
+
+  **NOTE**: If you receive an error message that says `Tenant with name XYZ not found`, don't worry. Your cloud account may be in a different region than we specified in the environment variable above. We will correct that in the next lab, once we log in to the OCI console.
 
 **You are now ready to move to the next lab: [Lab 200](LabGuide200.md)**

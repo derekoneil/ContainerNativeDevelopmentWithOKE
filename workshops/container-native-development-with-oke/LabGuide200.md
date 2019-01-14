@@ -636,6 +636,26 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   ![](images/200/LabGuide200-bb187bd2.png)
 
+- Lastly, let's go back and look at the `DOCKER_REGISTRY` variable to ensure that we have specified the correct region. In the **OCI Console**, look in the top right corner for the currently selected region:
+
+  ![](images/LabGuide200-fd1aa1f3.png)
+
+  - If the region is `ashburn`, then you do not need to change anything. The URL `iad.ocir.io` is correct.
+  
+  - If the region is not `ashburn`, replace the `iad` part of the `DOCKER_REGISTRY` environment variable to match your region:
+
+  ```
+  London = lhr
+  Frankfurt = fra
+  Phoenix = phx
+  Ashburn = iad
+  ```
+
+  - For example, if your region is `eu-frankfurt-1`, change the URL to `fra.ocir.io` and click the **save** button
+
+    ![](images/LabGuide200-cc8b640d.png)
+
+
 - Now we're ready to try out our workflow from start to finish. We could do that by making another commit on GitHub, since Wercker is monitoring our source code. We can also trigger a workflow execution right from Wercker. We'll see how in the next step.
 
 ### **STEP 12**: Trigger a retry of the pipeline
