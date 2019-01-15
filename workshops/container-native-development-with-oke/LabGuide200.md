@@ -682,8 +682,21 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   ![](images/200/LabGuide200-2de08741.png)
 
+- If you prefer to use the command line as opposed to the web browser method of testing the service, run the following command to verify that our microservice is returning JSON data:
 
+  **Mac/Linux/Git Bash**
+  ```bash
+  export KUBECONFIG=~/container-workshop/kubeconfig
+  ./kubectl exec -it $(./kubectl get pod -l "app=twitter-feed" -o jsonpath='{.items[0].metadata.name}') -- /bin/sh -c '/usr/bin/curl -s http://$HOSTNAME:8080/statictweets | head -c 1000; echo'
+  ```
 
+  **Windows PowerShell**
+  ```bash
+  $env:KUBECONFIG="path\to\your\kubeconfig"
+  .\kubectl exec -it $(.\kubectl get pod -l "app=twitter-feed" -o jsonpath='{.items[0].metadata.name}') -- /bin/sh -c '/usr/bin/curl -s http://$HOSTNAME:8080/statictweets | head -c 1000; echo'
+  ```
+
+  - If you see JSON data returned, **skip to Step 14** where we will deploy the other components of our product catalog application. Otherwise, if the commands didn't work, you don't have PowerShell, or you prefer a browser-based interface, continue on:
 
 - In a terminal window, start the **kubectl proxy** using the following command. Your `KUBECONFIG` environment variable should still be set from a previous step. If not, reset it.
 

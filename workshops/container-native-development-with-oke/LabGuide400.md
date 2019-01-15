@@ -99,7 +99,7 @@ This selector will instruct your load balancer to only route traffic to the blue
 
   ![](images/400/9.png)
 
-- Once the workflow has finished, navigate to the [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/) in a new tab. On the **Overview** page, click on one of the **twitter-feed-v1** pods to view the details.
+- Once the workflow has finished, navigate to the [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/) in a new tab. On the **Overview** page, click on one of the **twitter-feed-v1** pods to view the details.
 
   ![](images/400/10.png)
 

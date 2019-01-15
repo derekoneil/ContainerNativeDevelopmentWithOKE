@@ -113,7 +113,6 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Now that you have the function 'code', you can deploy it to the local Fn Server you started earlier by running the following commands in your terminal window:
 
   ```bash
-  fn migrate
   fn deploy --app imgconvert --local
   ```
 
@@ -220,7 +219,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/LabGuide500-8c45e01e.png)
 
-- Since we are pushing to a remote Fn Server, Fn will use Oracle's Docker registry, OCIR, as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to. In the following command, **replace `<your-tenancy-name>`** with the name of your Oracle Cloud tenancy, found under the User menu in the OCI Console:
+- Since we are pushing to a remote Fn Server, Fn will use Oracle's Docker registry, OCIR, as the container registry. We need to set the FN_REGISTRY environment variable to tell Fn which Docker Hub user to push to. In the following command, **replace `iad` with your OCI region** and **replace `<your-tenancy-name>`** with the name of your Oracle Cloud tenancy, found under the User menu in the OCI Console:
 
   ![](images/500/LabGuide500-e51e6a21.png)
 
@@ -229,6 +228,15 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
   ```
 
   ![](images/500/LabGuide500-21bab048.png)
+
+  **NOTE**: As you did in Lab 200, replace `iad` in the preceding URL with the correct abbreviation for your OCI region:
+
+  ```
+  London = lhr
+  Frankfurt = fra
+  Phoenix = phx
+  Ashburn = iad
+  ```
 
 - In order to push our function Docker image into our OCI Registry, we will need to log in using the Docker CLI. The password we use to authenticate is an **OCI Auth Token**, just as we created for Wercker in Lab 200. Navigate to the **OCI Console** in a web browser on your local machine. Open your **User Settings** page by using the navigation menu to go to Identity->Users and select **View User Details** from the three-dots menu for your user.
 
@@ -248,10 +256,19 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
     ![](images/500/LabGuide500-68cfd98c.png)
 
-- In your _SSH session_, run the following command, **substituting your OCI tenancy name and your Oracle Cloud username (probably your email address)** for `<your-tenancy-name> and <your-oracle-cloud-username>`:
+- In your _SSH session_, run the following command, **substituting your OCI tenancy name and your Oracle Cloud username (probably your email address)** for `<your-tenancy-name> and <your-oracle-cloud-username>`, and  **replacing `iad` with your OCI region** :
 
   ```bash
   docker login -u <your-tenancy-name>/<your-oracle-cloud-username> iad.ocir.io
+  ```
+
+  **NOTE**: As you did in Lab 200, replace `iad` in the preceding URL with the correct abbreviation for your OCI region:
+
+  ```
+  London = lhr
+  Frankfurt = fra
+  Phoenix = phx
+  Ashburn = iad
   ```
 
 - You will be prompted for your registry password. Click the **Copy** link from the OCI Console browser window displaying your newly-generated Auth Token. Then **paste** the token into the password prompt in your SSH session and press enter.

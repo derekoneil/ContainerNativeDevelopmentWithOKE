@@ -194,20 +194,30 @@ For this lab you will need a Github account. Use the following link to set one u
 
   ![](images/100/31.png)
 
-- Create an environment variable by filling in the **Key** and **Value** boxes and clicking **Add**. _Be sure to click **Add**_ after each environment variable, or they will not be saved. Repeat this step for each variable listed below. Replace `<your-identity-domain-name>` and `<your-oracle-cloud-username>` in the variable values with the specific tenancy name and username for your cloud account.
-
-  ![](images/LabGuide100-9f627c8b.png)
+- Create an environment variable by filling in the **Key** and **Value** boxes and clicking **Add**. _Be sure to click **Add**_ after each environment variable, or they will not be saved. Repeat this step for each variable listed below.
 
   ```
   Key:              Value:
-  DOCKER_USERNAME   <your-identity-domain-name>/<your-oracle-cloud-username>
+  DOCKER_USERNAME   <your-tenancy-name>/<your-oracle-cloud-username>
   DOCKER_REGISTRY   iad.ocir.io
-  DOCKER_REPO       <your-identity-domain-name>/twitter-feed
+  DOCKER_REPO       <your-tenancy-name>/twitter-feed
   ```
 
   ![](images/LabGuide100-ff28ad1b.png)
 
-  **NOTE**: The `DOCKER_REGISTRY` value above assumes your Oracle Cloud account is in the `iad` region, also known as `US-Ashburn`. We will confirm or correct this in the next lab.
+  **NOTES**:
+
+  - Replace `<your-tenancy-name>` and `<your-oracle-cloud-username>` in the variable values with the specific tenancy name and username for your cloud account.
+
+  ![](images/LabGuide100-9f627c8b.png)
+
+  - Your tenancy name can be found under the User menu in the OCI Console:
+
+  ![](images/500/LabGuide500-e51e6a21.png)
+
+  - Your Oracle Cloud username is the email address that you used when you created your trial account
+
+  - The `DOCKER_REGISTRY` value above assumes your Oracle Cloud account is in the `iad` region, also known as `US-Ashburn`. We will confirm or correct this in the next lab.
 
 - This is all of the environment variables that we can fill in at this point. However, we will need to provide one more piece of information to Wercker before we can successfully push an image to the OCIR Docker repository -- an OCI authentication token. We will log in to the OCI console and generate that token in Lab 200. For now, let's finish setting up the `push-release` pipeline in Wercker so that it will be ready to go once we have the token.
 
