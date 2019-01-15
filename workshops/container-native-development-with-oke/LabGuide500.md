@@ -80,13 +80,20 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Great, that was easy. Let's start a local Fn Server in the background that we can use for development. From a terminal, run:
 
   ```bash
-  nohup fn start > fn-output.txt 2>&1 </dev/null &
-  cat fn-output.txt
+  fn start --detach
   ```
 
-  ![](images/500/LabGuide500-74f9c4f2.png)
+  ![](images/LabGuide500-0c08a0fb.png)
 
-- You should see the Fn logo printed to the console, as well as a message indicating the port that the Fn Server is using: `Fn serving on ':8080'`. This indicates that Fn server is started successfully. Let's test it. Run the following to see if we get the expected 'Hello: World' response from Fn:
+- Verify that the server is running by checking the version. If a `Server version` is displayed, then the server is running and accessible.
+
+  ```bash
+  fn version
+  ```
+
+  ![](images/LabGuide500-e7511b95.png)
+
+- Let's test the Fn server's HTTP response. Run the following to see if we get the expected 'Hello: World' response from Fn:
 
   ```bash
   curl localhost:8080
