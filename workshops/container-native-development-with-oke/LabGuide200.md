@@ -376,10 +376,10 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
     ./kubectl get nodes
     ```
 
-- Now that we have verified that `kubectl` is connected to our cluster, let's increase the default auto-logout time so that we don't have to keep re-authenticating during the workshop. Note that the default logout time of 15 minutes is set for security reasons. The `--token-ttl:43200"` argument in the following command is the only change that we are making to the dashboard.
+- Now that we have verified that `kubectl` is connected to our cluster, let's increase the default auto-logout time so that we don't have to keep re-authenticating during the workshop. Note that the default logout time of 15 minutes is set for security reasons. The `--token-ttl=43200"` argument in the following command is the only change that we are making to the dashboard.
 
   ```bash
-  kubectl patch deployment kubernetes-dashboard -n kube-system -p '{"spec": {"template": {"spec": {"containers": [{"name": "kubernetes-dashboard", "args": ["--token-ttl:43200", "--auto-generate-certificates"]}]}}}}'
+  kubectl patch deployment kubernetes-dashboard -n kube-system -p '{"spec": {"template": {"spec": {"containers": [{"name": "kubernetes-dashboard", "args": ["--token-ttl=43200", "--auto-generate-certificates"]}]}}}}'
   ```
 
   ![](images/LabGuide200-a5c59f02.png)
@@ -641,7 +641,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
   ![](images/LabGuide200-fd1aa1f3.png)
 
   - If the region is `ashburn`, then you do not need to change anything. The URL `iad.ocir.io` is correct.
-  
+
   - If the region is not `ashburn`, replace the `iad` part of the `DOCKER_REGISTRY` environment variable to match your region:
 
   ```
