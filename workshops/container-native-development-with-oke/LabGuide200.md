@@ -698,10 +698,10 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
   ./kubectl exec -it $(./kubectl get pod -l "app=twitter-feed" -o jsonpath='{.items[0].metadata.name}') -- /bin/sh -c '/usr/bin/curl -s http://$HOSTNAME:8080/statictweets | head -c 1000; echo'
   ```
 
-  **Windows PowerShell**
+  **Windows**
   ```bash
-  $env:KUBECONFIG='./kubeconfig'
-  .\kubectl exec -it $(.\kubectl get pod -l "app=twitter-feed" -o jsonpath='{.items[0].metadata.name}') -- /bin/sh -c '/usr/bin/curl -s http://$HOSTNAME:8080/statictweets | head -c 1000; echo'
+  set KUBECONFIG=%USERPROFILE%\container-workshop\kubeconfig
+  kubectl.exe get pod -l "app=product-catalog-app" -o jsonpath="{.items[0].metadata.name}" > podname.txt && FOR /F usebackq %A IN (`cat podname.txt`) DO kubectl.exe exec -it %~A -- /bin/sh -c "/usr/bin/curl -s http://$HOSTNAME:8080/statictweets | head -c 1000; echo"
   ```
 
   - If you see JSON data returned, **skip to Step 14** where we will deploy the other components of our product catalog application. Otherwise, if the commands didn't work, you don't have PowerShell, or you prefer a browser-based interface, continue on:
