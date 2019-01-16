@@ -700,7 +700,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   **Windows PowerShell**
   ```bash
-  $env:KUBECONFIG="path\to\your\kubeconfig"
+  set env:KUBECONFIG='path\to\your\kubeconfig'
   .\kubectl exec -it $(.\kubectl get pod -l "app=twitter-feed" -o jsonpath='{.items[0].metadata.name}') -- /bin/sh -c '/usr/bin/curl -s http://$HOSTNAME:8080/statictweets | head -c 1000; echo'
   ```
 
