@@ -29,7 +29,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 
 # Provision Kubernetes Using the OCI Console
 
-## Set Up Oracle Cloud infrastructure
+## Set Up Oracle Cloud Infrastructure
 
 ### **STEP 1**: Log in to your OCI dashboard
 
