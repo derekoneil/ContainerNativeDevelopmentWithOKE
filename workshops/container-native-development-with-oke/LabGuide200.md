@@ -160,6 +160,12 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
       - Locate and run **puttygen.exe** in the PuTTY install folder.
 
+      - Ensure that **RSA** or **SSH-2 RSA** is selected in the `Type of key to generate` field (which one you see is dependent on your version of PuTTY)
+
+      ![](images/LabGuide200-614f9c26.png)
+
+      ![](images/LabGuide200-f0a8b7ba.png)
+
       - Click **Generate**
 
         ![](images/200/LabGuide200-4c048053.png)
