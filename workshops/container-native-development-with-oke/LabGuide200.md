@@ -563,7 +563,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ### **STEP 10**: Set up deployment pipelines in Wercker
 
-- Open **[Wercker](https://app.wercker.com)** in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Pipelines**, then click on your **twitter-feed** application.
+- Open **[Wercker](https://app.wercker.com)** in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Pipelines**, then click on your **twitter-feed-oke** application.
 
   ![](images/200/30.png)
 
