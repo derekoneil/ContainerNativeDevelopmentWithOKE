@@ -281,6 +281,11 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
     - Enter a location for your config: **accept default by pressing enter**
     - Enter a user OCID: copy your OCID by clicking **Copy** in the **User Information** box in OCI Console
     - Enter a tenancy OCID: copy the **Tenancy OCID** from the tenancy details page (found under the administration section of the OCI navigation menu)
+
+      ![](images/LabGuide300-fefb896c.png)
+
+      ![](images/LabGuide300-80c6b300.png)
+
     - Enter a region: type the **region shown in the upper right** corner of OCI Console
     - Do you want to generate a new RSA key pair?: **Y**
     - Enter a directory for your keys to be created: **accept default by pressing enter**
@@ -289,7 +294,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/LabGuide200-315d446f.png)
 
-  - You've just generated an RSA key pair that we will use to authenticate you to the OCI API. On the User Settings page in your browser, click **Add Public Key**
+  - You've just generated an RSA key pair that we will use to authenticate you to the OCI API. Click **back** to get back to the User Settings page in your browser, click **Add Public Key**
 
     ![](images/200/LabGuide200-70626501.png)
 
@@ -376,9 +381,15 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
     ./kubectl get nodes
     ```
 
+    ![](images/LabGuide200-397f4902.png)
+
+    ![](images/LabGuide200-778c8b15.png)
+
+    **NOTE**: You should see in the `cluster-info` that the Kubernetes master has an `oraclecloud.com` URL. If it instead has a `localhost` URL, your `KUBECONFIG` environment variable may not be set correctly. Double check the environment variable against the path and filename of your `kubeconfig` file.
+
 - Now that we have verified that `kubectl` is connected to our cluster, let's increase the default auto-logout time so that we don't have to keep re-authenticating during the workshop. Note that the default logout time of 15 minutes is set for security reasons. The `--token-ttl=43200"` argument in the following command is the only change that we are making to the dashboard.
 
-**NOTE**: The following commands are **optional**.
+  **NOTE**: The following commands are **optional**.
 
   **Windows**
   ```bash
@@ -403,6 +414,10 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
     ```bash
     ./kubectl proxy
     ```
+
+  ![](images/LabGuide200-73acec26.png)
+
+  **NOTE**: If you receive an error stating `bind: address already in use`, you may have another application running on port 8001. You can specify a different port for the proxy by passing the `--port=` parameter, for example `kubectl proxy --port=8002`. Note that you  will have to modify the URL for the dashboard in the next step to match this port.
 
 - Leave the proxy server running and navigate to the [Kubernetes Dashboard by Right Clicking on this link](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/), and choosing **open in a new browser tab**.
 
@@ -579,12 +594,12 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
   **Windows**
     ```bash
     cd %USERPROFILE%\container-workshop
-    cat kubeconfig | grep token | awk '{print $2}'
+    notepad kubeconfig
     ```
 
-    **NOTE**: You may have to use Bash Shell or Git Bash to run the command above. If you don't have either one available, you can open the `kubeconfig` file in Notepad, find the `token:` section at the bottom of the file, and copy the token value from there.
+    - Find the `token:` section at the bottom of the file, and copy the token value from there.
 
-      ![](images/LabGuide200-406fe845.png)
+    ![](images/LabGuide200-406fe845.png)
 
   **Mac/Linux**
     ```bash
