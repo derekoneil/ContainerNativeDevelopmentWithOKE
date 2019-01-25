@@ -723,8 +723,14 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 - In a terminal window, start the **kubectl proxy** using the following command. Your `KUBECONFIG` environment variable should still be set from a previous step. If not, reset it.
 
+  **Windows**
   ```bash
-  kubectl proxy
+  kubectl.exe proxy
+  ```
+
+  **Mac/Linux**
+  ```bash
+  ./kubectl proxy
   ```
 
 - In a browser tab, navigate to the [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
