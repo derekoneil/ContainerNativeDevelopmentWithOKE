@@ -42,7 +42,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - From this point forward, all command line instructions should be run _inside your SSH session_, not in a command prompt/shell on your local machine. Switch to the `root` user in your SSH session and install the prerequisite packages (and a few extras) by running:
 
   ```bash
-  sudo yum -y install docker kubectl git caca-utils
+  sudo yum -y install docker-engine kubectl git caca-utils
   ```
 
   **NOTE**: Docker and kubectl are prerequisites of Fn. Git and caca-utils are used in this lab for downloading repositories from GitHub and displaying images in the terminal, respectively.
