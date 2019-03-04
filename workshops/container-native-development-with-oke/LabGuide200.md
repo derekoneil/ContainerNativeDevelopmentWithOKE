@@ -273,6 +273,8 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     `bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"`
 
+    **CAUTION**: When copying the above command, be careful not to copy a newline character at the end. If you paste the command into your SSH session and it executes without you pressing enter, cancel the command with **Control-C**, then press the **up arrow** to retrieve it from the history, and press **enter** to run it without the newline character.
+
     ![](images/200/LabGuide200-41638e46.png)
 
   - For each of the prompts, accept the default by **pressing enter**
