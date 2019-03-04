@@ -229,7 +229,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
     - In the VCN Compartment field, ensure **Demo** is selected.
     - In the VCN field, ensure **oke-vcn-quick-cluster1** is selected (if you changed the name of your cluster, the `cluster1` portion of these name will differ).
     - In the Subnet Compartment field, ensure **Demo** is selected.
-    - In the Subnet field, select the subnet that begins with **oke-subnet-quick-cluster1**. Take care __not__ to select the subnet that begins with oke-svclbsubnet, as this one has a wide open security list (it is meant only for load balancers).  
+    - In the Subnet field, select the subnet that begins with **oke-svclbsubnet-quick-cluster1**, which is in the **Public Subnets** section. Take care __not__ to select the subnet that begins with oke-subnet, as this one is a private subnet (not accessible from the internet).
 
     ![](images/LabGuide200-e67f88fa.png)
 
