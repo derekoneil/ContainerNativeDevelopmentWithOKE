@@ -1,6 +1,7 @@
 # Container Native Development with OKE Workshop
 
 Welcome to the Oracle Public Cloud Container Native Development with OKE workshop. This workshop will walk you through the process of moving an existing application into a containerized CI/CD pipeline and deploying it to a managed Kubernetes service in the Oracle Public Cloud.
+
 To learn more about this workshop please watch the video below.
 
 [![Watch Workshop Overview](images/oraclecode/youtube.png)](https://youtu.be/9n8JMlvjFiw)
