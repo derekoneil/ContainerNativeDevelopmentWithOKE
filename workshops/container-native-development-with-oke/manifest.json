@@ -3,7 +3,7 @@
         "title": "Container Native Development",
         "description": "How to create a CI/CD pipeline and deploy to a managed Kubernetes environment using Wercker.",
         "theme": "default",
-        "interactive":"http://go.oracle.com/?oke",
+        "interactive":"https://launch.oracle.com/?oke",
         "labs": [
             {
                 "number": "0",
